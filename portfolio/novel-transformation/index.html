@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nouvel: 소설 텍스트 내 발화자 및 장면 인식 서비스 기술 발표 자료">
+    <title>Nouvel | 소설 텍스트 내 발화자 및 장면 인식</title>
+    <!-- Google Fonts: Outfit & Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Portfolio back link -->
+    <a href="../index.html" class="back-link" aria-label="포트폴리오 목록으로 이동">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+        </svg>
+        Portfolio
+    </a>
+
+    <!-- Presentation Container -->
+    <div class="presentation-container">
+
+        <!-- Slide 1: Title -->
+        <section class="slide active" id="slide-1">
+            <div class="window-frame">
+                <div class="slide-content-split">
+                    <div class="title-slide">
+                        <span class="sub-badge">고려대학교 지능정보 SW 아카데미</span>
+                        <h1 class="main-title-text">Nouvel:<br>소설 텍스트 내<br>발화자 / 장면 인식</h1>
+                    </div>
+                    <div class="title-right-preview">
+                        <div class="preview-card">
+                            <div class="preview-card-header">
+                                <div class="preview-dots"><span></span><span></span><span></span></div>
+                                <span class="preview-title">analyzer.log</span>
+                            </div>
+                            <div class="preview-card-body">
+                                <div class="preview-line">
+                                    <span class="preview-tag tag-speaker"><i class="fa-solid fa-user"></i> 화자: 한결</span>
+                                    <span class="preview-text">"오늘 날씨가 참 맑네."</span>
+                                </div>
+                                <div class="preview-line">
+                                    <span class="preview-tag tag-scene"><i class="fa-solid fa-location-dot"></i> 장면: 정원</span>
+                                    <span class="preview-text">햇살이 나뭇잎 사이로 부서져 내린다.</span>
+                                </div>
+                                <div class="preview-line">
+                                    <span class="preview-tag tag-speaker"><i class="fa-solid fa-user"></i> 화자: 은우</span>
+                                    <span class="preview-text">"그러게, 산책하기 딱 좋은 날이야."</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 2: Problem Definition -->
+        <section class="slide" id="slide-2">
+            <div class="window-frame">
+                <span class="window-logo">Nouvel</span>
+                <span class="chapter-number">01</span>
+                <div class="slide-header">
+                    <h2>문제 정의</h2>
+                    <p>발화자 구분이 필요한 분야</p>
+                </div>
+                <div class="grid-container grid-2 align-center">
+                    <div class="interview-container">
+                        <div class="chat-bubble-row">
+                            <div class="character-avatar"><i class="fa-solid fa-pen-nib"></i></div>
+                            <div class="speech-bubble">
+                                <span class="highlight-light">웹소설 작가와의 인터뷰</span>
+                                <ol>
+                                    <li>한국어를 지원하는 <span class="highlight-box">창작 도우미 서비스</span>에 대한 수요</li>
+                                    <li>드라마/영화의 분량에 맞춰 소설을 각색하는 서비스 필요</li>
+                                    <li>각 <span class="highlight-box">장면의 구분</span>을 도와주는 서비스 필요</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="chat-bubble-row right">
+                            <div class="character-avatar"><i class="fa-solid fa-robot"></i></div>
+                            <div class="speech-bubble" style="border-color: var(--accent-blue);">
+                                <span class="highlight-light" style="color: var(--accent-blue);">인공지능 솔루션</span>
+                                <p style="margin-top: 5px;">인공지능으로 발화자 및 사건을 인식, 재가공해 <span class="highlight-box" style="background-color: var(--accent-blue);">대본의 초석</span>을 제공하는 서비스</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="problem-card">
+                        <h3 style="margin-bottom: 8px;"><i class="fa-solid fa-clapperboard" style="color: var(--accent-orange); margin-right: 8px;"></i>콘텐츠 시장의 수요 확대</h3>
+                        <p style="margin-bottom: 12px;"><strong>유튜브 편집 및 오디오북:</strong> 기존의 발화자 구분 기술은 반드시 음향 파형 데이터가 존재해야만 기능하며, 순수 텍스트만 주어졌을 때 화자 인식이 불가능해 2차 창작 시 대본화 병목이 발생함</p>
+                        <p><strong>OTT 서비스 자막 도입:</strong> 넷플릭스 등 국내외 OTT 시장에서 예능 및 영화에 대사·화자 표시 자막 공급이 확대됨에 따라 텍스트 분석 및 장면 분할 자동화 가치가 대폭 성장함</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: System Architecture -->
+        <section class="slide" id="slide-3">
+            <div class="window-frame">
+                <span class="window-logo">Nouvel</span>
+                <span class="chapter-number">02</span>
+                <div class="slide-header">
+                    <h2>모델 : 시스템 구성도</h2>
+                    <p>소설 텍스트 변환 및 파이프라인 단계별 흐름</p>
+                </div>
+                <div class="pipeline-grid">
+                    <div class="pipeline-row">
+                        <div class="pipeline-node">
+                            <div class="pipeline-node-icon"><i class="fa-regular fa-file-lines"></i></div>
+                            <h4>Web Novel Text</h4>
+                            <p>정제되지 않은 소설 소스 텍스트 입력</p>
+                        </div>
+                        <div class="pipeline-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="pipeline-node">
+                            <div class="pipeline-node-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                            <h4>NER</h4>
+                            <p>인물명, 시간, 장소 정보 검출 및 후킹</p>
+                        </div>
+                        <div class="pipeline-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="pipeline-node">
+                            <div class="pipeline-node-icon"><i class="fa-solid fa-address-book"></i></div>
+                            <h4>Namelist & Scene</h4>
+                            <p>인물 사전(Name2id) 및 씬 단위 데이터화</p>
+                        </div>
+                    </div>
+                    <div class="pipeline-connector">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </div>
+                    <div class="pipeline-row pipeline-reverse">
+                        <div class="pipeline-node">
+                            <div class="pipeline-node-icon"><i class="fa-solid fa-diagram-project"></i></div>
+                            <h4>Instances</h4>
+                            <p>장소/시간 전이 기반 인스턴스 분할</p>
+                        </div>
+                        <div class="pipeline-arrow"><i class="fa-solid fa-arrow-left"></i></div>
+                        <div class="pipeline-node">
+                            <div class="pipeline-node-icon"><i class="fa-solid fa-brain"></i></div>
+                            <h4>CSN Speaker</h4>
+                            <p>대사 문맥과 화자 유사도 매칭 추론</p>
+                        </div>
+                        <div class="pipeline-arrow"><i class="fa-solid fa-arrow-left"></i></div>
+                        <div class="pipeline-node">
+                            <div class="pipeline-node-icon"><i class="fa-solid fa-file-code"></i></div>
+                            <h4>Scripts</h4>
+                            <p>각색에 최적화된 [화자-대사] 분할 대본 출력</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Fine Tuning -->
+        <section class="slide" id="slide-4">
+            <div class="window-frame">
+                <span class="window-logo">Nouvel</span>
+                <span class="chapter-number">02</span>
+                <div class="slide-header">
+                    <h2>모델 : 파인 튜닝</h2>
+                    <p>토크나이저 분석 및 하이퍼파라미터 조건 설정</p>
+                </div>
+                <div class="tab-card-row">
+                    <div class="tab-card">
+                        <div class="tab-header">Tokenizer</div>
+                        <div class="tab-body">
+                            <h4>1. Input Data</h4>
+                            <ul>
+                                <li>띄어쓰기 반영 여부 검토</li>
+                                <li>형태소 분석 반영 여부 검토</li>
+                                <li>글자 단위 파싱 적용</li>
+                            </ul>
+                            <h4 style="margin-top: 10px;">2. 형태소 분석기</h4>
+                            <ul>
+                                <li>KoNLPy (okt, komoran) 튜닝</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-card">
+                        <div class="tab-header">BERT</div>
+                        <div class="tab-body">
+                            <h4>1. 크기 및 모델 선택</h4>
+                            <ul>
+                                <li>Roberta-klue-large / small</li>
+                                <li>polyglot-ko, KoAlpaca 검토</li>
+                            </ul>
+                            <h4 style="margin-top: 10px;">2. 토크나이저</h4>
+                            <ul>
+                                <li>다양한 한국어 토크나이저 적용</li>
+                                <li>[UNK] 결측 토큰 제외 설정</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-card">
+                        <div class="tab-header">ETC</div>
+                        <div class="tab-body">
+                            <h4>1. 인스턴스</h4>
+                            <ul>
+                                <li>Window Size (ws) 크기 튜닝</li>
+                                <li>장면(Scene) 및 시간 가중치 추가</li>
+                            </ul>
+                            <h4 style="margin-top: 10px;">2. 장르</h4>
+                            <ul>
+                                <li>웹소설 장르별 학습셋 구성</li>
+                                <li>장르별 성능 변동 확인</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Performance Evaluation -->
+        <section class="slide" id="slide-5">
+            <div class="window-frame">
+                <span class="window-logo">Nouvel</span>
+                <span class="chapter-number">02</span>
+                <div class="slide-header">
+                    <h2>모델 : MPC 텍스트 내 발화자 구분 모델</h2>
+                    <p>(2) CSN-SAPR Evaluation</p>
+                </div>
+                <div class="grid-container grid-2 align-center">
+                    <div>
+                        <table class="academic-table">
+                            <thead>
+                                <tr>
+                                    <th>Model Name</th>
+                                    <th>explicit</th>
+                                    <th>implicit</th>
+                                    <th>latent</th>
+                                    <th>ALL (Avg)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Random Guess</td>
+                                    <td>0.386</td>
+                                    <td>0.517</td>
+                                    <td>0.356</td>
+                                    <td>0.376</td>
+                                </tr>
+                                <tr>
+                                    <td>Manual+MLP [10]</td>
+                                    <td>0.886</td>
+                                    <td>0.517</td>
+                                    <td>0.693</td>
+                                    <td>0.705</td>
+                                </tr>
+                                <tr class="highlight-row">
+                                    <td>Proposed Model</td>
+                                    <td>0.932</td>
+                                    <td>0.759</td>
+                                    <td>0.813</td>
+                                    <td>0.825</td>
+                                </tr>
+                                <tr>
+                                    <td>- SAPR</td>
+                                    <td>0.932</td>
+                                    <td>0.759</td>
+                                    <td>0.760</td>
+                                    <td>0.785</td>
+                                </tr>
+                                <tr>
+                                    <td>- SAPR & CSS</td>
+                                    <td>0.886</td>
+                                    <td>0.586</td>
+                                    <td>0.622</td>
+                                    <td>0.658</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="padding-left: 10px;">
+                        <h4 style="font-size: 0.95rem; color: var(--accent-navy); margin-bottom: 5px;"><i class="fa-solid fa-triangle-exclamation" style="color: var(--accent-orange); margin-right: 6px;"></i>개선해야 할 문제점</h4>
+                        <ul class="bullet-list" style="margin-top: 0;">
+                            <li style="margin-bottom: 5px; font-size: 0.75rem;">하나의 소설만을 기반으로 하여, 새로운 소설에 대한 정확도를 신뢰할 수 없음.</li>
+                            <li style="margin-bottom: 5px; font-size: 0.75rem;">중국어 기반 모델로, 한국어 텍스트에 일부 부적합함.</li>
+                            <li style="margin-bottom: 5px; font-size: 0.75rem;">Namelist 생성이 수동으로 이루어짐.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Expected Benefits -->
+        <section class="slide" id="slide-6">
+            <div class="window-frame">
+                <span class="window-logo">Nouvel</span>
+                <span class="chapter-number">03</span>
+                <div class="slide-header">
+                    <h2>결과 분석 및 기대 효과</h2>
+                    <p>개발된 발화자 구분 모델의 실무 응용 및 확장성</p>
+                </div>
+                <ul class="bullet-list">
+                    <li>다자 간 대화가 포함된 모든 서비스에서 활용 가능
+                        <ol>
+                            <li>음성 인식에서의 화자 인식 정확도 향상 (텍스트 + 오디오 결합)</li>
+                            <li>상담 기록 / 인터뷰 내용 등 손쉽게 발화자 구분 가능</li>
+                            <li>처음 읽는 글에서 내용을 눈에 띄게 구분하기 위해 활용 가능 (철학서적, 삼국지 등..)</li>
+                        </ol>
+                    </li>
+                    <li>웹소설이 아닌 소설 작품의 대본화 (동일한 파이프라인 구조 적용 가능)</li>
+                    <li>기초적 접근 방식이므로 기타 한국어 NLP 과제에서 유용하게 활용될 수 있을 것</li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Navigation Controller -->
+    <div class="nav-controls">
+        <button id="btn-prev" class="nav-btn" disabled><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="slide-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+            <span class="indicator" data-slide="3"></span>
+            <span class="indicator" data-slide="4"></span>
+            <span class="indicator" data-slide="5"></span>
+        </div>
+        <button id="btn-next" class="nav-btn"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <!-- Fixed Footer Bar -->
+    <div class="footer-bar">
+        <span>Nouvel : 소설 텍스트 내 발화자 / 장면 인식</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+[
+    {
+        "id": "item-novel-transformation",
+        "title": "Novel Transformation",
+        "category": "AI Service",
+        "description": "소설 텍스트 내 발화자 및 장면 인식 서비스",
+        "tags": [
+            "Python",
+            "FastAPI",
+            "NLP"
+        ],
+        "link": "novel-transformation/index.html",
+        "github": "https://github.com/Novel-Transformation-for-You/service"
+    },
+    {
+        "id": "item-invoice-simplifier",
+        "title": "Invoice Simplifier",
+        "category": "Web Utility",
+        "description": "자연어 기반 견적서 생성 도구",
+        "tags": [
+            "Python",
+            "Gemini API",
+            "Selenium"
+        ],
+        "link": "invoice-simplifier/index.html",
+        "github": "https://github.com/07lee"
+    },
+    {
+        "id": "item-nmap-reservation-analyzer",
+        "title": "Nmap Reservation Analyzer",
+        "category": "Data Automation",
+        "description": "네이버 지도 예약 수집 및 시각화 도구",
+        "tags": [
+            "Node.js",
+            "Puppeteer",
+            "Vanilla JS"
+        ],
+        "link": "nmap-reservation-analyzer/index.html",
+        "github": "https://github.com/07lee/navermap"
+    }
+]

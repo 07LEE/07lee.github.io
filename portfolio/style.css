@@ -1,0 +1,165 @@
+body {
+    background-color: #121214;
+    color: #e4e4e7;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 600px;
+    padding: 3rem 2rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Header Section */
+header {
+    margin-bottom: 3rem;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #e4e4e7;
+    transition: color 0.2s ease;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    color: #3b82f6;
+}
+
+.back-icon {
+    width: 20px;
+    height: 20px;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+
+/* Main Content List */
+main {
+    margin-top: 2rem;
+    flex: 1;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.project-item {
+    border-top: 1px solid #2a2a30;
+    padding-top: 1.5rem;
+}
+
+.project-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.project-header h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.link-item {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.link-item:hover {
+    color: #a5b4fc;
+    text-decoration: none;
+}
+
+.category {
+    font-size: 0.8rem;
+    color: #71717a;
+    font-weight: 500;
+}
+
+.description {
+    font-size: 0.95rem;
+    color: #d4d4d8;
+    margin: 0;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+}
+
+.tech-tag {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.03);
+    color: #a1a1aa;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Github Link Icon Styles */
+.project-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    color: #71717a;
+    transition: color 0.2s ease, transform 0.2s ease;
+    text-decoration: none;
+}
+
+.github-link:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+.github-icon {
+    width: 16px;
+    height: 16px;
+}
+
+
+
+/* Footer Section */
+footer {
+    margin-top: auto;
+    font-size: 0.875rem;
+    color: #71717a;
+    border-top: 1px solid #2a2a30;
+    padding-top: 1.5rem;
+}
