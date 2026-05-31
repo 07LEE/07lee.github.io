@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>견적서 간소화 프로그램</title>
+    <!-- Google Fonts: Outfit & Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons (CSS) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background Neon Gradient Spheres -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <!-- Presentation Container -->
+    <div class="presentation-container">
+
+        <!-- Slide 1: Title -->
+        <section class="slide active" id="slide-1">
+            <div class="slide-content title-slide">
+                <h1 class="main-title"><span class="gradient-text">Invoice Simplifier</span></h1>
+                <p class="subtitle">자연어 입력 기반 예약 데이터 추출 및<br>요일별 숙박 요금 자동 계산을 통한 견적 간소화 도구</p>
+            </div>
+        </section>
+
+        <!-- Slide 2: Background & Necessity -->
+        <section class="slide" id="slide-2">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">02</span>
+                    <h2>견적 작성 과정의 기존 비효율성</h2>
+                </div>
+                <div class="grid-container dynamic-cards">
+                    <div class="card glass">
+                        <div class="card-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                        <h3>수동 가격 조회 및 매칭</h3>
+                        <p>고객의 체크인과 체크아웃 일자를 확인하여 평일 요금과 주말(금요일, 토요일) 요금을 달력에서 대조하며 일일이 손으로 숙박 일수를 세어 계산하느라 시간이 소요됩니다.
+                        </p>
+                    </div>
+                    <div class="card glass">
+                        <div class="card-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <h3>수작업 계산 누수 위험</h3>
+                        <p>수동으로 날짜와 단가를 대입하다 보니 주말 일수 미스 계산, 청소비 반영 누락, 부가세 포함/별도 정산 에러 등 단순 계산 실수가 발생하기 쉽습니다.</p>
+                    </div>
+                    <div class="card glass">
+                        <div class="card-icon"><i class="fa-solid fa-file-invoice"></i></div>
+                        <h3>반복적인 수동 렌더링</h3>
+                        <p>매번 엑셀 포맷을 켜서 게스트 정보를 입력하고, 입금 안내 계좌번호를 적어 이미지 캡처 도구로 파일화하여 카카오톡이나 문자 메시지로 발송하는 수공업식 반복 업무가
+                            수반됩니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Core Features Specification -->
+        <section class="slide" id="slide-3">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">03</span>
+                    <h2>견적서 처리 간소화 흐름</h2>
+                </div>
+                <div class="grid-container two-cols">
+                    <div class="feature-list">
+                        <div class="feature-item glass active" data-target="feat-img-1">
+                            <div class="feat-num">01</div>
+                            <div class="feat-body">
+                                <h3>자연어 예약 정보 구조화</h3>
+                                <p>예약 문의 문구를 텔레그램 봇으로 전송하면 Gemini Flash API를 통해 pydantic 데이터 스키마 형식의 JSON 데이터 객체로 정교하게
+                                    자동 매핑합니다.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item glass" data-target="feat-img-2">
+                            <div class="feat-num">02</div>
+                            <div class="feat-body">
+                                <h3>요일 요금 자동 연산</h3>
+                                <p>바닐라 자바스크립트 Date API를 연동하여 예약 일정 내 금요일과 토요일(주말)을 가려내어 요율대로 자동 가중합 계산을 수행합니다.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item glass" data-target="feat-img-3">
+                            <div class="feat-num">03</div>
+                            <div class="feat-body">
+                                <h3>헤드리스 템플릿 이미지화</h3>
+                                <p>임시 HTML에 데이터를 매핑하고, 셀레늄(Selenium) 백그라운드 구동을 통해 html2canvas로 견적서 이미지를 1초 만에 캡처하여 파일로
+                                    전송합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-preview glass-dark">
+                        <div class="preview-inner" id="feat-img-1">
+                            <div class="mockup-ui">
+                                <span class="dot red"></span><span class="dot yellow"></span><span
+                                    class="dot green"></span>
+                            </div>
+                            <div class="preview-content">
+                                <div class="pulse-circle"><i class="fa-solid fa-code"></i></div>
+                                <h4>Structured JSON Parsing</h4>
+                                <p>genai 라이브러리의 구조화된 출력 기능을 설정하여, 자연어 요청문으로부터 신뢰도 높은 게스트 성함, 방 번호, 일정 정보 JSON을 추출하는
+                                    단계입니다.</p>
+                            </div>
+                        </div>
+                        <div class="preview-inner hidden" id="feat-img-2">
+                            <div class="mockup-ui">
+                                <span class="dot red"></span><span class="dot yellow"></span><span
+                                    class="dot green"></span>
+                            </div>
+                            <div class="preview-content">
+                                <div class="pulse-circle"><i class="fa-solid fa-calculator"></i></div>
+                                <h4>Automatic Day Splitter</h4>
+                                <p>체크인부터 체크아웃 기간 동안의 날짜를 일일이 루프 순회하여 숙박 일수와 부가세(incl/excl) 및 청소비 가산 조건을 정확하게 판정해내는
+                                    로직입니다.</p>
+                            </div>
+                        </div>
+                        <div class="preview-inner hidden" id="feat-img-3">
+                            <div class="mockup-ui">
+                                <span class="dot red"></span><span class="dot yellow"></span><span
+                                    class="dot green"></span>
+                            </div>
+                            <div class="preview-content">
+                                <div class="pulse-circle"><i class="fa-solid fa-camera"></i></div>
+                                <h4>Automated Screenshot Pipeline</h4>
+                                <p>html2canvas 스크립트 실행 제어를 통해 펜션 로고와 계좌번호, 취소 환불 규정이 포함된 정형화된 견적서 이미지를 자동 추출하는 파이프라인입니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Physical Mapping Results (Comparison Viewer) -->
+        <section class="slide" id="slide-4">
+            <div class="slide-content demo-slide">
+                <div class="slide-header">
+                    <span class="slide-number">04</span>
+                    <h2>예약 데이터 추출 및 최종 템플릿 변환 결과</h2>
+                </div>
+
+                <div class="demo-container">
+                    <!-- Left Column: Input message & parsed JSON data comparison panel -->
+                    <div class="demo-control-panel glass">
+                        <div class="panel-section">
+                            <h3><i class="fa-regular fa-message"></i> 사용자 입력 자연어 텍스트</h3>
+                            <div class="code-box text-box">
+                                "홍길동 101호 6월 5일에서 7일 2박, 주중 120,000원 주말 180,000원 청소비 30,000원 부가세 별도 정산 예약해주세요"
+                            </div>
+                        </div>
+
+                        <div class="panel-section">
+                            <h3><i class="fa-solid fa-square-rss"></i> Gemini API 파싱 구조화 데이터 (JSON)</h3>
+                            <div class="code-box json-box">
+                                <pre><code>{
+  "guest_name": "홍길동",
+  "version": "v3",
+  "vat_enabled": true,
+  "vat_mode": "excl",
+  "items": [
+    {
+      "room_name": "101호",
+      "check_in": "2026-06-05",
+      "check_out": "2026-06-07",
+      "weekday_price": 120000,
+      "friday_price": 180000,
+      "saturday_price": 180000,
+      "cleaning_fee": 30000
+    }
+  ]
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Final HTML template visualizer view -->
+                    <div class="demo-preview-panel">
+                        <div class="estimate-sheet" id="estimate-output">
+                            <h1 class="invoice-title">견적서</h1>
+                            <h2 class="invoice-subtitle">Invoice</h2>
+
+                            <!-- 2-column structure for guest & payment details -->
+                            <div class="est-info-section">
+                                <div class="est-info-col">
+                                    <table class="info-table guest-info-table">
+                                        <tr>
+                                            <th>Name of guest</th>
+                                            <td><span id="guest_name">홍길동</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Channel</th>
+                                            <td><span>Direct</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Booking Ret</th>
+                                            <td><span></span></td>
+                                        </tr>
+                                        <tr class="spacer">
+                                            <td colspan="2"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>DATE</th>
+                                            <td><span id="invoice_date">2026-05-30</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Check In</th>
+                                            <td><span id="check_in_date">2026-06-05</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Check Out</th>
+                                            <td><span id="check_out_date">2026-06-07</span></td>
+                                        </tr>
+                                        <tr class="spacer">
+                                            <td colspan="2"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total Price</th>
+                                            <td><span id="totalPrice">₩330,000</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tax</th>
+                                            <td><span id="tax">₩30,000</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="est-info-col">
+                                    <div class="section-title">Payment Details</div>
+                                    <table class="info-table payment-info-table">
+                                        <tr>
+                                            <th>Country of Passport</th>
+                                            <td><span></span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Credit card</th>
+                                            <td><span></span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>PayPal account</th>
+                                            <td><span></span></td>
+                                        </tr>
+                                        <tr class="spacer">
+                                            <td colspan="2"></td>
+                                        </tr>
+                                        <tr class="spacer">
+                                            <td colspan="2"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>은행명</th>
+                                            <td><span id="bank_name">더미은행 (법인)</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>계좌번호</th>
+                                            <td><span id="bank_account_number">110-987-654321</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>예금주</th>
+                                            <td><span id="bank_holder">스마트스테이(부가세정산)</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Item list table (fixed view calculated by daily rates) -->
+                            <div class="est-table-wrapper">
+                                <table class="est-table items-table cleaning-fee-visible" id="items-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-no">No</th>
+                                            <th class="col-room">Room</th>
+                                            <th class="col-nights">Nights</th>
+                                            <th class="col-checkin">Check In</th>
+                                            <th class="col-checkout">Check Out</th>
+                                            <th class="col-unitprice">Unit Price</th>
+                                            <th class="col-cleaning cleaning-fee-col">Cleaning</th>
+                                            <th class="col-amount">Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="est-items-body">
+                                        <tr>
+                                            <td>1</td>
+                                            <td class="col-room">101호</td>
+                                            <td>2</td>
+                                            <td>2026-06-05</td>
+                                            <td>2026-06-07</td>
+                                            <td class="txt-right">₩150,000</td>
+                                            <td class="col-cleaning cleaning-fee-col txt-right">₩30,000</td>
+                                            <td class="txt-right">₩330,000</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Comprehensive Summary Panel -->
+                            <div class="summary-container">
+                                <table class="summary-table">
+                                    <tr>
+                                        <th>Total Accommodation</th>
+                                        <td id="summary-total">300,000</td>
+                                    </tr>
+                                    <tr id="cleaning-fee-row">
+                                        <th>Cleaning Fee</th>
+                                        <td id="summary-cleaning-fee">30,000</td>
+                                    </tr>
+                                    <tr id="vat-row">
+                                        <th>VAT (10%)</th>
+                                        <td id="summary-vat">30,000</td>
+                                    </tr>
+                                    <tr id="grand-total-row">
+                                        <th>Grand Total</th>
+                                        <td id="summary-grand-total">360,000</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <!-- Cancellation & Refund Policy Panel -->
+                            <div class="cancellation-policy mt-4">
+                                <p class="fw-bold">[Cancellation policy] 취소 정책</p>
+                                <p class="mb-1 small">Any cancellation received within 10 days prior to arrival date
+                                    will incur the full period charge.</p>
+                                <p class="mb-1 small">Failure to arrive at your hotel will be treated as a No-show and
+                                    no refund will be given.</p>
+                                <p class="mb-1 small">체크인 10일전 17:00 까지 예약 취소시 : 전액 환불</p>
+                                <div class="d-flex justify-content-between small">
+                                    <p class="mb-1">체크인 5일전 17:00 까지 예약 취소시 : 50% 환불</p>
+                                    <p class="mb-1">Check-in: After 4:00 PM</p>
+                                </div>
+                                <div class="d-flex justify-content-between small">
+                                    <p class="mb-1">이후 예약 취소 시 : 100% 위약금 부과 (환불 불가)</p>
+                                    <p class="mb-1">Check-out: Before 11:00 AM</p>
+                                </div>
+                            </div>
+
+                            <!-- Supplier Information Panel -->
+                            <div class="company-info-area">
+                                <table class="company-info-table">
+                                    <tbody>
+                                        <tr>
+                                            <th style="width: 90px;">Company</th>
+                                            <td>스마트 스테이 컴퍼니</td>
+                                        </tr>
+                                        <tr>
+                                            <th>RE No.</th>
+                                            <td>123-45-67890</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Address</th>
+                                            <td>Mapo-daero 12, Mapo-gu, Seoul, Republic of Korea</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Director</th>
+                                            <td>대표자</td>
+                                        </tr>
+                                        <tr>
+                                            <th>E.Mail</th>
+                                            <td>support@smartstay.com</td>
+                                        </tr>
+                                        <tr>
+                                            <th>TEL</th>
+                                            <td>1544-0000</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Expected Benefits -->
+        <section class="slide" id="slide-5">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">05</span>
+                    <h2>업무 간소화 효과 및 기술적 비전</h2>
+                </div>
+                <div class="grid-container two-cols align-center">
+                    <div class="vision-text">
+                        <div class="vision-item">
+                            <span class="vision-bullet"><i class="fa-solid fa-code"></i></span>
+                            <div>
+                                <h3>예약 파싱 구조화</h3>
+                                <p>자연어 요청을 텔레그램 봇으로 수신하여 Gemini Flash API의 pydantic 스키마를 통해 구조화된 JSON 데이터로 파싱합니다.</p>
+                            </div>
+                        </div>
+                        <div class="vision-item">
+                            <span class="vision-bullet"><i class="fa-solid fa-gears"></i></span>
+                            <div>
+                                <h3>자동화 렌더링 엔진</h3>
+                                <p>headless 크롬 드라이버 기반의 Selenium 백엔드 연동을 통해 통합 HTML 템플릿에 동적으로 데이터를 즉각 바인딩합니다.</p>
+                            </div>
+                        </div>
+                        <div class="vision-item">
+                            <span class="vision-bullet"><i class="fa-solid fa-server"></i></span>
+                            <div>
+                                <h3>데이터 정형성 확보</h3>
+                                <p>정제된 JSON 형태의 데이터를 보존하여 데이터 정합성 유지와 향후 타 예약 플랫폼 연동 등 시스템 확장성을 보장합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vision-graphic glass">
+                        <div class="tech-pipeline">
+                            <div class="tech-step">
+                                <span class="step-badge">Step 01</span>
+                                <h4>Telegram Bot API</h4>
+                                <p>자연어 입력 메시지 수신 및 최종 이미지 견적서 전송</p>
+                            </div>
+                            <div class="tech-step">
+                                <span class="step-badge">Step 02</span>
+                                <h4>Gemini 1.5 Flash</h4>
+                                <p>구조화된 JSON 규격으로 예약 정보 데이터 추출</p>
+                            </div>
+                            <div class="tech-step">
+                                <span class="step-badge">Step 03</span>
+                                <h4>Selenium & Python</h4>
+                                <p>Headless Chrome을 통한 HTML 템플릿 데이터 바인딩</p>
+                            </div>
+                            <div class="tech-step">
+                                <span class="step-badge">Step 04</span>
+                                <h4>html2canvas JS</h4>
+                                <p>DOM 요소를 고해상도 PNG 포맷 이미지 파일로 캡처</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Navigation Controller -->
+    <div class="nav-controls">
+        <button id="btn-prev" class="nav-btn" disabled><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="slide-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+            <span class="indicator" data-slide="3"></span>
+            <span class="indicator" data-slide="4"></span>
+        </div>
+        <button id="btn-next" class="nav-btn"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
