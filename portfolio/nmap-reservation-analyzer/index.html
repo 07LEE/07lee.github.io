@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nmap Reservation Analyzer | Portfolio</title>
+  <meta name="description" content="네이버 예약 데이터 기반 상권 분석 자동화 도구">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <div class="deck-viewport">
+
+    <a href="../index.html" class="back-link" aria-label="Portfolio 목록으로 이동">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="19" y1="12" x2="5" y2="12"/>
+        <polyline points="12 19 5 12 12 5"/>
+      </svg>
+      Portfolio
+    </a>
+
+    <div class="deck-container">
+
+      <span class="page-hint">휠 또는 방향키로 전환</span>
+
+      <!-- ─── Slide 1: Cover ─── -->
+      <div class="slide s1 active" id="slide-1">
+
+        <div class="s1-left">
+          <div class="s1-eyebrow">
+            <span class="s1-eyebrow-dot"></span>
+            Automation · Analytics
+          </div>
+          <h1 class="s1-title">
+            Nmap<br>
+            <span class="green">Reservation</span><br>
+            Analyzer
+          </h1>
+          <p class="s1-desc">
+            네이버 예약 데이터 기반의 상권 분석 자동화 및<br>
+            브라우저 전용 다중 날짜 통합 분석 도구
+          </p>
+          <div class="s1-pills">
+            <span class="pill">Node.js</span>
+            <span class="pill">Puppeteer</span>
+            <span class="pill">Vanilla JS</span>
+            <span class="pill">GraphQL</span>
+          </div>
+        </div>
+
+        <div class="s1-right">
+          <div class="stat-block">
+            <div class="stat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+              </svg>
+            </div>
+            <div>
+              <div class="stat-label">수집 방식</div>
+              <div class="stat-value">Puppeteer Headless</div>
+            </div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+              </svg>
+            </div>
+            <div>
+              <div class="stat-label">인터셉션</div>
+              <div class="stat-value">GraphQL Network Hook</div>
+            </div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+              </svg>
+            </div>
+            <div>
+              <div class="stat-label">분석 환경</div>
+              <div class="stat-value">브라우저 단독 구동</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ─── Slide 2: Background ─── -->
+      <div class="slide s2" id="slide-2">
+        <div class="s2-bg-num">3</div>
+
+        <div class="s2-header">
+          <div class="slide-label">01 / Background</div>
+          <h2 class="slide-h2">기존 운영의 수작업 한계</h2>
+        </div>
+
+        <div class="s2-cards">
+          <div class="prob-card">
+            <div class="prob-card-bar"></div>
+            <div class="prob-num">01</div>
+            <div class="prob-title">수동 현황 확인</div>
+            <p class="prob-desc">
+              분석 대상 상권의 개별 네이버 예약 페이지를 수동으로 방문하여
+              시간대별 슬롯 상태를 일일이 수집 및 검토해야 하는 단순 작업이 반복됨.
+            </p>
+          </div>
+          <div class="prob-card">
+            <div class="prob-card-bar"></div>
+            <div class="prob-num">02</div>
+            <div class="prob-title">다중 경쟁사 취합 한계</div>
+            <p class="prob-desc">
+              상권 내 다수 경쟁 업체의 예약 현황을 개별 탐색 후
+              엑셀에 수작업으로 취합해야 하여 상권 전체 분석에 비효율이 발생함.
+            </p>
+          </div>
+          <div class="prob-card">
+            <div class="prob-card-bar"></div>
+            <div class="prob-num">03</div>
+            <div class="prob-title">상권 트렌드 분석 불가</div>
+            <p class="prob-desc">
+              단순 시점 열람에 그쳐, 요일별·시간대별 예약 밀집 패턴
+              분석이나 장기적 흐름을 도출하기 어려움.
+            </p>
+          </div>
+        </div>
+
+        <div class="s2-footer">
+          <span>네이버 예약 시스템 상권 분석 실무 관찰 기반</span>
+          <span>2 / 4</span>
+        </div>
+      </div>
+
+      <!-- ─── Slide 3: Pipeline ─── -->
+      <div class="slide s3" id="slide-3">
+
+        <div>
+          <div class="slide-label">02 / Pipeline</div>
+          <h2 class="slide-h2">수집 및 분석 파이프라인</h2>
+        </div>
+
+        <div class="s3-flow">
+          <div class="flow-step">
+            <div class="flow-inner">
+              <div class="flow-badge">01</div>
+              <div class="flow-title">Naver Booking Page</div>
+              <div class="flow-desc">모바일 User-Agent로 예약 페이지 접속, networkidle2 완료까지 대기</div>
+              <div class="flow-code">ua: "Mozilla/5.0 (iPhone...)"<br>waitUntil: 'networkidle2'</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-inner">
+              <div class="flow-badge">02</div>
+              <div class="flow-title">GraphQL Intercept</div>
+              <div class="flow-desc">네트워크 응답 이벤트를 리스닝하여 hourlySchedule 응답 감지 및 슬롯 추출</div>
+              <div class="flow-code">page.on('response')<br>opName=hourlySchedule</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-inner">
+              <div class="flow-badge">03</div>
+              <div class="flow-title">CSV Output</div>
+              <div class="flow-desc">StudioName · ResourceID · Date · Time · Status 구조로 날짜 스탬프 파일에 자동 저장</div>
+              <div class="flow-code">reservations_YYYYMMDD.csv<br>UTF-8 BOM (Excel 호환)</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-inner">
+              <div class="flow-badge">04</div>
+              <div class="flow-title">Dashboard</div>
+              <div class="flow-desc">드래그 앤 드롭으로 다중 CSV 업로드, 랭킹·시간대·추세 차트를 브라우저에서 즉시 렌더링</div>
+              <div class="flow-code">report.html (서버 불필요)<br>Vanilla JS + SVG Chart</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="s2-footer">
+          <span>인증 토큰 없이 GraphQL 응답 인터셉션으로 데이터 획득</span>
+          <span>3 / 4</span>
+        </div>
+
+      </div>
+
+      <div class="slide s45" id="slide-4">
+
+        <div class="s45-header">
+          <div class="slide-label">03 / Stack &amp; Impact</div>
+          <h2 class="slide-h2">기술 스택 및 적용 효과</h2>
+        </div>
+
+        <div class="s45-body">
+
+          <!-- Left: Tech Stack -->
+          <div class="s45-left">
+            <div class="tech-stack-list">
+              <div class="tech-row">
+                <div class="tech-icon-box">N</div>
+                <div>
+                  <div class="tech-row-title">Node.js (ESM) + Puppeteer</div>
+                  <div class="tech-row-desc">Chromium 기반 헤드리스 브라우저로 실제 사용자 탐색 시뮬레이션</div>
+                </div>
+              </div>
+              <div class="tech-row">
+                <div class="tech-icon-box em">G</div>
+                <div>
+                  <div class="tech-row-title">GraphQL 인터셉션</div>
+                  <div class="tech-row-desc">page.on('response')로 인증 없이 hourlySchedule API 응답 캡처</div>
+                </div>
+              </div>
+              <div class="tech-row">
+                <div class="tech-icon-box li">JS</div>
+                <div>
+                  <div class="tech-row-title">Vanilla JS (ES2020)</div>
+                  <div class="tech-row-desc">프레임워크 없이 CSV 파싱, DOM 렌더링, SVG 차트 생성</div>
+                </div>
+              </div>
+            </div>
+            <div class="stack-pills" style="margin-top: 14px;">
+              <span class="stack-pill">Node.js ESM</span>
+              <span class="stack-pill">Puppeteer 25</span>
+              <span class="stack-pill">Vanilla JS</span>
+              <span class="stack-pill">GraphQL Hook</span>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="s45-divider"></div>
+
+          <!-- Right: Impact -->
+          <div class="s45-right">
+            <div class="impact-row">
+              <div class="impact-pip"></div>
+              <div>
+                <div class="impact-row-label">무인 자동 수집</div>
+                <div class="impact-row-desc">crontab 기반 매일 23시 자동 실행. 사람의 개입 없이 CSV가 날짜별로 쌓임</div>
+              </div>
+            </div>
+            <div class="impact-row">
+              <div class="impact-pip"></div>
+              <div>
+                <div class="impact-row-label">다중 CSV 날짜 병합 분석</div>
+                <div class="impact-row-desc">여러 날짜의 CSV를 동시 드롭하면 기간별 통합 차트를 즉시 렌더링</div>
+              </div>
+            </div>
+            <div class="impact-row">
+              <div class="impact-pip"></div>
+              <div>
+                <div class="impact-row-label">완전 독립 실행</div>
+                <div class="impact-row-desc">클라우드·외부 DB·API 키 없이 로컬에서 수집과 시각화 완결</div>
+              </div>
+            </div>
+            <div class="s45-summary">
+              네이버 예약 GraphQL 인터셉션 → CSV 자동 적재 → 브라우저 즉시 시각화
+            </div>
+          </div>
+
+        </div>
+
+        <div class="s2-footer">
+          <span>외부 서버 · API 키 · 인증 불필요한 완전 로컬 파이프라인</span>
+          <span>4 / 4</span>
+        </div>
+
+      </div>
+
+
+      <!-- Navigation -->
+      <div class="deck-controls">
+        <button class="nav-btn" id="prev-btn" aria-label="이전 슬라이드">⟵</button>
+        <div class="indicator-dots" id="dots-container"></div>
+        <button class="nav-btn" id="next-btn" aria-label="다음 슬라이드">⟶</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
