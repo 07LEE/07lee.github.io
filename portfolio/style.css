@@ -153,6 +153,24 @@ main {
     height: 16px;
 }
 
+/* Company Marker Styles */
+.company-marker {
+    display: inline-flex;
+    align-items: center;
+    color: #71717a;
+    cursor: help;
+    transition: color 0.2s ease;
+}
+
+.company-marker:hover {
+    color: #60a5fa;
+}
+
+.company-icon {
+    width: 14px;
+    height: 14px;
+}
+
 
 
 /* Footer Section */

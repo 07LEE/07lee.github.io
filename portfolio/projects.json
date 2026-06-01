@@ -23,7 +23,20 @@
             "Selenium"
         ],
         "link": "invoice-simplifier/index.html",
-        "github": "https://github.com/07lee"
+        "isCompany": true
+    },
+    {
+        "id": "item-zed-remote-system",
+        "title": "ZED Remote System",
+        "category": "Computer Vision",
+        "description": "ZED SDK 기반 Headless Jetson 원격 카메라 캡처 시스템",
+        "tags": [
+            "Python",
+            "ZED SDK",
+            "Jetson"
+        ],
+        "link": "zed-remote-system/index.html",
+        "isCompany": true
     },
     {
         "id": "item-nmap-reservation-analyzer",
@@ -36,6 +49,6 @@
             "Vanilla JS"
         ],
         "link": "nmap-reservation-analyzer/index.html",
-        "github": "https://github.com/07lee/navermap"
+        "github": "https://github.com/07LEE/Nmap-Reservation-Analyzer"
     }
 ]

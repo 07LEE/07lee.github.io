@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const listContainer = document.getElementById('portfolio-list');
     if (!listContainer) return;
 
-    fetch('data/projects.json')
+    fetch('projects.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to load project data.');
@@ -27,10 +27,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 const link = document.createElement('a');
                 link.href = project.link;
                 link.className = 'link-item';
-                link.setAttribute('aria-label', `View ${project.title} project`);
+                link.setAttribute('aria-label', `${project.title} 프로젝트 보기`);
                 link.textContent = project.title;
                 h2.appendChild(link);
                 titleWrapper.appendChild(h2);
+
+                if (project.isCompany) {
+                    const companyMarker = document.createElement('span');
+                    companyMarker.className = 'company-marker';
+                    companyMarker.setAttribute('title', '회사 프로젝트');
+                    companyMarker.setAttribute('aria-label', '회사 프로젝트');
+                    companyMarker.innerHTML = `
+                        <svg class="company-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                            <line x1="9" y1="22" x2="9" y2="16"></line>
+                            <line x1="15" y1="22" x2="15" y2="16"></line>
+                            <line x1="9" y1="16" x2="15" y2="16"></line>
+                            <path d="M8 6h.01"></path>
+                            <path d="M16 6h.01"></path>
+                            <path d="M8 10h.01"></path>
+                            <path d="M16 10h.01"></path>
+                            <path d="M12 6h.01"></path>
+                            <path d="M12 10h.01"></path>
+                            <path d="M8 14h.01"></path>
+                            <path d="M16 14h.01"></path>
+                            <path d="M12 14h.01"></path>
+                        </svg>
+                    `;
+                    titleWrapper.appendChild(companyMarker);
+                }
 
                 if (project.github) {
                     const githubLink = document.createElement('a');
@@ -38,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     githubLink.className = 'github-link';
                     githubLink.target = '_blank';
                     githubLink.rel = 'noopener noreferrer';
-                    githubLink.setAttribute('aria-label', `View source code for ${project.title}`);
+                    githubLink.setAttribute('aria-label', `${project.title} 소스 코드 보기`);
 
                     githubLink.innerHTML = `
                         <svg class="github-icon" viewBox="0 0 16 16" fill="currentColor">
@@ -80,6 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => {
             console.error(error);
-            listContainer.innerHTML = `<p class="error-msg" style="color: #ef4444; font-size: 0.95rem; text-align: center; width: 100%;">An error occurred while loading the project list.</p>`;
+            listContainer.innerHTML = `<p class="error-msg" style="color: #ef4444; font-size: 0.95rem; text-align: center; width: 100%;">프로젝트 목록을 불러오는 중 오류가 발생했습니다.</p>`;
         });
 });
