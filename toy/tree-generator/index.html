@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Directory Tree Generator</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-top">
+        <h1>Directory Tree Generator</h1>
+        <a href="../index.html" class="back-btn">← Back</a>
+      </div>
+      <p>텍스트, 파일 경로 목록, 혹은 find . 실행 결과를 그대로 복사해 넣으면 마크다운 트리 구조로 변환합니다.</p>
+    </header>
+    <main class="app-main">
+      <section class="panel input-panel">
+        <div class="panel-header">
+          <label for="raw-input">Input Text</label>
+          <div class="root-input-box">
+            <label for="root-name-input">Root Name:</label>
+            <input type="text" id="root-name-input" value="project" placeholder="프로젝트명">
+          </div>
+        </div>
+        <div class="options-bar">
+          <label class="toggle-label">
+            <input type="checkbox" id="show-hidden-toggle"> Show . Files
+          </label>
+          <label class="toggle-label">
+            <input type="checkbox" id="show-double-underscore-toggle"> Show __ Files
+          </label>
+        </div>
+        <textarea id="raw-input" placeholder="여기에 ls 결과, find . 결과 혹은 파일 경로 리스트를 입력하세요.&#10;예시 1: find .&#10;        .&#10;        ./src&#10;        ./src/main.js&#10;예시 2: assets configs docs README.md">user@computer:~/project$ find .
+.
+./.github
+./.github/workflows
+./.github/workflows/pr_validation.yml
+./src
+./src/__pycache__
+./src/__pycache__/main.cpython-310.pyc
+./src/__init__.py
+./src/main.js
+./README.md</textarea>
+      </section>
+      <section class="panel output-panel">
+        <div class="panel-header">
+          <span>Tree Output</span>
+          <button id="copy-btn">Copy to Clipboard</button>
+        </div>
+        <pre><code id="tree-output"></code></pre>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
