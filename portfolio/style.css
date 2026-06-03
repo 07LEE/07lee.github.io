@@ -171,6 +171,24 @@ main {
     height: 14px;
 }
 
+/* Progress Marker Styles */
+.progress-marker {
+    display: inline-flex;
+    align-items: center;
+    color: #71717a;
+    cursor: help;
+    transition: color 0.2s ease;
+}
+
+.progress-marker:hover {
+    color: #f59e0b;
+}
+
+.progress-icon {
+    width: 14px;
+    height: 14px;
+}
+
 
 
 /* Footer Section */

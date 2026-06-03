@@ -1,0 +1,601 @@
+/* Chess Monochrome Design System (style.css) */
+
+/* Variables Definition */
+:root {
+    --bg-primary: #fcfcfc;
+    --bg-secondary: #f4f4f4;
+    --text-primary: #1c1c1c;
+    --text-secondary: #666666;
+    --border-color: #1c1c1c;
+    --border-light: #e0e0e0;
+    --accent-color: #000000;
+    --card-bg: #ffffff;
+    --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+    background-color: #f3f4f6;
+    color: var(--text-primary);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Chess Grid Pattern Background Overlay */
+.chess-grid-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Back Link Style */
+.back-link {
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 9999;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-family: 'Outfit', sans-serif;
+    text-decoration: none;
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
+    border-radius: 99px;
+    padding: 0.4rem 1rem;
+    transition: var(--transition-smooth);
+}
+
+.back-link:hover {
+    color: #ffffff;
+    background-color: var(--text-primary);
+    border-color: var(--text-primary);
+}
+
+/* Presentation Container */
+.presentation-container {
+    width: 90vw;
+    height: 80vh;
+    max-width: 1400px;
+    max-height: 850px;
+    position: relative;
+    z-index: 10;
+    background: var(--card-bg);
+    border: none;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
+}
+
+/* Slide Base Layout */
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(50px);
+    transition: var(--transition-smooth);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    background-color: var(--card-bg);
+}
+
+/* Active Slide State */
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    z-index: 10;
+}
+
+/* Slide Content Layout */
+.slide-content {
+    width: 100%;
+    height: 100%;
+    padding: 50px 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Slide Header */
+.slide-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 12px;
+}
+
+.slide-number {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-right: 15px;
+    line-height: 1;
+}
+
+.slide-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.slide-description {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+}
+
+/* Slide 1: Title Slide */
+.title-slide {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    background-image: 
+        linear-gradient(45deg, #f9f9f9 25%, transparent 25%), 
+        linear-gradient(-45deg, #f9f9f9 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #f9f9f9 75%), 
+        linear-gradient(-45deg, transparent 75%, #f9f9f9 75%);
+    background-size: 40px 40px;
+    background-position: 0 0, 0 20px, 20px -20px, -20px 0;
+}
+
+.chess-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--border-light);
+    background-color: var(--card-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.title-chess-icon {
+    font-size: 3rem;
+    color: var(--text-primary);
+}
+
+.main-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.subtitle {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 680px;
+    line-height: 1.6;
+    word-break: keep-all;
+}
+
+/* Slide 2: Architecture Cards */
+.architecture-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.step-card {
+    background-color: #f9f9f9;
+    border: 1px solid #e5e5e7;
+    border-top: 4px solid var(--text-primary);
+    padding: 30px 20px;
+    position: relative;
+    transition: var(--transition-smooth);
+}
+
+.step-card:hover {
+    background-color: var(--bg-secondary);
+    transform: translateY(-5px);
+}
+
+.step-num {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 800;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.step-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.step-card p {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* Slide 3: Environment Specification */
+.env-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 30px;
+}
+
+.env-info-box {
+    border: 1px solid #e5e5e7;
+    border-top: 4px solid var(--text-primary);
+    padding: 25px;
+    background-color: #f9f9f9;
+}
+
+.env-info-box h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+.env-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.env-table th, .env-table td {
+    border: 1px solid var(--border-light);
+    padding: 10px;
+    text-align: left;
+}
+
+.env-table th {
+    background-color: var(--bg-secondary);
+    font-weight: 700;
+}
+
+.action-card {
+    background-color: var(--bg-secondary);
+    border-left: 4px solid var(--border-color);
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.action-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.action-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* Slide 4: Image Pipeline Layout */
+.pipeline-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.pipeline-text {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.pipeline-item {
+    display: flex;
+    gap: 15px;
+}
+
+.bullet-square {
+    width: 12px;
+    height: 12px;
+    background-color: var(--text-primary);
+    margin-top: 5px;
+    flex-shrink: 0;
+}
+
+.pipeline-item h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.pipeline-item p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.pipeline-visual {
+    border: 1px solid #e5e5e7;
+    border-top: 4px solid var(--text-primary);
+    padding: 10px;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-screenshot {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border-light);
+}
+
+/* Slide 5: Model Grid */
+.model-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.model-card {
+    border: 1px solid #e5e5e7;
+    border-top: 4px solid var(--text-primary);
+    padding: 25px;
+    background-color: #f9f9f9;
+}
+
+.model-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    border-left: 3px solid var(--border-color);
+    padding-left: 10px;
+}
+
+.model-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Navigation Controls */
+.nav-controls {
+    position: absolute;
+    bottom: 25px;
+    left: 70px;
+    right: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 20;
+}
+
+.nav-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.nav-btn:hover:not(:disabled) {
+    background-color: var(--text-primary);
+    color: #ffffff;
+    border-color: var(--text-primary);
+}
+
+.nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    border-color: var(--border-light);
+}
+
+.slide-indicators {
+    display: flex;
+    gap: 10px;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--border-light);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.indicator.active {
+    background-color: var(--text-primary);
+    border-color: var(--text-primary);
+}
+
+/* Slide 5 Model Layout & Diagram Styles */
+.model-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 30px;
+    align-items: stretch;
+    margin-top: 20px;
+}
+
+.model-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    justify-content: center;
+}
+
+.model-diagram-box {
+    border: 1px solid #e5e5e7;
+    border-top: 4px solid var(--text-primary);
+    padding: 25px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.model-diagram-box h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-left: 3px solid var(--border-color);
+    padding-left: 10px;
+}
+
+.neural-network-svg {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nn-svg {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+}
+
+/* Combined Slide 2: Vertical Layout (Architecture on Top, Env on Bottom) */
+.sys-env-vertical-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.sys-section h3 {
+    font-size: 1.15rem;
+    margin-bottom: 15px;
+    border-left: 3px solid var(--border-color);
+    padding-left: 10px;
+    font-weight: 700;
+}
+
+.architecture-grid-compact {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.step-card-compact {
+    background-color: #f9f9f9;
+    border: 1px solid #e5e5e7;
+    border-top: 4px solid var(--text-primary);
+    padding: 25px 20px;
+    transition: var(--transition-smooth);
+}
+
+.step-card-compact:hover {
+    background-color: var(--bg-secondary);
+    transform: translateY(-3px);
+}
+
+.step-num-compact {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 3px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.step-card-compact h4 {
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.step-card-compact p {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.env-section-horizontal {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 35px;
+    border-top: 1px solid var(--border-light);
+    padding-top: 25px;
+}
+
+.env-left h4, .env-right h4 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.env-summary-table-compact {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+}
+
+.env-summary-table-compact th, .env-summary-table-compact td {
+    border: 1px solid var(--border-light);
+    padding: 8px 12px;
+    text-align: left;
+}
+
+.env-summary-table-compact th {
+    background-color: var(--bg-secondary);
+    font-weight: 700;
+}
+
+.action-row-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.action-box-compact {
+    background-color: var(--bg-secondary);
+    border-left: 4px solid var(--border-color);
+    padding: 18px 20px;
+}
+
+.action-box-compact h5 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.action-box-compact p {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+
+

@@ -57,6 +57,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     titleWrapper.appendChild(companyMarker);
                 }
 
+                if (project.inProgress) {
+                    const progressMarker = document.createElement('span');
+                    progressMarker.className = 'progress-marker';
+                    progressMarker.setAttribute('title', '진행 중인 프로젝트');
+                    progressMarker.setAttribute('aria-label', '진행 중인 프로젝트');
+                    progressMarker.innerHTML = `
+                        <svg class="progress-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    `;
+                    titleWrapper.appendChild(progressMarker);
+                }
+
                 if (project.github) {
                     const githubLink = document.createElement('a');
                     githubLink.href = project.github;

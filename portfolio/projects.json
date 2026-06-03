@@ -50,5 +50,19 @@
         ],
         "link": "nmap-reservation-analyzer/index.html",
         "github": "https://github.com/07LEE/Nmap-Reservation-Analyzer"
+    },
+    {
+        "id": "item-shotgun-king-rl",
+        "title": "Shotgun King Reinforcement Learning",
+        "category": "Reinforcement Learning",
+        "description": "화면 분석 기반 샷건 킹 강화학습 에이전트(Agent)",
+        "inProgress": true,
+        "tags": [
+            "Python",
+            "PyTorch",
+            "OpenCV"
+        ],
+        "link": "shotgun-king-rl/index.html",
+        "github": "https://github.com/07LEE/Shotgun-King-RL"
     }
 ]
