@@ -116,6 +116,12 @@ main {
     margin: 0;
 }
 
+.project-meta {
+    font-size: 0.8rem;
+    color: #71717a;
+    margin: 0 0 0.4rem;
+}
+
 .tech-tags {
     display: flex;
     flex-wrap: wrap;

@@ -3,6 +3,8 @@
         "id": "item-novel-transformation",
         "title": "Novel Transformation",
         "category": "AI Service",
+        "period": "",
+        "affiliation": "",
         "description": "소설 텍스트 내 발화자 및 장면 인식 서비스",
         "tags": [
             "Python",
@@ -16,6 +18,8 @@
         "id": "item-invoice-simplifier",
         "title": "Invoice Simplifier",
         "category": "Web Utility",
+        "period": "",
+        "affiliation": "",
         "description": "자연어 기반 견적서 생성 도구",
         "tags": [
             "Python",
@@ -29,6 +33,8 @@
         "id": "item-zed-remote-system",
         "title": "ZED Remote System",
         "category": "Computer Vision",
+        "period": "",
+        "affiliation": "",
         "description": "ZED SDK 기반 Headless Jetson 원격 카메라 캡처 시스템",
         "tags": [
             "Python",
@@ -42,6 +48,8 @@
         "id": "item-nmap-reservation-analyzer",
         "title": "Nmap Reservation Analyzer",
         "category": "Data Automation",
+        "period": "",
+        "affiliation": "",
         "description": "네이버 지도 예약 수집 및 시각화 도구",
         "tags": [
             "Node.js",
@@ -55,6 +63,8 @@
         "id": "item-shotgun-king-rl",
         "title": "Shotgun King Reinforcement Learning",
         "category": "Reinforcement Learning",
+        "period": "",
+        "affiliation": "",
         "description": "화면 분석 기반 샷건 킹 강화학습 에이전트(Agent)",
         "inProgress": true,
         "tags": [

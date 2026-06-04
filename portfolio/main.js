@@ -111,6 +111,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 article.appendChild(headerDiv);
+
+                if (project.period || project.affiliation) {
+                    const metaP = document.createElement('p');
+                    metaP.className = 'project-meta';
+                    const parts = [];
+                    if (project.period) parts.push(project.period);
+                    if (project.affiliation) parts.push(project.affiliation);
+                    metaP.textContent = parts.join('  ·  ');
+                    article.appendChild(metaP);
+                }
+
                 article.appendChild(descP);
                 article.appendChild(tagsDiv);
 
