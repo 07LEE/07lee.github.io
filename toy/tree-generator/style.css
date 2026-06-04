@@ -40,8 +40,9 @@ body {
 
 .header-top {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+  gap: 1rem;
   margin-bottom: 8px;
 }
 

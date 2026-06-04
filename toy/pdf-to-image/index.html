@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PDF 파일을 개별 이미지로 빠르고 간편하게 변환합니다.">
+    <title>07lee | PDF to Image</title>
+    <!-- Include portfolio common CSS -->
+    <link rel="stylesheet" href="../../portfolio/style.css">
+    <!-- Include current folder specialized CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="brand">
+                <a href="../index.html" class="back-link" aria-label="토이 프로젝트 목록으로 이동">
+                    <svg class="back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </a>
+                <h1>PDF to Image</h1>
+            </div>
+        </header>
+
+        <main>
+            <section class="converter-box">
+                <div id="drop-zone" class="drop-zone">
+                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p class="drop-text">PDF 파일을 드래그 앤 드롭하거나 클릭하여 선택하세요</p>
+                    <input type="file" id="file-input" accept="application/pdf" style="display: none;">
+                </div>
+
+                <div class="options-row">
+                    <div class="option-item">
+                        <label for="scale-select">변환 품질 (해상도):</label>
+                        <select id="scale-select">
+                            <option value="1">낮음 (1.0x)</option>
+                            <option value="1.5" selected>보통 (1.5x)</option>
+                            <option value="2">높음 (2.0x)</option>
+                            <option value="3">최고 (3.0x)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="progress-container" class="progress-container" style="display: none;">
+                    <div class="progress-bar-wrapper">
+                        <div id="progress-bar" class="progress-bar"></div>
+                    </div>
+                    <span id="progress-text" class="progress-text">0% 변환 중...</span>
+                </div>
+
+                <div id="action-bar" class="action-bar" style="display: none;">
+                    <button id="download-all-btn" class="action-btn">ZIP으로 전체 다운로드</button>
+                </div>
+
+                <div id="preview-grid" class="preview-grid"></div>
+            </section>
+        </main>
+
+        <footer>
+            &copy; 2026 07lee. All rights reserved.
+        </footer>
+    </div>
+
+    <!-- External Libraries CDN (pdf.js and jszip) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
