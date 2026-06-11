@@ -30,10 +30,25 @@
         "isCompany": true
     },
     {
+        "id": "item-segments-ai-api",
+        "title": "Segments AI API",
+        "category": "Data Automation",
+        "period": "2026.02",
+        "affiliation": "",
+        "description": "Segments.ai 플랫폼의 100개 데이터셋 조회 제한을 극복하기 위한 동적 위임 파이프라인 및 3D 포인트클라우드 업로드 자동화 프로그램",
+        "tags": [
+            "Python",
+            "CLI",
+            "Segments.ai"
+        ],
+        "link": "segments-ai-api/index.html",
+        "isCompany": true
+    },
+    {
         "id": "item-zed-remote-system",
         "title": "ZED Remote System",
         "category": "Computer Vision",
-        "period": "",
+        "period": "2026.03 ~ 2026.04",
         "affiliation": "",
         "description": "ZED SDK 기반 Headless Jetson 원격 카메라 캡처 시스템",
         "tags": [

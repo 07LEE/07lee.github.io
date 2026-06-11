@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Segments AI API: 100개 제한 극복을 위한 데이터 위임 및 PCD 업로드 자동화 파이프라인">
+    <title>Segments AI API | 데이터 위임 및 PCD 업로드 자동화</title>
+    <!-- Google Fonts: Inter & Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Portfolio back link -->
+    <a href="../index.html" class="back-link" aria-label="포트폴리오 목록으로 이동">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+        </svg>
+        Portfolio
+    </a>
+
+    <div class="dashboard-container">
+        
+        <!-- Left Fixed Navigation Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span class="brand-title">Segments API</span>
+                <span class="brand-version">v0.1.0</span>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="sidebar-item active" data-target="slide-1">
+                    <span class="nav-num">01</span> Overview
+                </button>
+                <button class="sidebar-item" data-target="slide-2">
+                    <span class="nav-num">02</span> Problem Definition
+                </button>
+                <button class="sidebar-item" data-target="slide-3">
+                    <span class="nav-num">03</span> Architecture
+                </button>
+                <button class="sidebar-item" data-target="slide-4">
+                    <span class="nav-num">04</span> Core Modules
+                </button>
+                <button class="sidebar-item" data-target="slide-5">
+                    <span class="nav-num">05</span> Performance
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <span>Ingestion Pipeline Project</span>
+            </div>
+        </aside>
+
+        <!-- Right Presentation Screen Area -->
+        <main class="content-area">
+
+            <!-- Slide 1: Overview -->
+            <section class="slide-section active" id="slide-1">
+                <div class="slide-grid">
+                    <div class="slide-info-panel">
+                        <span class="badge">Pipeline Overview</span>
+                        <h2>3D PCD 수집 및<br>라벨 시인성 우회 솔루션</h2>
+                        <p class="paragraph">Segments.ai 플랫폼의 100개 데이터셋 API 한계를 극복하고 대용량 포인트클라우드 데이터를 효율적으로 가공 및 적재하기 위해 구축한 동적 위임 자동화 프로그램입니다.</p>
+                        <div class="highlight-info-box">
+                            <i class="fa-solid fa-code"></i> Python 패키지 및 CLI 유틸리티 완비
+                        </div>
+                    </div>
+                    <div class="slide-visual-panel">
+                        <div class="code-viewport">
+                            <div class="code-header">
+                                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                                <span class="file-name">console.sh</span>
+                            </div>
+                            <pre class="code-body"><code>$ segments-api --upload --src "/mnt/nas/raw_data"
+[INFO] Scanning for PCD files recursively...
+[INFO] Starting Upload Pipeline: 15 files detected.
+[WARN] Detection: 5 datasets will exceed 100 limit.
+[INFO] [DELEGATE] Shared oldest datasets with Worker Key.
+[INFO] Ingestion completed. 3D viewpose stabilized.</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 2: Problem Definition -->
+            <section class="slide-section" id="slide-2">
+                <div class="slide-grid">
+                    <div class="slide-info-panel">
+                        <span class="badge badge-alert">Problem Definition</span>
+                        <h2>플랫폼 API 한계와<br>비즈니스 리스크</h2>
+                        <p class="paragraph">마스터 API 키가 조회할 수 있는 데이터셋이 100개로 수치 제약됨에 따라, 과거 데이터가 API 리포트에서 소실되는 심각한 인프라 관리 장애가 존재했습니다.</p>
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <span class="metric-title">API Visibility Limit</span>
+                                <span class="metric-value">100</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-title">수작업 권한 부여 공수</span>
+                                <span class="metric-value">5m / 건</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-visual-panel">
+                        <div class="card-outline outline-alert">
+                            <h3>조회 실종(Invisible) 장애 현상</h3>
+                            <p class="card-p">새로운 3D 데이터가 적재될 때마다 마스터 인덱스 100 바깥으로 밀려난 과거 라벨 데이터에 대한 제어권이 유실되어, 학습 데이터셋 전처리 자동화 파이프라인에서 제외되는 품질 장애 리스크가 발생합니다.</p>
+                        </div>
+                        <div class="card-outline outline-safe" style="margin-top: 15px;">
+                            <h3>해결 방향: 동적 다중 계정 배분</h3>
+                            <p class="card-p">마스터 슬롯 임계치를 동적으로 예측하고, 소실 임박한 꼬리(Tail) 데이터셋에 협업 서브 계정을 매핑시켜 조회가 차단되는 현상을 인프라 비용 없이 완벽히 방어합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 3: Architecture -->
+            <section class="slide-section" id="slide-3">
+                <div class="slide-grid">
+                    <div class="slide-info-panel">
+                        <span class="badge">Architecture</span>
+                        <h2>위임 및 업로드<br>파이프라인 아키텍처</h2>
+                        <p class="paragraph">로컬에서 중복 검사를 끝낸 뒤, 마스터 용량 임계치(100개)가 초과될 때 꼬리 데이터셋을 분기하여 서브 계정(Worker) 관리자로 이관하는 지능형 스케줄링 흐름입니다.</p>
+                        <ul class="step-desc-list">
+                            <li><strong>1. Slot 계산:</strong> 업로드 예정 수량과 잔여 조회 가능량 분석</li>
+                            <li><strong>2. 꼬리 판별:</strong> 생성일자 기준 실종 우선순위 N개 추출</li>
+                            <li><strong>3. 협업 위임:</strong> 서브 계정에 Collaborator 권한 주입</li>
+                            <li><strong>4. 보정 전송:</strong> ego_pose 축 설정 및 default_z 가공 업로드</li>
+                        </ul>
+                    </div>
+                    <div class="slide-visual-panel">
+                        <div class="code-viewport">
+                            <div class="code-header">
+                                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                                <span class="file-name">delegator.py</span>
+                            </div>
+                            <pre class="code-body"><code>def secure_tail_accessibility(upload_count=1):
+    expected_total = current_count + upload_count
+    if expected_total <= VISIBILITY_LIMIT:
+        return
+    
+    # Identify datasets about to fall off the Master's list
+    overlap_n = expected_total - VISIBILITY_LIMIT
+    tail_candidates = master_datasets[-min(overlap_n, current_count):]
+    
+    for ds in tail_candidates:
+        # Assign worker with remaining visibility slots
+        master_client.add_dataset_collaborator(
+            ds.full_name, worker_username, role="manager"
+        )</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 4: Core Modules -->
+            <section class="slide-section" id="slide-4">
+                <div class="slide-grid">
+                    <div class="slide-info-panel">
+                        <span class="badge">Core Modules</span>
+                        <h2>구현 아키텍처 상세</h2>
+                        <p class="paragraph">멀티스레딩 기반 위임 제어 및 3D 포인트클라우드 데이터 캘리브레이션을 담당하는 핵심 컴포넌트 목록입니다.</p>
+                        <div class="feature-block">
+                            <h4>delegator.py</h4>
+                            <p>서브 계정별 잔여 시인성 용량(Capacity)을 비동기 추적하고 Collaborator manager 권한 연동을 자동화합니다.</p>
+                        </div>
+                        <div class="feature-block">
+                            <h4>uploader.py</h4>
+                            <p>_matterpak 디렉토리 정보의 중복 전송을 원천 차단하고 3D 웹 뷰어 시점 렌더링 정상화를 위해 pose 메타데이터를 강제 보정합니다.</p>
+                        </div>
+                    </div>
+                    <div class="slide-visual-panel">
+                        <div class="code-viewport">
+                            <div class="code-header">
+                                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                                <span class="file-name">uploader.py</span>
+                            </div>
+                            <pre class="code-body"><code># uploader.py: Stabilization & Ingestion
+attributes = {
+    "pcd": {"url": pcd_url, "type": "pcd"},
+    "ego_pose": {
+        "position": {"x": 0, "y": 0, "z": 0},
+        "heading": {"qx": 0, "qy": 0, "qz": 0, "qw": 1}
+    },
+    "default_z": -1
+}
+client.add_sample(dataset_id, file_path.name, attributes)</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 5: Performance -->
+            <section class="slide-section" id="slide-5">
+                <div class="slide-grid">
+                    <div class="slide-info-panel">
+                        <span class="badge">Performance</span>
+                        <h2>수용 확장성 및<br>인프라 지표 성과</h2>
+                        <p class="paragraph">단일 마스터 한도 내에서 한정되었던 조회 및 적재 임계점을 아키텍처적 우회를 통해 기하급수적으로 상향시켰습니다.</p>
+                        <div class="highlight-info-box border-safe">
+                            <i class="fa-solid fa-chart-line"></i> 수작업 권한 부여 공정률 100% 자동화
+                        </div>
+                    </div>
+                    <div class="slide-visual-panel">
+                        <table class="dashboard-table">
+                            <thead>
+                                <tr>
+                                    <th>평가 지표</th>
+                                    <th>기존 단일 환경</th>
+                                    <th>위임 자동화 아키텍처</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>API 시인성 한계</td>
+                                    <td>100개 고정</td>
+                                    <td>100 × N개 (무제한)</td>
+                                </tr>
+                                <tr>
+                                    <td>데이터 증발률</td>
+                                    <td>초과분 영구 손실</td>
+                                    <td>0% 보존 완료</td>
+                                </tr>
+                                <tr>
+                                    <td>동적 스레딩 분산</td>
+                                    <td>미지원 (직렬 전송)</td>
+                                    <td>ThreadPool 가용 분산</td>
+                                </tr>
+                                <tr>
+                                    <td>3D 뷰어 렌더링 보정</td>
+                                    <td>초기 시점 불안정 (z값 누락)</td>
+                                    <td>정상화 완료 (default_z 주입)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <!-- Navigation Controller -->
+    <div class="nav-controls">
+        <button id="btn-prev" class="nav-btn" disabled><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="slide-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+            <span class="indicator" data-slide="3"></span>
+            <span class="indicator" data-slide="4"></span>
+        </div>
+        <button id="btn-next" class="nav-btn"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <!-- Fixed Footer Bar -->
+    <div class="footer-bar">
+        <span>Segments AI API : 3D 포인트클라우드 및 라벨 관리 자동화 유틸리티</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
