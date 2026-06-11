@@ -45,6 +45,21 @@
         "isCompany": true
     },
     {
+        "id": "item-video-mask-inspector",
+        "title": "Video Mask Inspector",
+        "category": "AI Tool",
+        "period": "",
+        "affiliation": "",
+        "description": "SAM 2.1 기반 비디오 객체 분할 마스크 검수 및 ID 일관성 정정 GUI 도구",
+        "tags": [
+            "Python",
+            "SAM 2.1",
+            "PySide6"
+        ],
+        "link": "video-mask-inspector/index.html",
+        "github": "https://github.com/07LEE/Video-Mask-Inspector"
+    },
+    {
         "id": "item-zed-remote-system",
         "title": "ZED Remote System",
         "category": "Computer Vision",
@@ -54,7 +69,7 @@
         "tags": [
             "Python",
             "ZED SDK",
-            "Jetson"
+            "Flask"
         ],
         "link": "zed-remote-system/index.html",
         "isCompany": true
@@ -63,7 +78,7 @@
         "id": "item-nmap-reservation-analyzer",
         "title": "Nmap Reservation Analyzer",
         "category": "Data Automation",
-        "period": "",
+        "period": "2026.05",
         "affiliation": "",
         "description": "네이버 지도 예약 수집 및 시각화 도구",
         "tags": [
@@ -78,7 +93,7 @@
         "id": "item-shotgun-king-rl",
         "title": "Shotgun King Reinforcement Learning",
         "category": "Reinforcement Learning",
-        "period": "",
+        "period": "2026.05 ~ ",
         "affiliation": "",
         "description": "화면 분석 기반 샷건 킹 강화학습 에이전트(Agent)",
         "inProgress": true,

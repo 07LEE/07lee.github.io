@@ -20,7 +20,7 @@ body {
 
 /* Header Section */
 header {
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
 }
 
 .brand {
@@ -60,7 +60,6 @@ h1 {
 
 /* Main Content List */
 main {
-    margin-top: 2rem;
     flex: 1;
 }
 

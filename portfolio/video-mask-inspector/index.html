@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Video Mask Inspector: SAM 2.1 기반 비디오 마스크 검수 및 객체 ID 일관성 정정 GUI 도구 기술 명세">
+    <title>Video Mask Inspector | 비디오 객체 ID 일관성 정정 도구</title>
+    <!-- Google Fonts: Outfit & Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Portfolio back link -->
+    <a href="../index.html" class="back-link" aria-label="포트폴리오 목록으로 이동">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+        </svg>
+        Portfolio
+    </a>
+
+    <!-- Main Grid Layout -->
+    <div class="interactive-layout">
+
+        <!-- Left Column: Fixed PySide6 App Simulator -->
+        <div class="gui-column">
+            <div class="app-frame">
+                <!-- App Header -->
+                <div class="app-header">
+                    <div class="app-dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="app-title">Video Mask Inspector v1.0.0</span>
+                    <div class="app-stats">
+                        <span class="stat-badge device"><i class="fa-solid fa-microchip"></i> CUDA:0</span>
+                        <span class="stat-badge fps"><i class="fa-solid fa-gauge"></i> 60+ FPS</span>
+                    </div>
+                </div>
+
+                <!-- Main Viewport and Sidebar Split -->
+                <div class="app-body">
+                    <!-- Image Viewport -->
+                    <div class="viewport-area">
+                        <!-- Simulated video frame container -->
+                        <div class="simulated-frame">
+                            <!-- Overlay Masks -->
+                            <div class="overlay-mask mask-base" id="mask-car">
+                                <span class="mask-label">Obj 12 (Car)</span>
+                            </div>
+                            <div class="overlay-mask mask-swap" id="mask-pedestrian">
+                                <span class="mask-label">Obj 15 (Pedestrian)</span>
+                            </div>
+                            
+                            <!-- Interactive AI Click Points -->
+                            <div class="ai-point pos-point" id="pt-pos"><i class="fa-solid fa-plus"></i></div>
+                            <div class="ai-point neg-point" id="pt-neg"><i class="fa-solid fa-minus"></i></div>
+                        </div>
+
+                        <!-- Notification popup layer inside viewport -->
+                        <div class="viewport-notification" id="app-toast">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            <span id="toast-text">ID Switch Warning: Obj 12 changed to Obj 15</span>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar: Objects & Properties -->
+                    <div class="sidebar-area">
+                        <div class="sidebar-section">
+                            <span class="sec-title">Active Objects</span>
+                            <ul class="obj-list">
+                                <li class="obj-item active" id="li-obj-12">
+                                    <span class="color-indicator" style="background-color: hsl(243, 75%, 59%);"></span>
+                                    <span class="obj-name">Obj 12 (Car)</span>
+                                    <span class="obj-type">uint16</span>
+                                </li>
+                                <li class="obj-item" id="li-obj-15">
+                                    <span class="color-indicator" style="background-color: hsl(172, 96%, 35%);"></span>
+                                    <span class="obj-name">Obj 15 (Pedestrian)</span>
+                                    <span class="obj-type">uint16</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="sidebar-section">
+                            <span class="sec-title">Model Status</span>
+                            <div class="model-info-box">
+                                <div class="box-row"><span>Active Model</span><strong>SAM 2.1 Large</strong></div>
+                                <div class="box-row"><span>Precision</span><strong>16-bit Standard</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Control & Terminal Area -->
+                <div class="app-bottom">
+                    <div class="timeline-bar">
+                        <div class="time-btn"><i class="fa-solid fa-backward-step"></i></div>
+                        <div class="time-btn"><i class="fa-solid fa-play"></i></div>
+                        <div class="time-btn"><i class="fa-solid fa-forward-step"></i></div>
+                        <div class="track-area">
+                            <div class="timeline-track">
+                                <div class="timeline-progress" id="time-line"></div>
+                                <div class="timeline-handle" id="time-handle"></div>
+                            </div>
+                            <div class="timeline-markers">
+                                <span class="marker" style="left: 0%;">00:00</span>
+                                <span class="marker" style="left: 45%;">00:43</span>
+                                <span class="marker" style="left: 95%;">01:30</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="terminal-panel">
+                        <span class="panel-label">stdout_monitor</span>
+                        <div class="terminal-logs" id="terminal-screen">
+                            <div class="log-line">> Loader: frame_0001.png parsed. Ready.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Scrolling Tech Content -->
+        <div class="content-column">
+            <!-- Section 1: Overview -->
+            <section class="tech-section" data-section="1">
+                <div class="section-badge">01. OVERVIEW</div>
+                <h2 class="section-title">Video Mask Inspector</h2>
+                <p class="section-para">Video Mask Inspector는 비디오 세그멘테이션 데이터 내 객체 고유 식별의 시간적 일관성(Temporal Consistency)을 검수하고 정제하기 위해 개발된 고정밀 GUI 애플리케이션입니다. Meta의 SAM 2.1 모델 추론 엔진과 고성능 뷰포트 렌더링, 증분 파일 동기화 시스템을 탑재하여 대규모 비디오 라벨 데이터 검수 공정을 간소화합니다.</p>
+                <div class="highlight-card">
+                    <h4>핵심 스펙 표준</h4>
+                    <ul class="plain-list">
+                        <li>AI 기반 마스크 편집: SAM 2.1 Tiny, Small, Base+, Large 등 전 규격 모델 탑재</li>
+                        <li>16-bit uint16 규격: 단일 비디오 시퀀스 내 255개 이상의 독립 객체 식별 지원</li>
+                        <li>스마트 증분 동기화: NAS 저장 시 로컬에서 변경된 물리 파일만 추출하여 원격 전송</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 2: Temporal Inconsistency -->
+            <section class="tech-section" data-section="2">
+                <div class="section-badge">02. PROBLEM DEFINITION</div>
+                <h2 class="section-title">시간적 ID 불일치 결함</h2>
+                <p class="section-para">비디오 마스크 전파 시, 객체가 겹치거나 가려지는 현상이 생겼을 때 트래킹 모델이 고유 식별 정보를 유실하여 동일 객체에 다른 ID를 잘못 덮어씌우는 ID Switch 현상이 발생합니다. 이에 따라 전체 시퀀스를 추적하는 인공지능 학습 정답지(Ground Truth)의 무결성이 붕괴됩니다.</p>
+                <div class="highlight-card warning-card">
+                    <h4>데이터 정합성 영향</h4>
+                    <p class="section-para" style="margin-bottom: 0;">ID Switch 결함이 잔존하는 비디오 마스크 셋은 학습용 데이터로서 신뢰할 수 없으므로, 프레임들을 전수 검사하고 결함이 발생하는 프레임 이후의 하위 시퀀스들을 일관성 있게 묶어주는 미세 교정 메커니즘이 수반되어야 합니다.</p>
+                </div>
+            </section>
+
+            <!-- Section 3: Smart Correction -->
+            <section class="tech-section" data-section="3">
+                <div class="section-badge">03. KEY TECHNOLOGY</div>
+                <h2 class="section-title">SAM 2.1 리파인먼트 & ID Swap</h2>
+                <p class="section-para">본 솔루션은 마우스 클릭 입력을 신속히 추론 가이드 피처로 수렴시키는 SAM 2.1 교정 엔진과, 꼬여버린 두 객체 ID 정보를 특정 프레임 시점부터 비디오 끝까지 영구적으로 맞바꾸어 해결하는 ID Swap 제어 기술을 탑재하였습니다.</p>
+                <div class="grid-cards-2">
+                    <div class="grid-subcard">
+                        <h4>공격적 마스크 보정</h4>
+                        <p>사용자가 입력한 양성(+) 및 음성(-) 포인트의 영향도를 우선 적용하여 픽셀의 오차 범위를 강력하게 제어</p>
+                    </div>
+                    <div class="grid-subcard">
+                        <h4>ID Swap (Current to End)</h4>
+                        <p>ID 불일치 발생 프레임부터 마지막 프레임 범위까지 단 한 번의 단축키로 두 객체 ID를 즉각 교환</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Performance Architecture -->
+            <section class="tech-section" data-section="4">
+                <div class="section-badge">04. SYSTEM ARCHITECTURE</div>
+                <h2 class="section-title">논블로킹 스레드 및 Smart Sync</h2>
+                <p class="section-para">고해상도 이미지 전파 및 AI 연산 도중 GUI가 얼어붙는 현상(Freezing)을 제거하고자 연산 흐름을 백그라운드 스레드로 격리하였으며, 데이터 저장 시 로컬에서 변경된 파일 블록만 선별하는 증분 동기화(Smart Sync)를 적용하였습니다.</p>
+                <div class="highlight-card">
+                    <h4>리소스 최적화 기능</h4>
+                    <ul class="plain-list">
+                        <li>백그라운드 스레드: AI 연산 및 마스크 전파 동작을 비동기 Worker 스레드로 위임</li>
+                        <li>경량 커맨드 Undo/Redo: 포인트 조작 이력을 논리적으로 관리하여 물리 메모리 오버헤드 0% 실현</li>
+                        <li>Smart Sync: 로컬 변경 사항과 리모트 스토리지 파일을 비교하여 변경분만 선별 업로드</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 5: Web Remote Integration -->
+            <section class="tech-section" data-section="5">
+                <div class="section-badge">05. WEB INTERFACE MODE</div>
+                <h2 class="section-title">FastAPI Web Inspector</h2>
+                <p class="section-para">Video Mask Inspector는 독립 실행형 PySide6(Qt) 데스크톱 환경 제공에 그치지 않고, FastAPI 백엔드 연동을 구현하여 사용자가 웹 브라우저를 통해 원격으로 마스크 인스펙터 인터페이스에 접속하여 동일한 검수 기능과 조작 단축키를 영위할 수 있도록 보장합니다.</p>
+                <div class="highlight-card teal-card">
+                    <h4>웹 서버 구성 요건</h4>
+                    <p class="section-para" style="margin-bottom: 0;">리포지토리 내 backend/main.py 서버 모듈 구동을 통해 localhost:8000 포트로 외부 원격 웹 환경 바인딩을 가동할 수 있으며, 이로써 로컬 장비의 하드웨어 리소스 한계를 우회하여 통합 협업 검수 시스템을 지원합니다.</p>
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+    <!-- Fixed Footer Bar -->
+    <div class="footer-bar">
+        <span>Video Mask Inspector : 고정밀 비디오 객체 ID 일관성 정정 도구</span>
+        <span>Scroll Down to Simulate</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
