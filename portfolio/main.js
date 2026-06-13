@@ -73,6 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     titleWrapper.appendChild(githubLink);
                 }
 
+
+
                 if (project.inProgress) {
                     const progressMarker = document.createElement('span');
                     progressMarker.className = 'progress-marker';

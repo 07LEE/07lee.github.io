@@ -781,3 +781,413 @@ body {
     font-family: 'Outfit', sans-serif;
     opacity: 0.9;
 }
+
+/* Nouvel Additional Slides Styling */
+
+/* Slide 2: Index Circles */
+.index-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px 0;
+}
+.index-card {
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px 20px;
+    width: 28%;
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+.index-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(28, 53, 94, 0.05);
+    border-color: var(--accent-navy);
+}
+.index-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 3px solid var(--accent-navy);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px auto;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--accent-navy);
+}
+.index-card h3 {
+    font-size: 1.1rem;
+    color: var(--accent-navy);
+    margin-bottom: 12px;
+}
+.index-card p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* Slide 3: Search bar & speaker example */
+.search-bar-container {
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    width: 100%;
+}
+.search-bar-ui {
+    display: flex;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 99px;
+    padding: 8px 20px;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+.search-bar-ui input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+.search-bar-ui i {
+    color: var(--text-secondary);
+}
+.dialogue-table-container {
+    overflow-x: auto;
+}
+.dialogue-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+.dialogue-table th, .dialogue-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+.dialogue-table th {
+    background: #f1f5f9;
+    color: var(--accent-navy);
+    font-weight: 700;
+    text-align: left;
+}
+.dialogue-table td .speaker-badge {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--accent-blue);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
+/* Slide 5: Domain Grid */
+.domain-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    width: 100%;
+}
+.domain-card {
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+.domain-card:hover {
+    border-color: var(--accent-navy);
+    transform: translateY(-3px);
+}
+.domain-icon {
+    font-size: 1.8rem;
+    color: var(--accent-navy);
+    margin-bottom: 12px;
+}
+.domain-card h4 {
+    font-size: 0.95rem;
+    color: var(--accent-navy);
+    margin-bottom: 8px;
+}
+.domain-card p {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* Slide 7: MPC research timeline & GCN */
+.mpc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    height: 100%;
+}
+.mpc-mindmap {
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.mpc-node {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 6px 0;
+    font-size: 0.8rem;
+    border-left: 4px solid var(--accent-navy);
+}
+.mpc-node.root {
+    background: var(--accent-navy);
+    color: #ffffff;
+    font-weight: 700;
+    border-left: none;
+    text-align: center;
+    margin-bottom: 12px;
+}
+.timeline-vertical {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-left: 20px;
+    justify-content: center;
+}
+.timeline-vertical::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 10%;
+    bottom: 10%;
+    width: 2px;
+    background: var(--border-color);
+}
+.timeline-item {
+    position: relative;
+    margin-bottom: 15px;
+}
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent-orange);
+    border: 2px solid #ffffff;
+}
+.timeline-year {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--accent-orange);
+}
+.timeline-desc {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+/* Slide 8: BERT sequence layout */
+.bert-seq-container {
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+}
+.bert-seq-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+}
+.seq-token {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+}
+.seq-token.special {
+    background: rgba(194, 65, 12, 0.1);
+    color: var(--accent-orange);
+    border-color: var(--accent-orange);
+    font-weight: 700;
+}
+.seq-token.speaker {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--accent-blue);
+    border-color: var(--accent-blue);
+    font-weight: 700;
+}
+
+/* Slide 13: EDA grid */
+.eda-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+}
+.eda-card {
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+.eda-stat {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent-navy);
+    margin-bottom: 8px;
+}
+.eda-label {
+    font-size: 0.85rem;
+    color: var(--accent-orange);
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+.eda-desc {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* Slide 14: Input/Output comparison */
+.io-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+}
+.io-box {
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.io-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--accent-navy);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.io-content {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    flex-grow: 1;
+    font-family: monospace;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    max-height: 250px;
+}
+
+/* Slide 15: Fine tuning grid */
+.ft-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+}
+.ft-card {
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+}
+.ft-card h4 {
+    font-size: 0.95rem;
+    color: var(--accent-navy);
+    margin-bottom: 10px;
+    border-bottom: 1.5px solid var(--accent-navy);
+    padding-bottom: 6px;
+}
+.ft-card ul {
+    list-style: none;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+.ft-card li {
+    margin-bottom: 6px;
+    position: relative;
+    padding-left: 10px;
+}
+.ft-card li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--accent-navy);
+}
+
+/* Slide 16: Result chart placeholder */
+.result-stats-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.result-stat-box {
+    text-align: center;
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    width: 30%;
+}
+.result-value {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent-navy);
+}
+.result-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 5px;
+}
+
+/* Slide 17: Thank you slide */
+.thankyou-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    gap: 20px;
+}
+.thankyou-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--accent-navy);
+    letter-spacing: -2px;
+}
+.thankyou-sub {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
