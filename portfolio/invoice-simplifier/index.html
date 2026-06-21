@@ -450,6 +450,28 @@
     </div>
 
     <script src="../../deck.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const featureItems = document.querySelectorAll('.feature-item');
+            const previews = document.querySelectorAll('.preview-inner');
+            if (featureItems.length > 0 && previews.length > 0) {
+                featureItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        featureItems.forEach(fi => fi.classList.remove('active'));
+                        item.classList.add('active');
+                        const targetId = item.getAttribute('data-target');
+                        previews.forEach(p => {
+                            if (p.id === targetId) {
+                                p.classList.remove('hidden');
+                            } else {
+                                p.classList.add('hidden');
+                            }
+                        });
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

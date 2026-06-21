@@ -21,7 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const indicators = dotsContainer ? (dotsContainer.querySelectorAll('.dot') || dotsContainer.querySelectorAll('.indicator') || dotsContainer.children) : [];
+    let indicators = [];
+    if (dotsContainer) {
+        indicators = dotsContainer.querySelectorAll('.dot, .indicator');
+        if (indicators.length === 0) {
+            indicators = dotsContainer.children;
+        }
+    }
 
     function goTo(index) {
         if (index < 0 || index >= totalSlides) return;
@@ -44,14 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (nextBtn) nextBtn.disabled = index === totalSlides - 1;
         current = index;
 
-        // Sync active status of sidebar buttons for segments-ai-api
-        const sidebarItems = document.querySelectorAll('.sidebar-item');
-        if (sidebarItems.length > 0) {
-            sidebarItems.forEach(item => item.classList.remove('active'));
-            if (sidebarItems[index]) {
-                sidebarItems[index].classList.add('active');
-            }
-        }
+        // Dispatch custom event for slide change
+        const event = new CustomEvent('slideChanged', { detail: { index: index } });
+        document.dispatchEvent(event);
     }
 
     if (prevBtn) prevBtn.addEventListener('click', () => { if (current > 0) goTo(current - 1); });
@@ -63,13 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Map click events for segments-ai-api sidebar buttons
-    const sidebarItems = document.querySelectorAll('.sidebar-item');
-    if (sidebarItems.length > 0) {
-        sidebarItems.forEach((item, idx) => {
-            item.addEventListener('click', () => goTo(idx));
-        });
-    }
+    // Listen for slide change requests from external components
+    document.addEventListener('changeSlide', (e) => {
+        if (e.detail && typeof e.detail.index === 'number') {
+            goTo(e.detail.index);
+        }
+    });
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'Enter') {
@@ -117,25 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
         autoFitDeck();
     }
 
-    // Sync tab preview for invoice-simplifier
-    const featureItems = document.querySelectorAll('.feature-item');
-    const previews = document.querySelectorAll('.preview-inner');
-    if (featureItems.length > 0 && previews.length > 0) {
-        featureItems.forEach(item => {
-            item.addEventListener('click', () => {
-                featureItems.forEach(fi => fi.classList.remove('active'));
-                item.classList.add('active');
-                const targetId = item.getAttribute('data-target');
-                previews.forEach(p => {
-                    if (p.id === targetId) {
-                        p.classList.remove('hidden');
-                    } else {
-                        p.classList.add('hidden');
-                    }
-                });
-            });
-        });
-    }
+
 
     goTo(0);
 });

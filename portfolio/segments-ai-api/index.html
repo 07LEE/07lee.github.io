@@ -260,6 +260,27 @@ client.add_sample(dataset_id, file_path.name, attributes)</code></pre>
     </div>
 
     <script src="../../deck.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            if (sidebarItems.length > 0) {
+                // Map click events on sidebar items to trigger slide change
+                sidebarItems.forEach((item, idx) => {
+                    item.addEventListener('click', () => {
+                        document.dispatchEvent(new CustomEvent('changeSlide', { detail: { index: idx } }));
+                    });
+                });
+
+                // Sync sidebar active state when slide changes
+                document.addEventListener('slideChanged', (e) => {
+                    sidebarItems.forEach(item => item.classList.remove('active'));
+                    if (sidebarItems[e.detail.index]) {
+                        sidebarItems[e.detail.index].classList.add('active');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
