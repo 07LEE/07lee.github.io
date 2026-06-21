@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let current = 0;
     const totalSlides = slides.length;
 
-    // 슬라이드 페이지 인디케이터가 없는 경우 동적 생성 처리
+    // Dynamically generate slide indicators if they do not exist
     if (dotsContainer && dotsContainer.children.length === 0 && totalSlides > 0) {
         slides.forEach((_, i) => {
             const dot = document.createElement('span');
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (nextBtn) nextBtn.disabled = index === totalSlides - 1;
         current = index;
 
-        // segments-ai-api 대시보드 사이드바의 버튼 활성화 상태 연동
+        // Sync active status of sidebar buttons for segments-ai-api
         const sidebarItems = document.querySelectorAll('.sidebar-item');
         if (sidebarItems.length > 0) {
             sidebarItems.forEach(item => item.classList.remove('active'));
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // segments-ai-api 사이드바 버튼 클릭 이벤트 매핑
+    // Map click events for segments-ai-api sidebar buttons
     const sidebarItems = document.querySelectorAll('.sidebar-item');
     if (sidebarItems.length > 0) {
         sidebarItems.forEach((item, idx) => {
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let wheelLocked = false;
     document.addEventListener('wheel', (e) => {
         if (!deckContainer) return;
-        // 사이드바 구조 레이아웃에서는 휠 전환 방지
+        // Prevent wheel navigation in dashboard layouts
         if (document.querySelector('.dashboard-container') || deckContainer.classList.contains('dashboard-container')) {
             return;
         }
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { passive: false });
 
-    // 16:9 슬라이드 화면 비율 자동 맞춤(auto-fit) 함수
+    // Auto-fit function for 16:9 slide aspect ratio
     function autoFitDeck() {
         if (!deckContainer) return;
         if (document.querySelector('.dashboard-container') || deckContainer.classList.contains('dashboard-container')) {
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
         autoFitDeck();
     }
 
-    // invoice-simplifier 탭 미리보기 연동 처리
+    // Sync tab preview for invoice-simplifier
     const featureItems = document.querySelectorAll('.feature-item');
     const previews = document.querySelectorAll('.preview-inner');
     if (featureItems.length > 0 && previews.length > 0) {
