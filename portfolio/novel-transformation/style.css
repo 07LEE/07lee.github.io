@@ -59,14 +59,23 @@ body {
     transform: translateY(-1px);
 }
 
-/* Presentation Container */
-.presentation-container {
+/* Presentation Container & Viewport */
+.deck-viewport {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+}
+
+.deck-container {
     width: 94vw;
     height: 82vh;
     max-width: 1350px;
     max-height: 850px;
     position: relative;
-    z-index: 10;
 }
 
 /* Slide Base Layout */

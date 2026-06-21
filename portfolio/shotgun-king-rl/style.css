@@ -71,14 +71,23 @@ body {
     border-color: var(--text-primary);
 }
 
-/* Presentation Container */
-.presentation-container {
+/* Presentation Container & Viewport */
+.deck-viewport {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+}
+
+.deck-container {
     width: 90vw;
     height: 80vh;
     max-width: 1400px;
     max-height: 850px;
     position: relative;
-    z-index: 10;
     background: var(--card-bg);
     border: none;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);

@@ -98,15 +98,21 @@ html, body {
 }
 
 /* ============================================
-   STAGE
+   STAGE & CONTAINER
    ============================================ */
-.stage {
+.deck-viewport {
     position: fixed;
     top: var(--topbar-h);
     bottom: var(--bottombar-h);
     left: 0; right: 0;
     overflow: hidden;
     background-color: var(--bg);
+}
+
+.deck-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 /* ============================================
