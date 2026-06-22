@@ -19,41 +19,36 @@
         Portfolio
     </a>
 
-    <!-- Background Neon Gradient Spheres -->
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
-
-    <div class="deck-viewport">
-        <div class="deck-container">
+    <div class="portfolio-container">
 
         <!-- Slide 1: Title -->
-        <section class="slide active" id="slide-1">
+        <section class="section-block" id="slide-1">
             <div class="slide-content title-slide">
-                <h1 class="main-title"><span class="gradient-text">Invoice Simplifier</span></h1>
+                <h1 class="main-title">Invoice Simplifier</h1>
                 <p class="subtitle">자연어 입력 기반 예약 데이터 추출 및<br>요일별 숙박 요금 자동 계산을 통한 견적 간소화 도구</p>
             </div>
         </section>
 
         <!-- Slide 2: Background & Necessity -->
-        <section class="slide" id="slide-2">
+        <section class="section-block" id="slide-2">
             <div class="slide-content">
                 <div class="slide-header">
-                    <span class="slide-number">02</span>
+                    <span class="slide-number">01</span>
                     <h2>견적 작성 과정의 기존 비효율성</h2>
                 </div>
                 <div class="grid-container dynamic-cards">
-                    <div class="card glass">
+                    <div class="card">
                         <div class="card-icon"><i class="fa-solid fa-calendar-days"></i></div>
                         <h3>수동 가격 조회 및 매칭</h3>
                         <p>고객의 체크인과 체크아웃 일자를 확인하여 평일 요금과 주말(금요일, 토요일) 요금을 달력에서 대조하며 일일이 손으로 숙박 일수를 세어 계산하느라 시간이 소요됩니다.
                         </p>
                     </div>
-                    <div class="card glass">
+                    <div class="card">
                         <div class="card-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
                         <h3>수작업 계산 누수 위험</h3>
-                        <p>수동으로 날짜와 단가를 대입하다 보니 주말 일수 미스 계산, 청소비 반영 누락, 부가세 포함/별도 정산 에러 등 단순 계산 실수가 발생하기 쉽습니다.</p>
+                        <p>수동으로 날짜 and 단가를 대입하다 보니 주말 일수 미스 계산, 청소비 반영 누락, 부가세 포함/별도 정산 에러 등 단순 계산 실수가 발생하기 쉽습니다.</p>
                     </div>
-                    <div class="card glass">
+                    <div class="card">
                         <div class="card-icon"><i class="fa-solid fa-file-invoice"></i></div>
                         <h3>반복적인 수동 렌더링</h3>
                         <p>매번 엑셀 포맷을 켜서 게스트 정보를 입력하고, 입금 안내 계좌번호를 적어 이미지 캡처 도구로 파일화하여 카카오톡이나 문자 메시지로 발송하는 수공업식 반복 업무가
@@ -64,15 +59,15 @@
         </section>
 
         <!-- Slide 3: Core Features Specification -->
-        <section class="slide" id="slide-3">
+        <section class="section-block" id="slide-3">
             <div class="slide-content">
                 <div class="slide-header">
-                    <span class="slide-number">03</span>
+                    <span class="slide-number">02</span>
                     <h2>견적서 처리 간소화 흐름</h2>
                 </div>
                 <div class="grid-container two-cols">
                     <div class="feature-list">
-                        <div class="feature-item glass active" data-target="feat-img-1">
+                        <div class="feature-item active" data-target="feat-img-1">
                             <div class="feat-num">01</div>
                             <div class="feat-body">
                                 <h3>자연어 예약 정보 구조화</h3>
@@ -80,14 +75,14 @@
                                     자동 매핑합니다.</p>
                             </div>
                         </div>
-                        <div class="feature-item glass" data-target="feat-img-2">
+                        <div class="feature-item" data-target="feat-img-2">
                             <div class="feat-num">02</div>
                             <div class="feat-body">
                                 <h3>요일 요금 자동 연산</h3>
                                 <p>바닐라 자바스크립트 Date API를 연동하여 예약 일정 내 금요일과 토요일(주말)을 가려내어 요율대로 자동 가중합 계산을 수행합니다.</p>
                             </div>
                         </div>
-                        <div class="feature-item glass" data-target="feat-img-3">
+                        <div class="feature-item" data-target="feat-img-3">
                             <div class="feat-num">03</div>
                             <div class="feat-body">
                                 <h3>헤드리스 템플릿 이미지화</h3>
@@ -96,7 +91,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="feature-preview glass-dark">
+                    <div class="feature-preview">
                         <div class="preview-inner" id="feat-img-1">
                             <div class="mockup-ui">
                                 <span class="dot red"></span><span class="dot yellow"></span><span
@@ -139,16 +134,16 @@
         </section>
 
         <!-- Slide 4: Physical Mapping Results (Comparison Viewer) -->
-        <section class="slide" id="slide-4">
+        <section class="section-block" id="slide-4">
             <div class="slide-content demo-slide">
                 <div class="slide-header">
-                    <span class="slide-number">04</span>
+                    <span class="slide-number">03</span>
                     <h2>예약 데이터 추출 및 최종 템플릿 변환 결과</h2>
                 </div>
 
                 <div class="demo-container">
                     <!-- Left Column: Input message & parsed JSON data comparison panel -->
-                    <div class="demo-control-panel glass">
+                    <div class="demo-control-panel">
                         <div class="panel-section">
                             <h3><i class="fa-regular fa-message"></i> 사용자 입력 자연어 텍스트</h3>
                             <div class="code-box text-box">
@@ -375,10 +370,10 @@
         </section>
 
         <!-- Slide 5: Expected Benefits -->
-        <section class="slide" id="slide-5">
+        <section class="section-block" id="slide-5">
             <div class="slide-content">
                 <div class="slide-header">
-                    <span class="slide-number">05</span>
+                    <span class="slide-number">04</span>
                     <h2>업무 간소화 효과 및 기술적 비전</h2>
                 </div>
                 <div class="grid-container two-cols align-center">
@@ -405,7 +400,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="vision-graphic glass">
+                    <div class="vision-graphic">
                         <div class="tech-pipeline">
                             <div class="tech-step">
                                 <span class="step-badge">Step 01</span>
@@ -433,23 +428,8 @@
             </div>
         </section>
 
-        </div>
     </div>
 
-    <!-- Navigation Controller -->
-    <div class="nav-controls">
-        <button id="btn-prev" class="nav-btn" disabled><i class="fa-solid fa-chevron-left"></i></button>
-        <div class="slide-indicators">
-            <span class="indicator active" data-slide="0"></span>
-            <span class="indicator" data-slide="1"></span>
-            <span class="indicator" data-slide="2"></span>
-            <span class="indicator" data-slide="3"></span>
-            <span class="indicator" data-slide="4"></span>
-        </div>
-        <button id="btn-next" class="nav-btn"><i class="fa-solid fa-chevron-right"></i></button>
-    </div>
-
-    <script src="../../deck.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const featureItems = document.querySelectorAll('.feature-item');

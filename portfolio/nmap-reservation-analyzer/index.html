@@ -94,17 +94,17 @@
 
         <div class="s2-header">
           <div class="slide-label">01 / Background</div>
-          <h2 class="slide-h2">기존 운영의 수작업 한계</h2>
+          <h2 class="slide-h2">수작업 분석의 정량적 한계</h2>
         </div>
 
         <div class="s2-cards">
           <div class="prob-card">
             <div class="prob-card-bar"></div>
             <div class="prob-num">01</div>
-            <div class="prob-title">수동 현황 확인</div>
+            <div class="prob-title">수동 조사 비효율</div>
             <p class="prob-desc">
-              분석 대상 상권의 개별 네이버 예약 페이지를 수동으로 방문하여
-              시간대별 슬롯 상태를 일일이 수집 및 검토해야 하는 단순 작업이 반복됨.
+              대상 상권 내 여러 업체의 실시간 예약 가능 상태를 파악하기 위해 
+              매시간 개별 페이지를 수동 방문하며 발생하는 리소스 낭비가 큼.
             </p>
           </div>
           <div class="prob-card">
@@ -233,8 +233,8 @@
             <div class="impact-row">
               <div class="impact-pip"></div>
               <div>
-                <div class="impact-row-label">무인 자동 수집</div>
-                <div class="impact-row-desc">crontab 기반 매일 23시 자동 실행. 사람의 개입 없이 CSV가 날짜별로 쌓임</div>
+                <div class="impact-row-label">무인 자동화 수집</div>
+                <div class="impact-row-desc">크론탭(Crontab) 스케줄러로 매일 자동 수집을 유도하여 지속적인 데이터 축적 흐름 형성함</div>
               </div>
             </div>
             <div class="impact-row">
@@ -288,7 +288,7 @@
         </div>
 
         <div class="s2-footer">
-          <span>다중 CSV 데이터 파싱 및 시간대별 예약 현황 시각화 화면</span>
+          <span>통합 대시보드로 요일별, 시간대별 상권 예약 집중 패턴 도출함</span>
           <span>5 / 5</span>
         </div>
 

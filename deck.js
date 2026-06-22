@@ -84,10 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let wheelLocked = false;
     document.addEventListener('wheel', (e) => {
         if (!deckContainer) return;
-        // Prevent wheel navigation in dashboard layouts
-        if (document.querySelector('.dashboard-container') || deckContainer.classList.contains('dashboard-container')) {
-            return;
-        }
         e.preventDefault();
         if (wheelLocked) return;
         wheelLocked = true;

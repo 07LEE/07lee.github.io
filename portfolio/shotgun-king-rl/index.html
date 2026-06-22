@@ -25,11 +25,10 @@
     <!-- Chess Board Pattern Background Overlay -->
     <div class="chess-grid-bg"></div>
 
-    <div class="deck-viewport">
-        <div class="deck-container">
+    <div class="portfolio-container">
 
         <!-- Slide 1: Title -->
-        <section class="slide active" id="slide-1">
+        <section class="section-block" id="slide-1">
             <div class="slide-content title-slide">
                 <div class="chess-icon-wrapper">
                     <i class="fa-solid fa-chess-king title-chess-icon"></i>
@@ -40,12 +39,9 @@
         </section>
 
         <!-- Slide 2: System Architecture & Environment Spec -->
-        <section class="slide" id="slide-2">
+        <section class="section-block" id="slide-2">
             <div class="slide-content">
-                <div class="slide-header">
-                    <span class="slide-number">02</span>
-                    <h2>시스템 구조 및 강화학습 환경</h2>
-                </div>
+                <h2 class="section-title">시스템 구조 및 강화학습 환경</h2>
                 <div class="sys-env-vertical-layout">
                     <!-- Top section: Architecture -->
                     <div class="sys-section">
@@ -132,12 +128,9 @@
         </section>
 
         <!-- Slide 3: Image Processing Pipeline -->
-        <section class="slide" id="slide-3">
+        <section class="section-block" id="slide-3">
             <div class="slide-content">
-                <div class="slide-header">
-                    <span class="slide-number">03</span>
-                    <h2>이미지 처리 파이프라인 (Image Pipeline)</h2>
-                </div>
+                <h2 class="section-title">이미지 처리 파이프라인 (Image Pipeline)</h2>
                 <div class="pipeline-layout">
                     <div class="pipeline-text">
                         <div class="pipeline-item">
@@ -170,12 +163,9 @@
         </section>
 
         <!-- Slide 4: Model & Training Details -->
-        <section class="slide" id="slide-4">
+        <section class="section-block" id="slide-4">
             <div class="slide-content">
-                <div class="slide-header">
-                    <span class="slide-number">04</span>
-                    <h2>모델 아키텍처 및 학습 정보</h2>
-                </div>
+                <h2 class="section-title">모델 아키텍처 및 학습 정보</h2>
                 <div class="model-layout">
                     <div class="model-cards-container">
                         <div class="model-card">
@@ -233,20 +223,6 @@
 
         </div>
     </div>
-
-    <!-- Navigation Controller -->
-    <div class="nav-controls">
-        <button id="btn-prev" class="nav-btn" disabled><i class="fa-solid fa-chevron-left"></i></button>
-        <div class="slide-indicators">
-            <span class="indicator active" data-slide="0"></span>
-            <span class="indicator" data-slide="1"></span>
-            <span class="indicator" data-slide="2"></span>
-            <span class="indicator" data-slide="3"></span>
-        </div>
-        <button id="btn-next" class="nav-btn"><i class="fa-solid fa-chevron-right"></i></button>
-    </div>
-
-    <script src="../../deck.js"></script>
 </body>
 
 </html>

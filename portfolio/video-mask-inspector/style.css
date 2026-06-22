@@ -1,20 +1,21 @@
-/* Midnight Purple & Lavender Presentation Design System (style.css) */
+/* Dark Charcoal & Indigo Presentation Design System (style.css) */
 
 :root {
-    --bg-main: #0b0914; /* Deep Midnight Violet */
-    --bg-card: #171426; /* Dark Violet Grey */
-    --text-primary: #f1eff7; /* Lavender Pearl */
-    --text-secondary: #9e9bb0; /* Lavender Silver */
-    --accent-indigo: hsl(256, 70%, 65%); /* Vivid Amethyst */
-    --accent-indigo-light: rgba(139, 92, 246, 0.14); /* Amethyst Tint */
+    --bg-main: #121214; /* Dark Charcoal */
+    --bg-card: #18181b; /* Muted Zinc */
+    --text-primary: #e4e4e7; /* Zinc White */
+    --text-secondary: #a1a1aa; /* Zinc Silver */
+    --accent-indigo: #818cf8; /* Soft Indigo */
+    --accent-indigo-light: rgba(129, 140, 248, 0.12); /* Indigo Tint */
     --accent-teal: hsl(172, 80%, 48%); /* Vivid Aqua */
     --accent-teal-light: rgba(45, 212, 191, 0.14); /* Aqua Tint */
     --accent-orange: hsl(30, 90%, 60%); /* Warm Amber */
     --accent-orange-light: rgba(251, 146, 60, 0.14); /* Amber Tint */
-    --border-color: #2d2940; /* Muted Plum Border */
-    --footer-bg: #07060e; /* Deepest Void */
+    --border-color: #27272a; /* Dark Muted Border */
+    --footer-bg: #09090b; /* Deep Zinc Void */
     --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 
 * {
     margin: 0;
@@ -56,7 +57,7 @@ body {
     color: var(--accent-indigo);
     border-color: var(--accent-indigo);
     transform: translateY(-1px);
-    background-color: #1f1a34;
+    background-color: #27272a;
 }
 
 /* Interactive Layout Main Split Grid */
@@ -69,7 +70,7 @@ body {
 
 /* Left Column: Simulator Area */
 .gui-column {
-    background-color: #06050c; /* Deepest Violet Void */
+    background-color: #09090b; /* Deep Dark Void */
     border-right: 1px solid var(--border-color);
     display: flex;
     justify-content: center;
@@ -86,10 +87,10 @@ body {
     max-width: 780px;
     height: 86%;
     max-height: 620px;
-    background-color: #100e1c; /* Midnight Panel */
+    background-color: #18181b; /* Dark Zinc Panel */
     border-radius: 12px;
-    border: 1px solid #352f52;
-    box-shadow: 0 25px 60px rgba(11, 9, 20, 0.5);
+    border: 1px solid #27272a;
+    box-shadow: 0 25px 60px rgba(9, 9, 11, 0.5);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -97,12 +98,12 @@ body {
 
 /* App Header bar */
 .app-header {
-    background-color: #1a1730; /* Plum Header */
+    background-color: #202023; /* Dark Header */
     padding: 12px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #2d2940;
+    border-bottom: 1px solid #27272a;
 }
 
 .app-dots {
@@ -123,7 +124,7 @@ body {
 .app-title {
     font-family: 'Outfit', sans-serif;
     font-size: 0.72rem;
-    color: #9e9bb0;
+    color: #a1a1aa;
     font-weight: 600;
 }
 
@@ -137,9 +138,9 @@ body {
     font-size: 0.62rem;
     padding: 2px 6px;
     border-radius: 4px;
-    background-color: #100e1c;
-    color: #c4c0d8;
-    border: 1px solid #352f52;
+    background-color: #09090b;
+    color: #a1a1aa;
+    border: 1px solid #27272a;
 }
 
 /* App Body (Viewport & Sidebar Split) */
@@ -148,18 +149,18 @@ body {
     grid-template-columns: 1.35fr 0.65fr;
     flex-grow: 1;
     overflow: hidden;
-    border-bottom: 1px solid #2d2940;
+    border-bottom: 1px solid #27272a;
 }
 
 /* Viewport Area */
 .viewport-area {
-    background-color: #06050c; /* Deepest Void */
+    background-color: #09090b; /* Deep Dark Void */
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     overflow: hidden;
-    border-right: 1px solid #2d2940;
+    border-right: 1px solid #27272a;
 }
 
 /* Simulated Frame Visuals */
@@ -167,15 +168,15 @@ body {
     width: 88%;
     height: 82%;
     border-radius: 6px;
-    background-image: linear-gradient(135deg, #1a1730 25%, transparent 25%), 
-                      linear-gradient(225deg, #1a1730 25%, transparent 25%), 
-                      linear-gradient(45deg, #1a1730 25%, transparent 25%), 
-                      linear-gradient(315deg, #1a1730 25%, #100e1c 25%);
+    background-image: linear-gradient(135deg, #27272a 25%, transparent 25%), 
+                      linear-gradient(225deg, #27272a 25%, transparent 25%), 
+                      linear-gradient(45deg, #27272a 25%, transparent 25%), 
+                      linear-gradient(315deg, #27272a 25%, #18181b 25%);
     background-position: 20px 0, 20px 0, 0 0, 0 0;
     background-size: 40px 40px;
     background-repeat: repeat;
     position: relative;
-    border: 1px dashed #3d3660;
+    border: 1px dashed #3f3f46;
     transition: var(--transition-smooth);
 }
 
@@ -196,7 +197,7 @@ body {
 }
 
 .mask-label {
-    background-color: rgba(11, 9, 20, 0.88);
+    background-color: rgba(9, 9, 11, 0.88);
     padding: 2px 6px;
     border-radius: 4px;
 }
@@ -204,7 +205,7 @@ body {
 .mask-base {
     width: 45%;
     height: 35%;
-    background-color: hsla(243, 75%, 65%, 0.35);
+    background-color: rgba(129, 140, 248, 0.35);
     border: 2px solid var(--accent-indigo);
     top: 25%;
     left: 15%;
@@ -275,7 +276,7 @@ body {
 
 /* Sidebar styling */
 .sidebar-area {
-    background-color: #1a1730; /* Plum Sidebar */
+    background-color: #1f1f23; /* Dark Zinc Sidebar */
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -286,7 +287,7 @@ body {
     font-family: 'Outfit', sans-serif;
     font-size: 0.62rem;
     font-weight: 700;
-    color: #6b6588;
+    color: #71717a;
     text-transform: uppercase;
     letter-spacing: 1px;
     display: block;
@@ -301,22 +302,22 @@ body {
 }
 
 .obj-item {
-    background-color: #100e1c;
-    border: 1px solid #2d2940;
+    background-color: #18181b;
+    border: 1px solid #27272a;
     padding: 8px 12px;
     border-radius: 6px;
     display: flex;
     align-items: center;
     gap: 8px;
     font-size: 0.68rem;
-    color: #9e9bb0;
+    color: #a1a1aa;
     transition: var(--transition-smooth);
 }
 
 .obj-item.active {
     border-color: var(--accent-indigo);
-    color: #f1eff7;
-    background-color: rgba(139, 92, 246, 0.15);
+    color: #e4e4e7;
+    background-color: rgba(129, 140, 248, 0.12);
 }
 
 .color-indicator {
@@ -329,7 +330,7 @@ body {
 .obj-type {
     margin-left: auto;
     font-size: 0.55rem;
-    color: #6b6588;
+    color: #71717a;
     text-transform: uppercase;
     font-weight: 600;
 }
@@ -344,17 +345,17 @@ body {
 .box-row {
     display: flex;
     justify-content: space-between;
-    color: #9e9bb0;
+    color: #a1a1aa;
 }
 
 .box-row strong {
-    color: #f1eff7;
+    color: #e4e4e7;
 }
 
 /* App Bottom Area */
 .app-bottom {
-    background-color: #1a1730;
-    border-top: 1px solid #2d2940;
+    background-color: #1f1f23;
+    border-top: 1px solid #27272a;
     display: flex;
     flex-direction: column;
 }
@@ -364,18 +365,18 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
-    border-bottom: 1px solid #2d2940;
+    border-bottom: 1px solid #27272a;
 }
 
 .time-btn {
-    color: #9e9bb0;
+    color: #a1a1aa;
     font-size: 0.72rem;
     cursor: pointer;
     transition: var(--transition-smooth);
 }
 
 .time-btn:hover {
-    color: #f1eff7;
+    color: #e4e4e7;
 }
 
 .track-area {
@@ -387,7 +388,7 @@ body {
 
 .timeline-track {
     height: 4px;
-    background-color: #100e1c;
+    background-color: #09090b;
     border-radius: 2px;
     position: relative;
 }
@@ -407,7 +408,7 @@ body {
     transform: translate(-50%, -50%);
     width: 10px;
     height: 10px;
-    background-color: #e8e5f0;
+    background-color: #e4e4e7;
     border-radius: 50%;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
     transition: var(--transition-smooth);
@@ -418,11 +419,11 @@ body {
     justify-content: space-between;
     font-family: 'Outfit', sans-serif;
     font-size: 0.55rem;
-    color: #6b6588;
+    color: #71717a;
 }
 
 .terminal-panel {
-    background-color: #06050c;
+    background-color: #09090b;
     padding: 10px 20px;
     font-family: 'Outfit', monospace;
     font-size: 0.65rem;
@@ -430,7 +431,7 @@ body {
 
 .panel-label {
     font-size: 0.55rem;
-    color: #6b6588;
+    color: #71717a;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     display: block;
@@ -440,7 +441,7 @@ body {
 .terminal-logs {
     height: 38px;
     overflow-y: auto;
-    color: #c4c0d8;
+    color: #e4e4e7;
     display: flex;
     flex-direction: column;
     gap: 3px;
@@ -616,13 +617,13 @@ body {
     left: 0;
     width: 100%;
     background-color: var(--footer-bg);
-    color: rgba(241, 239, 247, 0.4);
+    color: rgba(228, 228, 231, 0.4);
     padding: 12px 24px;
     font-size: 0.72rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid rgba(139, 92, 246, 0.08);
+    border-top: 1px solid rgba(129, 140, 248, 0.08);
     z-index: 90;
     font-family: 'Outfit', sans-serif;
 }
@@ -649,7 +650,7 @@ body {
 .active-state-2 #mask-pedestrian {
     opacity: 0.85;
     transform: scale(1);
-    background-color: hsla(243, 75%, 65%, 0.35); /* Swapped colors */
+    background-color: rgba(129, 140, 248, 0.35); /* Swapped colors */
     border-color: var(--accent-indigo);
 }
 .active-state-2 #app-toast {
@@ -664,7 +665,7 @@ body {
 }
 .active-state-2 #li-obj-15 {
     border-color: var(--accent-indigo);
-    background-color: rgba(99, 102, 241, 0.15);
+    background-color: rgba(129, 140, 248, 0.12);
     color: #ffffff;
 }
 .active-state-2 #li-obj-15 .color-indicator {
@@ -675,7 +676,7 @@ body {
 .active-state-3 #mask-car {
     opacity: 0.85;
     transform: scale(1);
-    background-color: hsla(243, 75%, 65%, 0.35); /* Restored colors */
+    background-color: rgba(129, 140, 248, 0.35); /* Restored colors */
     border-color: var(--accent-indigo);
 }
 .active-state-3 #mask-pedestrian {
@@ -694,16 +695,16 @@ body {
 }
 .active-state-3 #li-obj-12 {
     border-color: var(--accent-indigo);
-    background-color: rgba(99, 102, 241, 0.15);
+    background-color: rgba(129, 140, 248, 0.12);
     color: #ffffff;
 }
 .active-state-3 #li-obj-12 .color-indicator {
     background-color: var(--accent-indigo);
 }
 .active-state-3 #li-obj-15 {
-    border-color: #2d2940;
-    background-color: #100e1c;
-    color: #9e9bb0;
+    border-color: var(--border-color);
+    background-color: #18181b;
+    color: #a1a1aa;
 }
 .active-state-3 #li-obj-15 .color-indicator {
     background-color: var(--accent-teal);
