@@ -134,12 +134,51 @@ function renderProjectList(containerId, dataUrl) {
 
                 listContainer.appendChild(article);
             });
+            bindCategoryFilters(containerId);
         })
         .catch(error => {
             console.error(error);
             listContainer.innerHTML = `<p class="error-msg" style="color: #ef4444; font-size: 0.95rem; text-align: center; width: 100%;">An error occurred while loading the list.</p>`;
         });
 }
+
+// Filter logic binding
+function bindCategoryFilters(listContainerId) {
+    const filterBtns = document.querySelectorAll('.filter-bar .filter-btn');
+    if (filterBtns.length === 0) return;
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filterVal = btn.getAttribute('data-filter');
+            const cards = document.querySelectorAll(`#${listContainerId} .project-item`);
+
+            cards.forEach(card => {
+                const categorySpan = card.querySelector('.category');
+                const category = categorySpan ? categorySpan.textContent.toLowerCase().trim() : '';
+                const normalizedCategory = category.replace(/[^a-z0-9]/g, '_');
+
+                let isMatch = false;
+                if (filterVal === 'all') {
+                    isMatch = true;
+                } else if (filterVal === 'etc') {
+                    isMatch = !normalizedCategory.includes('computer_vision') && !normalizedCategory.includes('automation');
+                } else {
+                    isMatch = normalizedCategory.includes(filterVal);
+                }
+
+                if (isMatch) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+}
+
 
 // Control common entry point
 document.addEventListener('DOMContentLoaded', () => {

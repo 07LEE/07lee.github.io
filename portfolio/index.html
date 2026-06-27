@@ -24,9 +24,20 @@
         </header>
 
         <main>
-            <section class="links" id="portfolio-list">
-                <p class="loading-msg" style="color: #a1a1aa; font-size: 0.95rem; text-align: center; width: 100%;">Loading project list...</p>
-            </section>
+            <!-- Category Filters -->
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="computer_vision">Vision</button>
+                <button class="filter-btn" data-filter="automation">Automation</button>
+                <button class="filter-btn" data-filter="etc">Etc</button>
+            </div>
+
+            <!-- Horizontal Scroll Track -->
+            <div class="carousel-container">
+                <section class="carousel-track" id="portfolio-list">
+                    <p class="loading-msg" style="color: #a1a1aa; font-size: 0.95rem; text-align: center; width: 100%;">Loading project list...</p>
+                </section>
+            </div>
         </main>
 
         <footer>
