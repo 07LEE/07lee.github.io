@@ -10,18 +10,12 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="../components.js" defer></script>
 </head>
 
 <body>
 
-    <!-- Portfolio back link -->
-    <a href="../index.html" class="back-link" aria-label="포트폴리오 목록으로 이동">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="19" y1="12" x2="5" y2="12"/>
-            <polyline points="12 19 5 12 12 5"/>
-        </svg>
-        Portfolio
-    </a>
+    <portfolio-header back-href="../index.html" title="Novel Transformation" only-back></portfolio-header>
 
     <div class="deck-viewport">
         <div class="deck-container">
@@ -245,45 +239,10 @@
 
     </div>
 
-    <!-- Navigation Controller -->
-    <div class="nav-controls">
-        <button id="btn-prev" class="nav-btn" disabled><i class="fa-solid fa-chevron-left"></i></button>
-        <div class="slide-indicators" style="gap: 4px;">
-            <span class="indicator active" data-slide="0"></span>
-            <span class="indicator" data-slide="1"></span>
-            <span class="indicator" data-slide="2"></span>
-            <span class="indicator" data-slide="3"></span>
-            <span class="indicator" data-slide="4"></span>
-            <span class="indicator" data-slide="5"></span>
-            <span class="indicator" data-slide="6"></span>
-            <span class="indicator" data-slide="7"></span>
-            <span class="indicator" data-slide="8"></span>
-            <span class="indicator" data-slide="9"></span>
-            <span class="indicator" data-slide="10"></span>
-            <span class="indicator" data-slide="11"></span>
-            <span class="indicator" data-slide="12"></span>
-            <span class="indicator" data-slide="13"></span>
-            <span class="indicator" data-slide="14"></span>
-            <span class="indicator" data-slide="15"></span>
-            <span class="indicator" data-slide="16"></span>
-            <span class="indicator" data-slide="17"></span>
-            <span class="indicator" data-slide="18"></span>
-            <span class="indicator" data-slide="19"></span>
-            <span class="indicator" data-slide="20"></span>
-            <span class="indicator" data-slide="21"></span>
-            <span class="indicator" data-slide="22"></span>
-            <span class="indicator" data-slide="23"></span>
-            <span class="indicator" data-slide="24"></span>
-            <span class="indicator" data-slide="25"></span>
-            <span class="indicator" data-slide="26"></span>
-            <span class="indicator" data-slide="27"></span>
-            <span class="indicator" data-slide="28"></span>
-            <span class="indicator" data-slide="29"></span>
-            <span class="indicator" data-slide="30"></span>
-        </div>
-        <button id="btn-next" class="nav-btn"><i class="fa-solid fa-chevron-right"></i></button>
         </div></div>
     </div>
+
+    <portfolio-deck-nav></portfolio-deck-nav>
 
     <!-- Fixed Footer Bar -->
     <div class="footer-bar">

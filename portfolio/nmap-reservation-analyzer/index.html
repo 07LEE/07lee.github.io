@@ -7,19 +7,14 @@
   <meta name="description" content="네이버 예약 데이터 기반 상권 분석 자동화 도구">
   <meta name="robots" content="noindex, nofollow">
   <link rel="stylesheet" href="style.css">
+  <script src="../components.js" defer></script>
 </head>
 <body>
 
 
   <div class="deck-viewport">
 
-    <a href="../index.html" class="back-link" aria-label="Portfolio 목록으로 이동">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <line x1="19" y1="12" x2="5" y2="12"/>
-        <polyline points="12 19 5 12 12 5"/>
-      </svg>
-      Portfolio
-    </a>
+    <portfolio-header back-href="../index.html" title="Nmap Reservation Analyzer" only-back></portfolio-header>
 
     <div class="deck-container">
 
@@ -295,12 +290,7 @@
       </section>
 
 
-      <!-- Navigation -->
-      <div class="deck-controls">
-        <button class="nav-btn" id="prev-btn" aria-label="이전 슬라이드">⟵</button>
-        <div class="indicator-dots" id="dots-container"></div>
-        <button class="nav-btn" id="next-btn" aria-label="다음 슬라이드">⟶</button>
-      </div>
+      <portfolio-deck-nav></portfolio-deck-nav>
 
     </div>
   </div>

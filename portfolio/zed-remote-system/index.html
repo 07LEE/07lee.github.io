@@ -8,24 +8,12 @@
     <title>ZED Remote System</title>
     <meta name="robots" content="noindex, nofollow">
     <link rel="stylesheet" href="style.css">
+    <script src="../components.js" defer></script>
 </head>
 
 <body>
 
-    <!-- Top Bar -->
-    <header class="topbar">
-        <a href="../index.html" class="back-link" aria-label="포트폴리오 목록으로 이동">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <line x1="19" y1="12" x2="5" y2="12"/>
-                <polyline points="12 19 5 12 12 5"/>
-            </svg>
-        </a>
-        <div class="topbar-brand">
-            <span class="topbar-dot"></span>
-            <span class="topbar-title">ZED Remote System</span>
-        </div>
-        <div class="topbar-slide-label" id="slide-label">01 / 타이틀</div>
-    </header>
+    <portfolio-header back-href="../index.html" title="ZED Remote System" has-slide></portfolio-header>
 
     <!-- Stage -->
     <div class="deck-viewport">
@@ -257,24 +245,7 @@
         </div>
     </div>
 
-    <!-- Bottom Navigation -->
-    <nav class="bottombar">
-        <button id="btn-prev" class="nav-btn" disabled>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="15 18 9 12 15 6"/>
-            </svg>
-        </button>
-        <div class="indicators">
-            <span class="dot active" data-slide="0"></span>
-            <span class="dot" data-slide="1"></span>
-            <span class="dot" data-slide="2"></span>
-        </div>
-        <button id="btn-next" class="nav-btn">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="9 18 15 12 9 6"/>
-            </svg>
-        </button>
-    </nav>
+    <portfolio-deck-nav></portfolio-deck-nav>
 
     <script src="../../deck.js"></script>
 </body>
