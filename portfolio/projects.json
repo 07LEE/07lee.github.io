@@ -2,7 +2,7 @@
     {
         "id": "item-novel-transformation",
         "title": "Novel Transformation",
-        "category": "AI Service",
+        "category": "NLP",
         "period": "2023.11 ~ 2023.12",
         "affiliation": "",
         "description": "소설 텍스트 내 발화자 및 장면 인식 서비스",
@@ -17,7 +17,7 @@
     {
         "id": "item-invoice-simplifier",
         "title": "Invoice Simplifier",
-        "category": "Web Utility",
+        "category": "Automation",
         "period": "",
         "affiliation": "",
         "description": "자연어 기반 견적서 생성 도구",

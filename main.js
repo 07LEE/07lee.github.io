@@ -164,7 +164,7 @@ function bindCategoryFilters(listContainerId) {
                 if (filterVal === 'all') {
                     isMatch = true;
                 } else if (filterVal === 'etc') {
-                    isMatch = !normalizedCategory.includes('computer_vision') && !normalizedCategory.includes('automation');
+                    isMatch = !normalizedCategory.includes('automation');
                 } else {
                     isMatch = normalizedCategory.includes(filterVal);
                 }
