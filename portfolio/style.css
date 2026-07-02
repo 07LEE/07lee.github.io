@@ -1,11 +1,46 @@
+:root {
+    --bg-color: #121214;
+    --text-color: #e4e4e7;
+    --text-accent: #ffffff;
+    --back-link-color: #e4e4e7;
+    --back-link-hover: #3b82f6;
+    --border-color: #2a2a30;
+
+    --filter-bg: rgba(255, 255, 255, 0.03);
+    --filter-border: rgba(255, 255, 255, 0.08);
+    --filter-color: #a1a1aa;
+    --filter-active-bg: #ffffff;
+    --filter-active-color: #121214;
+
+    --card-bg: rgba(255, 255, 255, 0.02);
+    --card-border: rgba(255, 255, 255, 0.06);
+    --card-hover-border: rgba(255, 255, 255, 0.15);
+
+    --link-color: #ffffff;
+    --link-hover: #a5b4fc;
+
+    --text-secondary: #d4d4d8;
+    --text-muted: #71717a;
+
+    --tag-bg: rgba(255, 255, 255, 0.03);
+    --tag-color: #a1a1aa;
+    --tag-border: rgba(255, 255, 255, 0.08);
+
+    --github-color: #71717a;
+    --github-hover: #ffffff;
+
+    --footer-border: #2a2a30;
+}
+
 body {
-    background-color: #121214;
-    color: #e4e4e7;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .container {
@@ -21,6 +56,9 @@ body {
 
 /* Header Section */
 header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     margin-bottom: 2rem;
 }
 
@@ -29,20 +67,19 @@ header {
     align-items: center;
     justify-content: flex-start;
     gap: 0.75rem;
-    margin-bottom: 0.5rem;
 }
 
 .back-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #e4e4e7;
+    color: var(--back-link-color);
     transition: color 0.2s ease;
     text-decoration: none;
 }
 
 .back-link:hover {
-    color: #3b82f6;
+    color: var(--back-link-hover);
 }
 
 .back-icon {
@@ -53,10 +90,11 @@ header {
 h1 {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #ffffff;
+    color: var(--text-accent);
     margin-top: 0;
     margin-bottom: 0;
 }
+
 
 
 /* Main Content List */
@@ -73,9 +111,9 @@ main {
 }
 
 .filter-btn {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: #a1a1aa;
+    background: var(--filter-bg);
+    border: 1px solid var(--filter-border);
+    color: var(--filter-color);
     padding: 0.45rem 1.25rem;
     border-radius: 99px;
     font-size: 0.82rem;
@@ -84,10 +122,11 @@ main {
     outline: none;
 }
 
-.filter-btn.active, .filter-btn:hover {
-    background: #ffffff;
-    color: #121214;
-    border-color: #ffffff;
+.filter-btn.active,
+.filter-btn:hover {
+    background: var(--filter-active-bg);
+    color: var(--filter-active-color);
+    border-color: var(--filter-active-bg);
 }
 
 /* Card Grid Container */
@@ -102,8 +141,8 @@ main {
 }
 
 .project-item {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     border-radius: 16px;
     padding: 1.75rem;
     display: flex;
@@ -115,7 +154,7 @@ main {
 
 .project-item:hover {
     transform: translateY(-6px);
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--card-hover-border);
 }
 
 .project-header {
@@ -133,31 +172,31 @@ main {
 }
 
 .link-item {
-    color: #ffffff;
+    color: var(--link-color);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .link-item:hover {
-    color: #a5b4fc;
+    color: var(--link-hover);
     text-decoration: none;
 }
 
 .category {
     font-size: 0.8rem;
-    color: #71717a;
+    color: var(--text-muted);
     font-weight: 500;
 }
 
 .description {
     font-size: 0.95rem;
-    color: #d4d4d8;
+    color: var(--text-secondary);
     margin: 0 0 1rem;
 }
 
 .project-meta {
     font-size: 0.8rem;
-    color: #71717a;
+    color: var(--text-muted);
     margin: 0 0 0.5rem;
 }
 
@@ -173,9 +212,9 @@ main {
     font-size: 0.75rem;
     padding: 0.2rem 0.6rem;
     border-radius: 99px;
-    background: rgba(255, 255, 255, 0.03);
-    color: #a1a1aa;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--tag-bg);
+    color: var(--tag-color);
+    border: 1px solid var(--tag-border);
 }
 
 /* Github Link Icon Styles */
@@ -188,32 +227,33 @@ main {
 .github-link {
     display: inline-flex;
     align-items: center;
-    color: #71717a;
+    color: var(--github-color);
     transition: color 0.2s ease, transform 0.2s ease;
     text-decoration: none;
 }
 
 .github-link:hover {
-    color: #ffffff;
+    color: var(--github-hover);
     transform: scale(1.1);
 }
 
 .github-icon {
     width: 16px;
     height: 16px;
+    fill: currentColor;
 }
 
 /* Company Marker Styles */
 .company-marker {
     display: inline-flex;
     align-items: center;
-    color: #71717a;
+    color: var(--github-color);
     cursor: help;
     transition: color 0.2s ease;
 }
 
 .company-marker:hover {
-    color: #60a5fa;
+    color: var(--back-link-hover);
 }
 
 .company-icon {
@@ -225,7 +265,7 @@ main {
 .progress-marker {
     display: inline-flex;
     align-items: center;
-    color: #71717a;
+    color: var(--github-color);
     cursor: help;
     transition: color 0.2s ease;
 }
@@ -239,14 +279,12 @@ main {
     height: 14px;
 }
 
-
-
 /* Footer Section */
 footer {
     margin-top: auto;
     font-size: 0.875rem;
-    color: #71717a;
-    border-top: 1px solid #2a2a30;
+    color: var(--github-color);
+    border-top: 1px solid var(--footer-border);
     padding-top: 1.5rem;
 }
 

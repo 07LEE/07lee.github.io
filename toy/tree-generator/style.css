@@ -1,11 +1,11 @@
 :root {
-  --bg: #0f172a;
-  --surface: #1e293b;
+  --bg: #121212;
+  --surface: #1e1e1e;
   --primary: #22c55e;
   --primary-hover: #16a34a;
-  --text-main: #f8fafc;
-  --text-sub: #94a3b8;
-  --border: #334155;
+  --text-main: #e3e3e3;
+  --text-sub: #888888;
+  --border: #2d2d2d;
   --radius: 12px;
 }
 
@@ -32,7 +32,7 @@ body {
 }
 
 .app-header h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--text-main);
   margin-bottom: 0;
@@ -54,6 +54,9 @@ body {
   border: 1px solid var(--border);
   border-radius: 6px;
   transition: all 0.2s ease;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .back-btn:hover {
@@ -85,7 +88,7 @@ body {
 }
 
 .panel-header {
-  background: #0f172a;
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
   padding: 12px 18px;
   font-size: 0.88rem;
@@ -147,7 +150,7 @@ textarea {
 pre {
   flex: 1;
   padding: 18px;
-  background: #0b0f19;
+  background: #0d0d0d;
   overflow: auto;
 }
 

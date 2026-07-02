@@ -1,0 +1,217 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #121212;
+    --header-bg: #1a1a1a;
+    --card-border: #2d2d2d;
+    --text-primary: #e3e3e3;
+    --text-secondary: #aaaaaa;
+    --accent-color: #ffffff;
+    --hover-bg: #262626;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    line-height: 1.5;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--card-border);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}
+
+/* Sidebar Layout */
+.sidebar {
+    width: 300px;
+    height: 100vh;
+    background-color: var(--header-bg);
+    border-right: 1px solid var(--card-border);
+    padding: 1.5rem;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--card-border) transparent;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-secondary);
+    transition: color 0.15s ease, transform 0.15s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.back-btn:hover {
+    color: var(--accent-color);
+    transform: translateX(-2px);
+}
+
+.back-icon {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+}
+
+.logo-text {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-secondary);
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.github-link:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+.github-icon {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+.navigation-tree {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.nav-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.toy-sidebar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.toy-item {
+    padding: 10px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.toy-item:hover {
+    background: var(--hover-bg);
+    color: var(--text-primary);
+}
+
+.toy-item.active {
+    background: var(--hover-bg);
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.sidebar-footer {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--card-border);
+    padding-top: 1rem;
+    text-align: left;
+}
+
+/* Main Content Area */
+.main-content {
+    flex: 1;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg-color);
+}
+
+.content-view {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-box {
+    text-align: center;
+    max-width: 400px;
+    padding: 2rem;
+}
+
+.welcome-box h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.welcome-box p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+#tool-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #ffffff;
+}

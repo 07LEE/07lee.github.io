@@ -186,8 +186,4 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('portfolio-list')) {
         renderProjectList('portfolio-list', 'projects.json');
     }
-    // Call when toy project list is detected
-    if (document.getElementById('toy-list')) {
-        renderProjectList('toy-list', 'toys.json');
-    }
 });
