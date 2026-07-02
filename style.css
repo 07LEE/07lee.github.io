@@ -114,3 +114,19 @@ footer {
     border-top: 1px solid var(--border-color);
     padding-top: 1rem;
 }
+
+@media (max-width: 480px) {
+    .container {
+        padding: 2rem 1.25rem;
+    }
+    h1 {
+        font-size: 1.35rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    .header-nav-links {
+        margin-left: 0;
+        margin-top: 0.25rem;
+        width: 100%;
+    }
+}
