@@ -215,3 +215,36 @@ body {
     border: none;
     background: #ffffff;
 }
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        overflow: hidden;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--card-border);
+        padding: 1rem;
+        gap: 0.75rem;
+    }
+    .sidebar-footer {
+        display: none;
+    }
+    .navigation-tree {
+        gap: 0.25rem;
+    }
+    .toy-sidebar-list {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 0.5rem;
+        padding-bottom: 0.25rem;
+        -webkit-overflow-scrolling: touch;
+    }
+    .toy-item {
+        white-space: nowrap;
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+}
