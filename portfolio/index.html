@@ -6,44 +6,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="포트폴리오">
     <title>07lee | Portfolio</title>
-    <link class="style-import" rel="stylesheet" href="style.css">
+    <link class="style-import" rel="stylesheet" href="style.css?v=6">
 </head>
 
 <body>
-    <div class="container">
-        <header>
-            <div class="brand">
-                <a href="../index.html" class="back-link" aria-label="메인 홈으로 이동">
-                    <svg class="back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <div class="portfolio-layout">
+        <!-- Left Sidebar: Project List & Filters -->
+        <aside class="portfolio-sidebar">
+            <header class="sidebar-header">
+                <div class="brand">
+                    <a href="../index.html" class="back-link" aria-label="메인 홈으로 이동">
+                        <svg class="back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                    </a>
+                    <h1>Portfolio</h1>
+                </div>
+            </header>
+
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="ai_ml">AI & ML</button>
+                <button class="filter-btn" data-filter="computer_vision">Computer Vision</button>
+                <button class="filter-btn" data-filter="automation">Automation</button>
+                <button class="filter-btn" data-filter="analytics">Analytics</button>
+            </div>
+
+            <nav class="portfolio-list-container" id="portfolio-list">
+                <p class="loading-msg">Loading project list...</p>
+            </nav>
+
+            <footer class="sidebar-footer">
+                &copy; 2026 07lee. All rights reserved.
+            </footer>
+        </aside>
+
+        <!-- Right Content Area: Detail View -->
+        <main class="portfolio-main-content" id="portfolio-main-content">
+            <!-- Welcome View (Shown when no project is selected) -->
+            <section class="welcome-view" id="welcome-view">
+                <div class="welcome-box">
+                    <h2>07lee | Portfolio</h2>
+                    <p>왼쪽 목록에서 프로젝트를 선택하여 상세 내용을 확인해 보세요.</p>
+                </div>
+            </section>
+
+            <!-- Detail Iframe View -->
+            <section class="detail-frame-view" id="detail-frame-view" style="display: none;">
+                <!-- Mobile back button to return to list -->
+                <button class="mobile-close-btn" id="mobile-close-btn" aria-label="목록으로 돌아가기">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="19" y1="12" x2="5" y2="12"></line>
                         <polyline points="12 19 5 12 12 5"></polyline>
                     </svg>
-                </a>
-                <h1>Portfolio</h1>
-            </div>
-        </header>
-
-        <main>
-            <!-- Category Filters -->
-            <div class="filter-bar">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="automation">Automation</button>
-                <button class="filter-btn" data-filter="etc">Etc</button>
-            </div>
-
-            <!-- Horizontal Scroll Track -->
-            <div class="carousel-container">
-                <section class="carousel-track" id="portfolio-list">
-                    <p class="loading-msg" style="color: #a1a1aa; font-size: 0.95rem; text-align: center; width: 100%;">Loading project list...</p>
-                </section>
-            </div>
+                    <span>목록</span>
+                </button>
+                <iframe id="project-iframe" src="" title="Project Detail Window"></iframe>
+            </section>
         </main>
-
-        <footer>
-            &copy; 2026 07lee. All rights reserved.
-        </footer>
     </div>
-    <script src="../main.js"></script>
+    <script src="../main.js?v=6"></script>
 </body>
 
 </html>

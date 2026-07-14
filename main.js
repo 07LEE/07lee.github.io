@@ -3,6 +3,9 @@ function renderProjectList(containerId, dataUrl) {
     const listContainer = document.getElementById(containerId);
     if (!listContainer) return;
 
+    // Render Skeleton Loaders first
+    showSkeletons(listContainer);
+
     fetch(dataUrl)
         .then(response => {
             if (!response.ok) {
@@ -11,7 +14,7 @@ function renderProjectList(containerId, dataUrl) {
             return response.json();
         })
         .then(projects => {
-            listContainer.innerHTML = ''; // Remove fallback message
+            listContainer.innerHTML = ''; // Remove skeleton loaders
 
             projects.forEach(project => {
                 const article = document.createElement('article');
@@ -25,13 +28,16 @@ function renderProjectList(containerId, dataUrl) {
                 titleWrapper.className = 'project-title-wrapper';
 
                 const h2 = document.createElement('h2');
-                const link = document.createElement('a');
-                link.href = project.link;
-                link.className = 'link-item';
-                link.setAttribute('aria-label', `View ${project.title}`);
-                link.textContent = project.title;
-                h2.appendChild(link);
+                h2.textContent = project.title;
                 titleWrapper.appendChild(h2);
+                headerDiv.appendChild(titleWrapper);
+
+                // Row 2: Icons & Category
+                const metaRow = document.createElement('div');
+                metaRow.className = 'project-meta-row';
+
+                const iconsWrapper = document.createElement('div');
+                iconsWrapper.className = 'project-icons-wrapper';
 
                 // Dynamically render company marker
                 if (project.isCompany) {
@@ -40,7 +46,7 @@ function renderProjectList(containerId, dataUrl) {
                     companyMarker.setAttribute('title', 'Company Project');
                     companyMarker.setAttribute('aria-label', 'Company Project');
                     companyMarker.innerHTML = `
-                        <svg class="company-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="company-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
                             <line x1="9" y1="22" x2="9" y2="16"></line>
                             <line x1="15" y1="22" x2="15" y2="16"></line>
@@ -51,12 +57,9 @@ function renderProjectList(containerId, dataUrl) {
                             <path d="M16 10h.01"></path>
                             <path d="M12 6h.01"></path>
                             <path d="M12 10h.01"></path>
-                            <path d="M8 14h.01"></path>
-                            <path d="M16 14h.01"></path>
-                            <path d="M12 14h.01"></path>
                         </svg>
                     `;
-                    titleWrapper.appendChild(companyMarker);
+                    iconsWrapper.appendChild(companyMarker);
                 }
 
                 // Dynamically render GitHub source link
@@ -72,7 +75,11 @@ function renderProjectList(containerId, dataUrl) {
                             <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
                         </svg>
                     `;
-                    titleWrapper.appendChild(githubLink);
+                    // Prevent sidebar item click when clicking GitHub link
+                    githubLink.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                    iconsWrapper.appendChild(githubLink);
                 }
 
                 // Dynamically render in-progress marker
@@ -82,21 +89,31 @@ function renderProjectList(containerId, dataUrl) {
                     progressMarker.setAttribute('title', 'In-progress Project');
                     progressMarker.setAttribute('aria-label', 'In-progress Project');
                     progressMarker.innerHTML = `
-                        <svg class="progress-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="progress-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <polyline points="12 6 12 12 16 14"></polyline>
                         </svg>
                     `;
-                    titleWrapper.appendChild(progressMarker);
+                    iconsWrapper.appendChild(progressMarker);
                 }
+
+                metaRow.appendChild(iconsWrapper);
 
                 const categorySpan = document.createElement('span');
                 categorySpan.className = 'category';
                 categorySpan.textContent = project.category;
+                metaRow.appendChild(categorySpan);
 
-                headerDiv.appendChild(titleWrapper);
-                headerDiv.appendChild(categorySpan);
                 article.appendChild(headerDiv);
+                article.appendChild(metaRow);
+
+                // Dynamically render description
+                if (project.description) {
+                    const descP = document.createElement('p');
+                    descP.className = 'description';
+                    descP.textContent = project.description;
+                    article.appendChild(descP);
+                }
 
                 // Dynamically render project period and affiliation
                 if (project.period || project.affiliation) {
@@ -107,14 +124,6 @@ function renderProjectList(containerId, dataUrl) {
                     if (project.affiliation) parts.push(project.affiliation);
                     metaP.textContent = parts.join('  ·  ');
                     article.appendChild(metaP);
-                }
-
-                // Dynamically render description
-                if (project.description) {
-                    const descP = document.createElement('p');
-                    descP.className = 'description';
-                    descP.textContent = project.description;
-                    article.appendChild(descP);
                 }
 
                 // Dynamically render technology tags
@@ -132,14 +141,55 @@ function renderProjectList(containerId, dataUrl) {
                     article.appendChild(tagsDiv);
                 }
 
+                // Bind Master-Detail click event for 2-column layout
+                article.addEventListener('click', () => {
+                    // Control active highlight state in list
+                    const siblingCards = listContainer.querySelectorAll('.project-item');
+                    siblingCards.forEach(card => card.classList.remove('active'));
+                    article.classList.add('active');
+
+                    // Select right container components
+                    const welcomeView = document.getElementById('welcome-view');
+                    const detailFrameView = document.getElementById('detail-frame-view');
+                    const iframe = document.getElementById('project-iframe');
+
+                    if (welcomeView && detailFrameView && iframe) {
+                        welcomeView.style.display = 'none';
+                        detailFrameView.style.display = 'flex';
+                        iframe.src = project.link;
+                    }
+
+                    // Mobile view slide transition control
+                    const mainContent = document.getElementById('portfolio-main-content');
+                    if (mainContent && window.innerWidth <= 768) {
+                        mainContent.classList.add('active');
+                    }
+                });
+
                 listContainer.appendChild(article);
             });
             bindCategoryFilters(containerId);
         })
         .catch(error => {
             console.error(error);
-            listContainer.innerHTML = `<p class="error-msg" style="color: #ef4444; font-size: 0.95rem; text-align: center; width: 100%;">An error occurred while loading the list.</p>`;
+            listContainer.innerHTML = `<p class="error-msg" style="color: #ef4444; font-size: 0.85rem; text-align: center; width: 100%;">An error occurred while loading the list.</p>`;
         });
+}
+
+// Display skeleton loaders
+function showSkeletons(container) {
+    container.innerHTML = '';
+    for (let i = 0; i < 3; i++) {
+        const item = document.createElement('div');
+        item.className = 'skeleton-item';
+        item.innerHTML = `
+            <div class="skeleton-line title"></div>
+            <div class="skeleton-line desc1"></div>
+            <div class="skeleton-line desc2"></div>
+            <div class="skeleton-line meta"></div>
+        `;
+        container.appendChild(item);
+    }
 }
 
 // Filter logic binding
@@ -158,13 +208,11 @@ function bindCategoryFilters(listContainerId) {
             cards.forEach(card => {
                 const categorySpan = card.querySelector('.category');
                 const category = categorySpan ? categorySpan.textContent.toLowerCase().trim() : '';
-                const normalizedCategory = category.replace(/[^a-z0-9]/g, '_');
+                const normalizedCategory = category.replace(/[^a-z0-9]+/g, '_');
 
                 let isMatch = false;
                 if (filterVal === 'all') {
                     isMatch = true;
-                } else if (filterVal === 'etc') {
-                    isMatch = !normalizedCategory.includes('automation');
                 } else {
                     isMatch = normalizedCategory.includes(filterVal);
                 }
@@ -179,11 +227,83 @@ function bindCategoryFilters(listContainerId) {
     });
 }
 
-
 // Control common entry point
 document.addEventListener('DOMContentLoaded', () => {
+    // Bind mouse wheel horizontally for the filter bar
+    const filterBar = document.querySelector('.filter-bar');
+    if (filterBar) {
+        filterBar.addEventListener('wheel', (e) => {
+            if (e.deltaY !== 0) {
+                e.preventDefault();
+                filterBar.scrollLeft += e.deltaY;
+            }
+        }, { passive: false });
+
+        // Mouse Drag to Scroll
+        let isDown = false;
+        let startX;
+        let scrollLeftVal;
+
+        filterBar.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - filterBar.offsetLeft;
+            scrollLeftVal = filterBar.scrollLeft;
+        });
+
+        filterBar.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        filterBar.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        filterBar.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - filterBar.offsetLeft;
+            const walk = (x - startX) * 1.5; // Scroll speed
+            filterBar.scrollLeft = scrollLeftVal - walk;
+        });
+    }
+
     // Call when portfolio main list is detected
     if (document.getElementById('portfolio-list')) {
         renderProjectList('portfolio-list', 'projects.json');
+
+        // Bind Mobile close button logic
+        const mobileCloseBtn = document.getElementById('mobile-close-btn');
+        if (mobileCloseBtn) {
+            mobileCloseBtn.addEventListener('click', () => {
+                const mainContent = document.getElementById('portfolio-main-content');
+                if (mainContent) {
+                    mainContent.classList.remove('active');
+                }
+            });
+        }
+
+        // Active interception of iframe load events to purge internal back controls (bypasses browser caches)
+        const iframe = document.getElementById('project-iframe');
+        if (iframe) {
+            iframe.addEventListener('load', () => {
+                try {
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    if (iframeDoc) {
+                        // Find any duplicate back link elements or custom element anchors inside the iframe
+                        const duplicateBackLinks = iframeDoc.querySelectorAll('.back-link, .back-btn, .back-icon, portfolio-header a, portfolio-header .back-link');
+                        duplicateBackLinks.forEach(el => {
+                            el.style.display = 'none';
+                            el.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                            });
+                            el.remove(); // Erase from DOM
+                        });
+                    }
+                } catch (err) {
+                    console.warn("Cross-origin or initialization lock prevented direct iframe DOM cleanup:", err);
+                }
+            });
+        }
     }
 });
