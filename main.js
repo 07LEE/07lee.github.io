@@ -16,6 +16,12 @@ function renderProjectList(containerId, dataUrl) {
         .then(projects => {
             listContainer.innerHTML = ''; // Remove skeleton loaders
 
+            // Sort projects by start date in descending order automatically
+            projects.sort((a, b) => {
+                const getStart = p => p ? p.split('~')[0].trim() : '';
+                return getStart(b.period).localeCompare(getStart(a.period));
+            });
+
             projects.forEach(project => {
                 const article = document.createElement('article');
                 article.className = 'project-item';

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Automation & Multi-Account Management System</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Outfit:wght@300;400;600;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="../components.js" defer></script>
+</head>
+<body>
+    <!-- Background Decoration -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <portfolio-header title="Netflix Management" back-href="../index.html"></portfolio-header>
+
+    <main class="content-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="badge">MULTI-ACCOUNT AUTOMATION</div>
+            <h1 class="hero-title">넷플릭스 다중 계정 관리 및 자동 제어 시스템</h1>
+            <p class="hero-subtitle">
+                다수의 객실별 넷플릭스 계정을 유기적으로 매핑하고, 텔레그램 봇과 Playwright 엔진을 연동하여 프로필 언어 즉시 전환 및 민감한 개인정보 노출 없는 일회성 SMS 성인인증을 완전 자동화한 백엔드 통합 솔루션입니다.
+            </p>
+        </section>
+
+        <!-- Interactive Simulation Section -->
+        <section class="section-card simulation-section">
+            <div class="card-header">
+                <div class="header-info">
+                    <span class="dot red-dot"></span>
+                    <h2>시스템 제어 시뮬레이터</h2>
+                </div>
+                <p class="card-desc">실제 동작하는 두 가지 자동화 시나리오 중 하나를 선택하고, 봇과 브라우저의 연동 흐름을 실시간으로 확인해 보세요.</p>
+            </div>
+
+            <!-- Simulation Configuration & Controls -->
+            <div class="sim-config-area">
+                <div class="config-group">
+                    <label class="config-label">시나리오 모드 선택</label>
+                    <div class="radio-tile-group">
+                        <div class="input-container">
+                            <input id="mode-lang" class="radio-button" type="radio" name="sim-mode" value="language" checked>
+                            <div class="radio-tile">
+                                <div class="icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21v-4a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v4"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                </div>
+                                <label for="mode-lang" class="radio-tile-label">프로필 언어 자동 전환</label>
+                            </div>
+                        </div>
+                        <div class="input-container">
+                            <input id="mode-verify" class="radio-button" type="radio" name="sim-mode" value="verification">
+                            <div class="radio-tile">
+                                <div class="icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                                </div>
+                                <label for="mode-verify" class="radio-tile-label">SMS 성인인증 및 개인정보 파기</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-group">
+                    <label for="select-room-id" class="config-label">다중 계정 객실 선택</label>
+                    <select id="select-room-id" class="select-box">
+                        <option value="101">101호 계정 (user_101@example.com)</option>
+                        <option value="203">203호 계정 (user_203@example.com)</option>
+                        <option value="305">305호 계정 (user_305@example.com)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="sim-controls">
+                <button id="btn-start" class="btn btn-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    <span>자동화 시작</span>
+                </button>
+                <button id="btn-reset" class="btn btn-secondary" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+                    <span>초기화</span>
+                </button>
+                <div id="sim-status" class="sim-badge">대기 중</div>
+            </div>
+
+            <!-- Simulator Split View -->
+            <div class="simulator-grid">
+                <!-- Left Panel: Telegram Bot Mockup -->
+                <div class="mockup telegram-mockup">
+                    <div class="mockup-header">
+                        <div class="window-dots">
+                            <span class="window-dot"></span>
+                            <span class="window-dot"></span>
+                            <span class="window-dot"></span>
+                        </div>
+                        <div class="telegram-title">
+                            <span class="telegram-name">관리 자동화 봇</span>
+                            <span class="telegram-status">online</span>
+                        </div>
+                    </div>
+                    <div class="telegram-messages" id="telegram-chat">
+                        <div class="message system-msg">
+                            자동화 모드와 대상을 지정한 후 [자동화 시작] 버튼을 클릭해 주세요.
+                        </div>
+                    </div>
+                    <div class="telegram-input-area">
+                        <input type="text" id="telegram-input" placeholder="인증번호 등을 입력하는 가상 입력창입니다..." readonly>
+                        <button id="telegram-send-btn" class="telegram-send-btn" disabled>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Panel: Netflix Browser Mockup -->
+                <div class="mockup browser-mockup">
+                    <div class="mockup-header">
+                        <div class="window-dots">
+                            <span class="window-dot"></span>
+                            <span class="window-dot"></span>
+                            <span class="window-dot"></span>
+                        </div>
+                        <div class="browser-address">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="lock-icon"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            <span id="browser-url">https://www.netflix.com</span>
+                        </div>
+                    </div>
+                    <!-- Browser Screen Content -->
+                    <div class="browser-content" id="browser-viewport">
+                        <div class="netflix-blank-screen">
+                            <div class="netflix-logo">NETFLIX</div>
+                            <p class="netflix-status-text">대기 중</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terminal Log Window -->
+            <div class="mockup terminal-mockup">
+                <div class="mockup-header">
+                    <span class="terminal-title">System Execution Logs (Playwright)</span>
+                </div>
+                <div class="terminal-body" id="terminal-logs">
+                    <div class="log-line text-muted">[SYSTEM] Simulation ready. Select mode and start.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Architecture Section -->
+        <section class="section-card">
+            <div class="card-header">
+                <h2>다중 계정 관리 및 비동기 제어 구조</h2>
+                <p class="card-desc">사용자 정의 매핑 파일과 연동하여 계정을 찾아내고, 각각 분리된 독립된 브라우저 인스턴스를 통해 병렬적으로 제어를 수행하는 구조입니다.</p>
+            </div>
+            
+            <!-- Flow Diagram (HTML/CSS representation of flows) -->
+            <div class="architecture-flow">
+                <div class="flow-node active-hover" data-target="db-flow">
+                    <div class="node-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+                    </div>
+                    <div class="node-title">JSON DB Mapping</div>
+                    <p class="node-desc">객실 번호에 매핑된 계정 데이터 동적 식별 및 호출</p>
+                </div>
+                <div class="flow-arrow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+                <div class="flow-node active-hover" data-target="tg-flow">
+                    <div class="node-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg>
+                    </div>
+                    <div class="node-title">Telegram API</div>
+                    <p class="node-desc">객실별 작업 개시 명령 접수 및 타겟 정보 핸들링</p>
+                </div>
+                <div class="flow-arrow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+                <div class="flow-node active-hover" data-target="pw-flow">
+                    <div class="node-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    </div>
+                    <div class="node-title">Playwright Context</div>
+                    <p class="node-desc">지정 계정별 독립적인 크로미움 브라우저 격리 제어</p>
+                </div>
+            </div>
+            
+            <div class="architecture-explanation" id="arch-details">
+                아키텍처 요소를 클릭하면 상세한 설계 원리를 확인할 수 있습니다.
+            </div>
+        </section>
+
+        <!-- Technical Challenges & Solutions -->
+        <section class="technical-details">
+            <div class="grid-card">
+                <div class="section-card">
+                    <div class="card-header">
+                        <h2>기술적 당면 과제</h2>
+                    </div>
+                    <div class="challenge-list">
+                        <div class="challenge-item">
+                            <h3>1. 다중 아이디 동적 라우팅 및 락 제어</h3>
+                            <p>객실별로 매핑된 고유 넷플릭스 계정 데이터의 보안 보관 및 동시 다발적인 동작 시 중복 로그인 충돌이나 세션 오염을 방지해야 했습니다.</p>
+                        </div>
+                        <div class="challenge-item">
+                            <h3>2. 프로필 UI 동적 대응 및 봇 차단</h3>
+                            <p>넷플릭스는 주기적으로 계정 프로필 관리 구조 및 클래스명을 변경합니다. 또한 헤드리스 모드 동작 시 로그인 시점부터 봇으로 인식하여 CAPTCHA를 유도하는 보안 모델이 존재했습니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-card">
+                    <div class="card-header">
+                        <h2>아키텍처적 해결책</h2>
+                    </div>
+                    <div class="solution-list">
+                        <div class="solution-item">
+                            <h3>1. JSON 구조화 매핑 및 스레드 독립 세션</h3>
+                            <p>객실별 Credential을 구조화된 JSON 형태로 관리하여 `get_credentials` 함수를 통해 동적으로 로딩합니다. 병렬 실행 시 Playwright의 `new_context`를 통해 각 세션을 물리적 브라우저 환경처럼 격리하여 데이터 및 세션 충돌을 근본적으로 차단했습니다.</p>
+                        </div>
+                        <div class="solution-item">
+                            <h3>2. 유연한 Locator 스택 및 Stealth 우회</h3>
+                            <p>계정 프로필 선택 시 다양한 CSS 셀렉터 폴백(Fallback) 방식을 채택하고, playwright_stealth 및 랜덤 타이핑 딜레이를 통해 봇 탐지 위협 요소를 최소화하여 안정적인 화면 진입을 유지합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Code Highlight Section -->
+        <section class="section-card">
+            <div class="card-header">
+                <h2>핵심 구현 코드</h2>
+                <p class="card-desc">다중 계정 관리 기능과 언어 자동 변경, 그리고 비동기 대기 처리를 주도하는 주요 코드 조각입니다.</p>
+            </div>
+            <div class="code-tabs">
+                <button class="code-tab active" data-tab="tab-manager">netflix_manager.py (언어전환 & 다중계정)</button>
+                <button class="code-tab" data-tab="tab-verifier">netflix_verifier.py (성인인증)</button>
+                <button class="code-tab" data-tab="tab-handler">netflix_handler.py (봇 연동)</button>
+            </div>
+            
+            <div class="code-viewport">
+                <!-- Tab: Manager -->
+                <pre id="tab-manager" class="code-content active"><code># 1. 다중 계정 파일(JSON)을 로드하여 요청된 객실 번호에 대응하는 계정 정보를 조회
+# 2. 독립적인 Playwright Chromium 세션을 생성하여 언어를 동적 전환합니다.
+
+class NetflixManager:
+    @classmethod
+    async def run_language_change(cls, room_number: str, korean_lang: str) -> str:
+        user_data = load_data(USER_DATA_PATH, "User Data")
+        lang_map = load_data(LANGUAGE_MAP_PATH, "Language Map")
+
+        # 객실에 대응하는 넷플릭스 크레덴셜 조회 (다중 아이디 라우팅)
+        email, password = get_credentials(user_data, room_number)
+        if not (email and password):
+            return f"Room number '{room_number}' not found."
+
+        target_lang = get_language_code(korean_lang, lang_map)
+        
+        async with async_playwright() as p:
+            browser = await p.chromium.launch(headless=True)
+            # 브라우저 컨텍스트 격리 실행
+            context = await browser.new_context(user_agent="Mozilla/5.0 ...")
+            page = await context.new_page()
+
+            # 프로필 관리 페이지 이동 후 마지막 프로필 선택 및 언어 변경 적용
+            if await cls._login(page, email, password):
+                if await cls._select_last_profile(page):
+                    if await cls._change_language_direct(page, target_lang):
+                        await browser.close()
+                        return f"Success: Room {room_number} to {korean_lang}"
+            await browser.close()
+            return "Failed to change language"</code></pre>
+
+                <!-- Tab: Verifier -->
+                <pre id="tab-verifier" class="code-content"><code># asyncio.to_thread를 활용하여 비동기 흐름 속에서 동기식 Queue 대기를 처리하는 메커니즘
+# 성인 인증을 위한 SMS 입력 및 전화번호 삭제를 위한 SMS 입력을 순차적으로 처리합니다.
+
+# 1단계: 인증 코드 대기
+logging.info("Waiting for SMS code #1 from user...")
+sms_code = await asyncio.to_thread(code_queue.get, timeout=180)
+if not sms_code:
+    return False, "User cancelled or timeout."
+
+# 2단계: 번호 삭제용 SMS 코드 대기
+logging.info("Waiting for SMS code #2 from user...")
+sms_code = await asyncio.to_thread(code_queue.get, timeout=180)
+if not sms_code:
+    return False, "User cancelled or timeout."
+
+# playwright_stealth 우회 모듈 적용 예시
+async with async_playwright() as p:
+    browser = await p.chromium.launch(headless=True)
+    context = await browser.new_context(user_agent="Mozilla/5.0 ...")
+    page = await context.new_page()
+    
+    # 봇 감지 회피 장치 활성화
+    st = playwright_stealth
+    if hasattr(st, "stealth"):
+        st = st.stealth
+    if callable(st):
+        await st(page)</code></pre>
+
+                <!-- Tab: Handler -->
+                <pre id="tab-handler" class="code-content"><code># 텔레그램 봇 이벤트 루프 스레드 내에서 비동기로 Playwright 테스크를 분리 호출하고
+# 사용자 입력을 Queue를 통해 백엔드 브라우저 스레드로 전달하는 로직
+
+active_verifications = {} # 대화방 ID별 동적 Queue 관리 맵
+
+async def select_room_verify(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    room = query.data.replace("v_room_", "")
+    chat_id = update.effective_chat.id
+    
+    info_q = queue.Queue()
+    code_q = queue.Queue()
+    active_verifications[chat_id] = {"info_q": info_q, "code_q": code_q}
+
+    # 백엔드 스레드로 Playwright 조작 루틴 분기 실행
+    context.application.create_task(
+        run_verification_task(context, chat_id, room, info_q, code_q)
+    )
+    return ENTER_NAME
+
+async def enter_sms_code(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    sms_code = update.message.text.strip()
+    chat_id = update.effective_chat.id
+    
+    if chat_id in active_verifications:
+        # Playwright 스레드가 대기 중인 Queue로 값을 전달하여 블로킹 상태 해제
+        active_verifications[chat_id]["code_q"].put(sms_code)</code></pre>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 07Lee. Portfolio Page for Netflix Automation System.</p>
+    </footer>
+
+    <!-- App JavaScript -->
+    <script src="main.js"></script>
+</body>
+</html>

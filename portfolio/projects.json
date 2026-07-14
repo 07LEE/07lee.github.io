@@ -30,6 +30,21 @@
         "github": "https://github.com/07LEE/Nmap-Reservation-Analyzer"
     },
     {
+        "id": "item-netflix-automation",
+        "title": "Netflix Automation & Verification",
+        "category": "Automation",
+        "period": "2026.03 ~ 2026.06",
+        "affiliation": "",
+        "description": "넷플릭스 언어 변경 및 SMS 성인인증 자동화",
+        "tags": [
+            "Python",
+            "Playwright",
+            "Telegram API"
+        ],
+        "link": "netflix-automation/index.html",
+        "isCompany": true
+    },
+    {
         "id": "item-zed-remote-system",
         "title": "ZED Remote System",
         "category": "Computer Vision",
