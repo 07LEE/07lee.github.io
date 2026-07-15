@@ -7,6 +7,7 @@
     <meta name="description" content="포트폴리오">
     <title>07lee | Portfolio</title>
     <link class="style-import" rel="stylesheet" href="style.css?v=6">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -23,6 +24,14 @@
                     </a>
                     <h1>Portfolio</h1>
                 </div>
+                <!-- Sidebar Toggle Menu Button -->
+                <button class="sidebar-toggle-btn" id="sidebar-toggle-btn" aria-label="메뉴 접기/펼치기">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
             </header>
 
             <div class="filter-bar">
@@ -46,22 +55,28 @@
         <main class="portfolio-main-content" id="portfolio-main-content">
             <!-- Welcome View (Shown when no project is selected) -->
             <section class="welcome-view" id="welcome-view">
-                <div class="welcome-box">
-                    <h2>07lee | Portfolio</h2>
-                    <p>왼쪽 목록에서 프로젝트를 선택하여 상세 내용을 확인해 보세요.</p>
+                <div class="dashboard-container">
+                    <header class="dashboard-header">
+                        <h1>07lee | Portfolio Overview</h1>
+                    </header>
+                    <div class="dashboard-categories" id="dashboard-categories">
+                        <!-- Dynamic dashboard sections will be injected here -->
+                    </div>
                 </div>
             </section>
 
             <!-- Detail Iframe View -->
             <section class="detail-frame-view" id="detail-frame-view" style="display: none;">
-                <!-- Mobile back button to return to list -->
-                <button class="mobile-close-btn" id="mobile-close-btn" aria-label="목록으로 돌아가기">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="19" y1="12" x2="5" y2="12"></line>
-                        <polyline points="12 19 5 12 12 5"></polyline>
-                    </svg>
-                    <span>목록</span>
-                </button>
+                <!-- Detail Top Header Bar -->
+                <div class="detail-header">
+                    <button class="close-detail-btn" id="close-detail-btn" aria-label="대시보드로 돌아가기">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                    </button>
+                    <span class="detail-project-title" id="detail-project-title"></span>
+                </div>
                 <iframe id="project-iframe" src="" title="Project Detail Window"></iframe>
             </section>
         </main>

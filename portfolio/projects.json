@@ -39,7 +39,7 @@
         "tags": [
             "Python",
             "Playwright",
-            "Telegram API"
+            "JSON DB"
         ],
         "link": "netflix-automation/index.html",
         "isCompany": true
@@ -83,8 +83,8 @@
         "description": "Segments.ai API 제한 극복 및 3D PCD 대량 업로드 자동화 도구",
         "tags": [
             "Python",
-            "CLI",
-            "Segments.ai"
+            "Segments.ai",
+            "CLI"
         ],
         "link": "segments-ai-api/index.html",
         "isCompany": true
@@ -98,8 +98,8 @@
         "description": "자연어 기반 견적서 생성 도구",
         "tags": [
             "Python",
-            "Gemini API",
-            "Selenium"
+            "Selenium",
+            "Gemini API"
         ],
         "link": "invoice-simplifier/index.html",
         "isCompany": true
@@ -113,8 +113,8 @@
         "description": "소설 텍스트 내 발화자 및 장면 인식 서비스",
         "tags": [
             "Python",
-            "FastAPI",
-            "NLP"
+            "NLP",
+            "FastAPI"
         ],
         "link": "novel-transformation/index.html",
         "github": "https://github.com/Novel-Transformation-for-You/service"
