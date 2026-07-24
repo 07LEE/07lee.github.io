@@ -1,21 +1,21 @@
 @import "../../style.css";
 
-/* Chess Monochrome Design System (style.css) */
+/* Chess Monochrome Design System - High-Visibility Large Font & Spacious Deck Layout */
 
-/* Variables Definition */
 :root {
+    --bg-main: #f3f4f6;
     --bg-primary: #fcfcfc;
     --bg-secondary: #f4f4f4;
+    --bg-sidebar: #ffffff;
     --text-primary: #1c1c1c;
-    --text-secondary: #666666;
+    --text-secondary: #444444;
     --border-color: #1c1c1c;
-    --border-light: #e0e0e0;
+    --border-light: #d1d5db;
     --accent-color: #000000;
     --card-bg: #ffffff;
-    --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* General Reset */
 * {
     margin: 0;
     padding: 0;
@@ -24,14 +24,13 @@
 
 body {
     font-family: 'Outfit', 'Noto Sans KR', sans-serif;
-    background-color: #f3f4f6;
+    background-color: var(--bg-main);
     color: var(--text-primary);
-    overflow-x: hidden;
-    overflow-y: auto;
-    min-height: 100vh;
-    padding: 60px 20px;
-    display: block;
-    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    font-size: 16px;
+    line-height: 1.7;
 }
 
 /* Chess Grid Pattern Background Overlay */
@@ -54,19 +53,21 @@ body {
 .back-link {
     position: fixed;
     top: 1.5rem;
-    left: 1.5rem;
+    right: 1.5rem;
     z-index: 9999;
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.5rem;
     color: var(--text-secondary);
-    font-size: 0.85rem;
+    font-size: 0.95rem;
+    font-weight: 600;
     font-family: 'Outfit', sans-serif;
     text-decoration: none;
     background: var(--card-bg);
     border: 1px solid var(--border-light);
     border-radius: 99px;
-    padding: 0.4rem 1rem;
+    padding: 0.6rem 1.2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     transition: var(--transition-smooth);
 }
 
@@ -76,60 +77,145 @@ body {
     border-color: var(--text-primary);
 }
 
-/* Scroll Layout Container */
-.portfolio-container {
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
+/* Dashboard Container (2-Column Layout) */
+.dashboard-container {
     display: flex;
-    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
     position: relative;
     z-index: 10;
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-light);
-    padding: 60px 80px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
 }
 
-/* Section Block Layout */
-.section-block {
+/* Left Fixed Navigation Sidebar (목차) */
+.sidebar {
+    width: 300px;
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border-light);
+    padding: 50px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+    z-index: 100;
+}
+
+.sidebar-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.brand-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+}
+
+.brand-version {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-family: monospace;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 40px 0;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: left;
+    transition: var(--transition-smooth);
+}
+
+.sidebar-item:hover {
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+}
+
+.sidebar-item.active {
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    border-left: 5px solid var(--text-primary);
+}
+
+.nav-num {
+    font-family: monospace;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.sidebar-item.active .nav-num {
+    color: var(--text-primary);
+    font-weight: bold;
+}
+
+.sidebar-footer {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Right Content Area (Deck Container) */
+.content-area {
+    flex-grow: 1;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-main);
+}
+
+/* Slide Base Styling */
+.slide {
+    display: none;
+    height: 100%;
     width: 100%;
+    padding: 60px 80px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.slide.active {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border-bottom: 1px solid var(--border-light);
 }
 
-.section-block:last-child {
-    border-bottom: none;
-}
-
-/* Slide Content Layout */
+/* Slide Content Container - Large & Readable */
 .slide-content {
     width: 100%;
-    height: auto;
-    padding: 40px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    max-width: 1150px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-light);
+    padding: 50px 70px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
 }
 
 /* Section Title Style */
 .section-title {
-    font-size: 2rem;
+    font-size: 2.3rem;
     font-weight: 800;
     color: var(--text-primary);
-    margin-bottom: 30px;
-    border-bottom: 2px solid var(--text-primary);
-    padding-bottom: 10px;
+    margin-bottom: 32px;
+    border-bottom: 3px solid var(--text-primary);
+    padding-bottom: 12px;
     text-transform: uppercase;
     letter-spacing: -0.5px;
-}
-
-.slide-description {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    margin-bottom: 30px;
 }
 
 /* Slide 1: Title Slide */
@@ -137,8 +223,8 @@ body {
     align-items: center;
     text-align: center;
     justify-content: center;
-    padding: 80px 0 100px 0;
-    border-bottom: 2px solid var(--text-primary);
+    padding: 80px 50px;
+    border-bottom: 3px solid var(--text-primary);
     background-image: 
         linear-gradient(45deg, #f9f9f9 25%, transparent 25%), 
         linear-gradient(-45deg, #f9f9f9 25%, transparent 25%), 
@@ -149,185 +235,195 @@ body {
 }
 
 .chess-icon-wrapper {
-    width: 80px;
-    height: 80px;
-    border: 2px solid var(--border-light);
+    width: 96px;
+    height: 96px;
+    border: 3px solid var(--border-color);
     background-color: var(--card-bg);
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 30px;
+    margin: 0 auto 30px auto;
 }
 
 .title-chess-icon {
-    font-size: 3rem;
+    font-size: 3.8rem;
     color: var(--text-primary);
 }
 
 .main-title {
     font-family: 'Outfit', sans-serif;
-    font-size: 3.5rem;
+    font-size: 4.0rem;
     font-weight: 800;
     line-height: 1.1;
-    letter-spacing: -1.5px;
-    margin-bottom: 20px;
+    letter-spacing: -1.8px;
+    margin-bottom: 24px;
     text-transform: uppercase;
     color: var(--text-primary);
 }
 
 .subtitle {
-    font-size: 1.15rem;
+    font-size: 1.3rem;
     color: var(--text-secondary);
-    max-width: 680px;
-    line-height: 1.6;
+    max-width: 780px;
+    line-height: 1.7;
+    margin: 0 auto;
     word-break: keep-all;
 }
 
-/* Slide 2: Architecture Cards */
-.architecture-grid {
+/* Architecture & Environment Spec Section */
+.sys-env-vertical-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+}
+
+.sys-section h3 {
+    font-size: 1.35rem;
+    margin-bottom: 18px;
+    border-left: 4px solid var(--border-color);
+    padding-left: 12px;
+    font-weight: 700;
+}
+
+.architecture-grid-compact {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
 
-.step-card {
+.step-card-compact {
     background-color: #f9f9f9;
-    border: 1px solid #e5e5e7;
-    border-top: 4px solid var(--text-primary);
-    padding: 30px 20px;
-    position: relative;
+    border: 1px solid #d1d5db;
+    border-top: 5px solid var(--text-primary);
+    padding: 30px 22px;
     transition: var(--transition-smooth);
 }
 
-.step-card:hover {
+.step-card-compact:hover {
     background-color: var(--bg-secondary);
-    transform: translateY(-5px);
+    transform: translateY(-4px);
 }
 
-.step-num {
+.step-num-compact {
     font-family: 'Outfit', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     font-weight: 800;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 5px;
-    margin-bottom: 15px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 4px;
+    margin-bottom: 12px;
     display: inline-block;
 }
 
-.step-card h3 {
-    font-size: 1.15rem;
+.step-card-compact h4 {
+    font-size: 1.2rem;
     margin-bottom: 10px;
     font-weight: 700;
 }
 
-.step-card p {
+.step-card-compact p {
     color: var(--text-secondary);
-    font-size: 0.85rem;
-    line-height: 1.5;
+    font-size: 0.98rem;
+    line-height: 1.6;
 }
 
-/* Slide 3: Environment Specification */
-.env-layout {
+.env-section-horizontal {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 30px;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    border-top: 1px solid var(--border-light);
+    padding-top: 30px;
 }
 
-.env-info-box {
-    border: 1px solid #e5e5e7;
-    border-top: 4px solid var(--text-primary);
-    padding: 25px;
-    background-color: #f9f9f9;
+.env-left h4, .env-right h4 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    font-weight: 700;
 }
 
-.env-info-box h3 {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 8px;
-}
-
-.env-table {
+.env-summary-table-compact {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.85rem;
+    font-size: 0.98rem;
 }
 
-.env-table th, .env-table td {
+.env-summary-table-compact th, .env-summary-table-compact td {
     border: 1px solid var(--border-light);
-    padding: 10px;
+    padding: 12px 16px;
     text-align: left;
 }
 
-.env-table th {
+.env-summary-table-compact th {
     background-color: var(--bg-secondary);
     font-weight: 700;
 }
 
-.action-card {
-    background-color: var(--bg-secondary);
-    border-left: 4px solid var(--border-color);
-    padding: 15px;
-    margin-bottom: 15px;
+.action-row-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
 
-.action-card h4 {
+.action-box-compact {
+    background-color: var(--bg-secondary);
+    border-left: 5px solid var(--border-color);
+    padding: 22px 24px;
+}
+
+.action-box-compact h5 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.action-box-compact p {
     font-size: 0.95rem;
-    font-weight: 700;
-    margin-bottom: 5px;
-}
-
-.action-card p {
-    font-size: 0.85rem;
     color: var(--text-secondary);
-    line-height: 1.4;
+    line-height: 1.6;
 }
 
-/* Slide 4: Image Pipeline Layout */
+/* Image Pipeline Layout */
 .pipeline-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    gap: 40px;
     align-items: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 
 .pipeline-text {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 28px;
 }
 
 .pipeline-item {
     display: flex;
-    gap: 15px;
+    gap: 18px;
 }
 
 .bullet-square {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     background-color: var(--text-primary);
-    margin-top: 5px;
+    margin-top: 6px;
     flex-shrink: 0;
 }
 
 .pipeline-item h3 {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
 }
 
 .pipeline-item p {
-    font-size: 0.85rem;
+    font-size: 1.0rem;
     color: var(--text-secondary);
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 .pipeline-visual {
-    border: 1px solid #e5e5e7;
-    border-top: 4px solid var(--text-primary);
-    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-top: 5px solid var(--text-primary);
+    padding: 14px;
     background-color: #f9f9f9;
     display: flex;
     justify-content: center;
@@ -340,56 +436,46 @@ body {
     border: 1px solid var(--border-light);
 }
 
-/* Slide 5: Model Grid */
-.model-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.model-card {
-    border: 1px solid #e5e5e7;
-    border-top: 4px solid var(--text-primary);
-    padding: 25px;
-    background-color: #f9f9f9;
-}
-
-.model-card h3 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    border-left: 3px solid var(--border-color);
-    padding-left: 10px;
-}
-
-.model-card p {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-}
-
-
-
-/* Slide 5 Model Layout & Diagram Styles */
+/* Model Architecture & Training Layout */
 .model-layout {
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
-    gap: 30px;
+    gap: 36px;
     align-items: stretch;
-    margin-top: 20px;
 }
 
 .model-cards-container {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 22px;
     justify-content: center;
 }
 
+.model-card {
+    border: 1px solid #d1d5db;
+    border-top: 5px solid var(--text-primary);
+    padding: 26px;
+    background-color: #f9f9f9;
+}
+
+.model-card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    border-left: 4px solid var(--border-color);
+    padding-left: 12px;
+}
+
+.model-card p {
+    font-size: 0.98rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
 .model-diagram-box {
-    border: 1px solid #e5e5e7;
-    border-top: 4px solid var(--text-primary);
-    padding: 25px;
+    border: 1px solid #d1d5db;
+    border-top: 5px solid var(--text-primary);
+    padding: 26px;
     background-color: #f9f9f9;
     display: flex;
     flex-direction: column;
@@ -397,11 +483,11 @@ body {
 }
 
 .model-diagram-box h3 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    margin-bottom: 20px;
-    border-left: 3px solid var(--border-color);
-    padding-left: 10px;
+    margin-bottom: 18px;
+    border-left: 4px solid var(--border-color);
+    padding-left: 12px;
 }
 
 .neural-network-svg {
@@ -413,120 +499,29 @@ body {
 
 .nn-svg {
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
     height: auto;
 }
 
-/* Combined Slide 2: Vertical Layout (Architecture on Top, Env on Bottom) */
-.sys-env-vertical-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+/* Responsive Rules */
+@media (max-width: 1024px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+    }
+    .sidebar-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        margin: 10px 0 0 0;
+    }
+    .slide-content {
+        padding: 30px 24px;
+    }
+    .architecture-grid-compact, .env-section-horizontal, .pipeline-layout, .model-layout {
+        grid-template-columns: 1fr;
+    }
 }
-
-.sys-section h3 {
-    font-size: 1.15rem;
-    margin-bottom: 15px;
-    border-left: 3px solid var(--border-color);
-    padding-left: 10px;
-    font-weight: 700;
-}
-
-.architecture-grid-compact {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-.step-card-compact {
-    background-color: #f9f9f9;
-    border: 1px solid #e5e5e7;
-    border-top: 4px solid var(--text-primary);
-    padding: 25px 20px;
-    transition: var(--transition-smooth);
-}
-
-.step-card-compact:hover {
-    background-color: var(--bg-secondary);
-    transform: translateY(-3px);
-}
-
-.step-num-compact {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 800;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 3px;
-    margin-bottom: 10px;
-    display: inline-block;
-}
-
-.step-card-compact h4 {
-    font-size: 1.05rem;
-    margin-bottom: 6px;
-    font-weight: 700;
-}
-
-.step-card-compact p {
-    color: var(--text-secondary);
-    font-size: 0.8rem;
-    line-height: 1.5;
-}
-
-.env-section-horizontal {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 35px;
-    border-top: 1px solid var(--border-light);
-    padding-top: 25px;
-}
-
-.env-left h4, .env-right h4 {
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-
-.env-summary-table-compact {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.8rem;
-}
-
-.env-summary-table-compact th, .env-summary-table-compact td {
-    border: 1px solid var(--border-light);
-    padding: 8px 12px;
-    text-align: left;
-}
-
-.env-summary-table-compact th {
-    background-color: var(--bg-secondary);
-    font-weight: 700;
-}
-
-.action-row-compact {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.action-box-compact {
-    background-color: var(--bg-secondary);
-    border-left: 4px solid var(--border-color);
-    padding: 18px 20px;
-}
-
-.action-box-compact h5 {
-    font-size: 0.9rem;
-    font-weight: 700;
-    margin-bottom: 4px;
-}
-
-.action-box-compact p {
-    font-size: 0.78rem;
-    color: var(--text-secondary);
-    line-height: 1.5;
-}
-
-
-

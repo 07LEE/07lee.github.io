@@ -154,11 +154,7 @@ function renderProjectList(containerId, dataUrl) {
                     siblingCards.forEach(card => card.classList.remove('active'));
                     article.classList.add('active');
 
-                    // Auto-collapse sidebar on desktop when entering detail view
-                    const sidebar = document.querySelector('.portfolio-sidebar');
-                    if (sidebar && window.innerWidth > 768) {
-                        sidebar.classList.add('collapsed');
-                    }
+
 
                     // Select right container components
                     const welcomeView = document.getElementById('welcome-view');
@@ -292,9 +288,16 @@ document.addEventListener('DOMContentLoaded', () => {
         renderProjectList('portfolio-list', 'projects.json');
 
         const sidebar = document.querySelector('.portfolio-sidebar');
-        // Initial collapse on desktop (welcome screen dashboard showing)
-        if (sidebar && window.innerWidth > 768) {
-            sidebar.classList.add('collapsed');
+        // Restore sidebar collapsed state from localStorage or set default on desktop
+        if (sidebar) {
+            const savedState = localStorage.getItem('portfolio_sidebar_collapsed');
+            if (savedState === 'true') {
+                sidebar.classList.add('collapsed');
+            } else if (savedState === 'false') {
+                sidebar.classList.remove('collapsed');
+            } else if (window.innerWidth > 768) {
+                sidebar.classList.add('collapsed');
+            }
         }
 
         // Bind Sidebar toggle menu button
@@ -302,6 +305,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (toggleBtn && sidebar) {
             toggleBtn.addEventListener('click', () => {
                 sidebar.classList.toggle('collapsed');
+                const isCollapsed = sidebar.classList.contains('collapsed');
+                localStorage.setItem('portfolio_sidebar_collapsed', isCollapsed ? 'true' : 'false');
             });
         }
 
@@ -312,18 +317,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const welcomeView = document.getElementById('welcome-view');
                 const detailFrameView = document.getElementById('detail-frame-view');
                 const iframeEl = document.getElementById('project-iframe');
-                const sidebarEl = document.querySelector('.portfolio-sidebar');
                 const cards = document.querySelectorAll('.project-item');
 
                 if (welcomeView && detailFrameView && iframeEl) {
                     welcomeView.style.display = 'block';
                     detailFrameView.style.display = 'none';
                     iframeEl.src = ''; // Unload page to save resources
-                }
-
-                // Auto-collapse sidebar on desktop to expand full dashboard again
-                if (sidebarEl && window.innerWidth > 768) {
-                    sidebarEl.classList.add('collapsed');
                 }
 
                 // Remove active states from sidebar
