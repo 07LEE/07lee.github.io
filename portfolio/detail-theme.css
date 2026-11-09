@@ -1,0 +1,241 @@
+/* Shared dark, neutral theme for project detail pages.
+   Loaded after each page's own style.css; pages opt in with <html data-page="...">. */
+
+/* ---------- Common ---------- */
+html[data-page] {
+    color-scheme: dark;
+}
+
+html[data-page],
+html[data-page] body {
+    background-color: #121214;
+}
+
+html[data-page] .back-link {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(24, 24, 27, 0.92);
+    border: 1px solid #2a2a30;
+    color: #e4e4e7;
+    font: 500 13px/1.2 'Inter', 'Noto Sans KR', -apple-system, sans-serif;
+    text-decoration: none;
+    box-shadow: none;
+}
+
+html[data-page] .back-link:hover {
+    background: #27272a;
+    border-color: #3f3f46;
+    color: #ffffff;
+}
+
+/* ---------- Segments AI API (PCD Data Pipeline) ---------- */
+html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) {
+    --bg-main: #121214;
+    --bg-sidebar: #18181b;
+    --bg-content: #121214;
+    --text-primary: #f4f4f5;
+    --text-secondary: #a1a1aa;
+    --accent-blue: #e4e4e7;
+    --accent-blue-light: rgba(255, 255, 255, 0.08);
+    --border-color: #2a2a30;
+    --code-bg: #18181b;
+    --code-text: #e4e4e7;
+}
+
+html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .back-link {
+    left: auto;
+    right: 24px;
+    top: 24px;
+}
+
+html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .sidebar-item:hover,
+html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .highlight-info-box,
+html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .card-outline,
+html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .metric-card,
+html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .dashboard-table thead tr {
+    background-color: #1f1f23;
+}
+
+html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .badge-alert {
+    background-color: rgba(239, 68, 68, 0.12);
+}
+
+html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .code-viewport {
+    border: 1px solid #2a2a30;
+    box-shadow: none;
+    max-height: 560px;
+}
+
+html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .code-header {
+    background-color: #111113;
+}
+
+html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .indicator {
+    background: #3f3f46;
+}
+
+html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .nav-btn:hover:not(:disabled) {
+    border-color: #3f3f46;
+}
+
+/* ---------- Novel Transformation ---------- */
+html[data-page="novel"] {
+    --bg-main: #121214;
+    --bg-window: #18181b;
+    --text-primary: #f4f4f5;
+    --text-secondary: #a1a1aa;
+    --accent-navy: #d4d4d8;
+    --accent-blue: #d4d4d8;
+    --footer-bg: #18181b;
+    --border-color: #2a2a30;
+}
+
+html[data-page="novel"] .highlight-light,
+html[data-page="novel"] .preview-card,
+html[data-page="novel"] .preview-card-header,
+html[data-page="novel"] .problem-card,
+html[data-page="novel"] .character-avatar,
+html[data-page="novel"] .pipeline-grid,
+html[data-page="novel"] .tab-header,
+html[data-page="novel"] .tab-body,
+html[data-page="novel"] .index-card,
+html[data-page="novel"] .search-bar-container,
+html[data-page="novel"] .dialogue-table th,
+html[data-page="novel"] .domain-card,
+html[data-page="novel"] .mpc-mindmap,
+html[data-page="novel"] .bert-seq-container,
+html[data-page="novel"] .eda-card,
+html[data-page="novel"] .io-box,
+html[data-page="novel"] .ft-card,
+html[data-page="novel"] .result-stat-box {
+    background: #1f1f23;
+}
+
+html[data-page="novel"] .speech-bubble,
+html[data-page="novel"] .pipeline-node-icon,
+html[data-page="novel"] .nav-btn,
+html[data-page="novel"] .index-circle,
+html[data-page="novel"] .search-bar-ui,
+html[data-page="novel"] .mpc-node,
+html[data-page="novel"] .seq-token,
+html[data-page="novel"] .io-content {
+    background: #18181b;
+}
+
+html[data-page="novel"] .chat-bubble-row:not(.right) .speech-bubble::after {
+    border-color: transparent #18181b transparent transparent;
+}
+
+html[data-page="novel"] .chat-bubble-row.right .speech-bubble::after {
+    border-color: transparent transparent transparent #18181b;
+}
+
+html[data-page="novel"] .highlight-box {
+    background-color: #3f3f46;
+}
+
+html[data-page="novel"] .timeline-item::before {
+    border-color: #18181b;
+}
+
+html[data-page="novel"] .chapter-number {
+    color: #1f1f23;
+}
+
+html[data-page="novel"] .tag-speaker,
+html[data-page="novel"] .seq-token.speaker,
+html[data-page="novel"] .dialogue-table td .speaker-badge {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+html[data-page="novel"] .window-dots span,
+html[data-page="novel"] .preview-dots span,
+html[data-page="novel"] .indicator {
+    background: #3f3f46;
+}
+
+html[data-page="novel"] .academic-table tbody tr {
+    border-bottom-color: #2a2a30;
+}
+
+/* ---------- Talentbank Analysis ---------- */
+html[data-page="talentbank"] {
+    --bg: #121214;
+    --surface: #18181b;
+    --surface-alt: #111113;
+    --primary: #e4e4e7;
+    --primary-glow: rgba(255, 255, 255, 0.1);
+    --border: #2a2a30;
+    --text-main: #f4f4f5;
+    --text-sub: #a1a1aa;
+}
+
+html[data-page="talentbank"] .s1 {
+    background: linear-gradient(135deg, #18181b 0%, #121214 100%);
+}
+
+html[data-page="talentbank"] .cover-title {
+    color: #f4f4f5;
+}
+
+html[data-page="talentbank"] .cover-subtitle {
+    color: #a1a1aa;
+}
+
+html[data-page="talentbank"] .pill {
+    border-color: #3f3f46;
+    color: #d4d4d8;
+    background: transparent;
+}
+
+html[data-page="talentbank"] .pill:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+html[data-page="talentbank"] .bottombar {
+    background: rgba(24, 24, 27, 0.92);
+}
+
+/* ---------- Status colors: keep one muted green, turn red/orange/yellow neutral ---------- */
+html[data-page] {
+    --muted-green: #6ebe96;
+    --muted-green-line: rgba(110, 190, 150, 0.55);
+    --muted-green-soft: rgba(110, 190, 150, 0.06);
+}
+
+/* Segments */
+html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .badge-alert {
+    color: #d4d4d8;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .outline-alert {
+    border-left-color: #3f3f46;
+}
+
+html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .outline-safe,
+html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .border-safe {
+    border-left-color: var(--muted-green-line);
+}
+
+/* Novel */
+html[data-page="novel"] {
+    --accent-orange: #d4d4d8;
+}
+
+html[data-page="novel"] .tag-scene,
+html[data-page="novel"] .seq-token.special {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+html[data-page="novel"] .academic-table tr.highlight-row {
+    outline-color: #71717a;
+    background-color: rgba(255, 255, 255, 0.03);
+}

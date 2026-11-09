@@ -1,87 +1,87 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="포트폴리오">
-    <title>07lee | Portfolio</title>
-    <link class="style-import" rel="stylesheet" href="style.css?v=6">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>07lee | Data Engineer Portfolio</title>
+    <meta name="description" content="데이터 엔지니어 포트폴리오: 데이터 플랫폼, 센서·3D 데이터, Python 개발, AI 업무 자동화">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="../style.css?v=4">
 </head>
-
 <body>
-    <div class="portfolio-layout">
-        <!-- Left Sidebar: Project List & Filters -->
-        <aside class="portfolio-sidebar">
-            <header class="sidebar-header">
-                <div class="brand">
-                    <a href="../index.html" class="back-link" aria-label="메인 홈으로 이동">
-                        <svg class="back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="19" y1="12" x2="5" y2="12"></line>
-                            <polyline points="12 19 5 12 12 5"></polyline>
-                        </svg>
-                    </a>
-                    <h1>Portfolio</h1>
-                </div>
-                <!-- Sidebar Toggle Menu Button -->
-                <button class="sidebar-toggle-btn" id="sidebar-toggle-btn" aria-label="메뉴 접기/펼치기">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="3" y1="12" x2="21" y2="12"></line>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <line x1="3" y1="18" x2="21" y2="18"></line>
-                    </svg>
-                </button>
-            </header>
-
-            <div class="filter-bar">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="ai_ml">AI & ML</button>
-                <button class="filter-btn" data-filter="computer_vision">Computer Vision</button>
-                <button class="filter-btn" data-filter="automation">Automation</button>
-                <button class="filter-btn" data-filter="analytics">Analytics</button>
+    <div class="container">
+        <header class="main-header">
+            <div class="brand">
+                <a href="index.html" class="brand-name">07lee</a>
             </div>
-
-            <nav class="portfolio-list-container" id="portfolio-list">
-                <p class="loading-msg">Loading project list...</p>
+            <nav class="header-nav-links">
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="https://github.com/07lee" class="header-nav-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" title="GitHub Profile">
+                    <svg class="github-icon" viewBox="0 0 24 24">
+                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                    </svg>
+                </a>
             </nav>
+        </header>
 
-            <footer class="sidebar-footer">
-                &copy; 2026 07lee. All rights reserved.
-            </footer>
-        </aside>
-
-        <!-- Right Content Area: Detail View -->
-        <main class="portfolio-main-content" id="portfolio-main-content">
-            <!-- Welcome View (Shown when no project is selected) -->
-            <section class="welcome-view" id="welcome-view">
-                <div class="dashboard-container">
-                    <header class="dashboard-header">
-                        <h1>07lee | Portfolio Overview</h1>
-                    </header>
-                    <div class="dashboard-categories" id="dashboard-categories">
-                        <!-- Dynamic dashboard sections will be injected here -->
-                    </div>
+        <main>
+            <section class="hero-section">
+                <div class="hero-badge">Data Engineer Portfolio</div>
+                <h1 class="hero-title">쓰는 사람이 믿고 쓸 수 있는 데이터를 만듭니다.</h1>
+                <p class="hero-subtitle">연구원과 작업자가 바로 쓸 수 있도록, 현장 데이터의 수집과 가공부터 출처와 처리 상태를 추적하는 데이터 플랫폼까지 맡아 왔습니다. 필요한 도구는 Python으로 직접 만듭니다.</p>
+                <div class="hero-tags">
+                    <span class="tech-tag">Data Engineering</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">3D · Sensor Data</span>
+                    <span class="tech-tag">AI Automation</span>
                 </div>
             </section>
 
-            <!-- Detail Iframe View -->
-            <section class="detail-frame-view" id="detail-frame-view" style="display: none;">
-                <!-- Detail Top Header Bar -->
-                <div class="detail-header">
-                    <button class="close-detail-btn" id="close-detail-btn" aria-label="대시보드로 돌아가기">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="19" y1="12" x2="5" y2="12"></line>
-                            <polyline points="12 19 5 12 12 5"></polyline>
-                        </svg>
-                    </button>
-                    <span class="detail-project-title" id="detail-project-title"></span>
+            <section class="featured-section">
+                <div class="section-header">
+                    <h2>Featured Projects</h2>
+                    <a href="projects.html" class="view-all-link">All projects &rarr;</a>
                 </div>
-                <iframe id="project-iframe" src="" title="Project Detail Window"></iframe>
+                <div class="featured-grid">
+                    <a href="nas-data-platform/index.html" class="featured-card">
+                        <div class="card-category">Data Pipeline</div>
+                        <h3>NAS Data Platform</h3>
+                        <p>현장 수집 데이터와 처리 결과의 출처와 상태를 추적하는 카탈로그와 입고 파이프라인</p>
+                        <div class="card-meta">
+                            <span>2026.09 ~ 2026.10 · Python · FastAPI</span>
+                        </div>
+                    </a>
+                    <a href="real-to-sim/index.html" class="featured-card">
+                        <div class="card-category">Data Processing</div>
+                        <h3>Real-to-Sim Assets</h3>
+                        <p>3D 재구성 자료를 실측 스케일, 물리, 관절을 갖춘 시뮬레이션 자산으로 가공</p>
+                        <div class="card-meta">
+                            <span>2026.02 ~ 2026.09 · Python · Blender · USD</span>
+                        </div>
+                    </a>
+                    <a href="segments-ai-api/index.html" class="featured-card">
+                        <div class="card-category">Data Pipeline</div>
+                        <h3>VFM 3D Sensor Data</h3>
+                        <p>다중 센서 수집 검증, 좌표 정합, 점군 라벨링과 업로드를 거쳐 연구팀에 전달한 3D 데이터</p>
+                        <div class="card-meta">
+                            <span>2025.09 ~ 2026.02 · Python · ROS · Open3D</span>
+                        </div>
+                    </a>
+                    <a href="invoice-simplifier/index.html" class="featured-card">
+                        <div class="card-category">AI Automation</div>
+                        <h3>Invoice Simplifier</h3>
+                        <p>자연어 요청을 견적서로 바꿔 운영자가 직접 발행하는 업무 자동화, 실사용 중</p>
+                        <div class="card-meta">
+                            <span>2025.08 ~ 현재 · Python · LLM</span>
+                        </div>
+                    </a>
+                </div>
             </section>
         </main>
-    </div>
-    <script src="../main.js?v=6"></script>
-</body>
 
+        <footer>
+            &copy; 2026 07lee. All rights reserved.
+        </footer>
+    </div>
+</body>
 </html>

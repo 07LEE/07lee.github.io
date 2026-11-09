@@ -1,90 +1,45 @@
 [
     {
-        "id": "item-shotgun-king-rl",
-        "title": "Shotgun King RL",
-        "category": "AI & ML",
-        "period": "2026.05 ~ 2026.06",
-        "affiliation": "Hobby",
-        "description": "화면 분석 기반 샷건 킹 강화학습 에이전트(Agent)",
+        "id": "item-nas-data-platform",
+        "title": "NAS Data Platform",
+        "category": "Data Pipeline",
+        "period": "2026.09 ~ 2026.10",
+        "affiliation": "",
+        "description": "현장 수집 데이터와 처리 결과의 출처와 상태를 추적하는 카탈로그와 입고 파이프라인",
         "tags": [
             "Python",
-            "PyTorch",
-            "OpenCV"
+            "FastAPI",
+            "SQLite"
         ],
-        "link": "shotgun-king-rl/index.html",
-        "github": "https://github.com/07LEE/Shotgun-King-RL"
-    },
-    {
-        "id": "item-nmap-reservation-analyzer",
-        "title": "Nmap Reservation Analyzer",
-        "category": "Analytics",
-        "period": "2026.05",
-        "affiliation": "",
-        "description": "네이버 지도 예약 수집 및 시각화 도구",
-        "tags": [
-            "Node.js",
-            "Puppeteer",
-            "Vanilla JS"
-        ],
-        "link": "nmap-reservation-analyzer/index.html",
-        "github": "https://github.com/07LEE/Nmap-Reservation-Analyzer"
-    },
-    {
-        "id": "item-netflix-automation",
-        "title": "Netflix Automation & Verification",
-        "category": "Automation",
-        "period": "2026.03 ~ 2026.06",
-        "affiliation": "",
-        "description": "넷플릭스 언어 변경 및 SMS 성인인증 자동화",
-        "tags": [
-            "Python",
-            "Playwright",
-            "JSON DB"
-        ],
-        "link": "netflix-automation/index.html",
+        "link": "nas-data-platform/index.html",
         "isCompany": true
     },
     {
         "id": "item-zed-remote-system",
         "title": "ZED Remote System",
-        "category": "Computer Vision",
+        "category": "Data Collection",
         "period": "2026.03 ~ 2026.04",
         "affiliation": "",
-        "description": "ZED SDK 기반 Headless Jetson 원격 카메라 캡처 시스템",
+        "description": "Jetson 카메라의 원격 배포, 실행, 상태 확인을 갖춘 현장 수집 도구",
         "tags": [
             "Python",
-            "ZED SDK",
-            "Flask"
+            "PySide6",
+            "ZED SDK"
         ],
         "link": "zed-remote-system/index.html",
         "isCompany": true
     },
     {
-        "id": "item-video-mask-inspector",
-        "title": "Video Mask Inspector",
-        "category": "Computer Vision",
-        "period": "2026.03",
-        "affiliation": "",
-        "description": "SAM 2.1 기반 비디오 객체 분할 마스크 검수 및 ID 일관성 정정 GUI 도구",
-        "tags": [
-            "Python",
-            "SAM 2.1",
-            "PySide6"
-        ],
-        "link": "video-mask-inspector/index.html",
-        "github": "https://github.com/07LEE/Video-Mask-Inspector"
-    },
-    {
         "id": "item-segments-ai-api",
-        "title": "PCD Data Pipeline",
-        "category": "Automation",
-        "period": "2026.02",
+        "title": "VFM 3D Sensor Data",
+        "category": "Data Pipeline",
+        "period": "2025.09 ~ 2026.02",
         "affiliation": "",
-        "description": "Segments.ai API 제한 극복 및 3D PCD 대량 업로드 자동화 도구",
+        "description": "다중 센서 수집 검증, 좌표 정합, 점군 라벨링과 업로드를 거쳐 연구팀에 전달한 3D 데이터",
         "tags": [
             "Python",
-            "Segments.ai",
-            "CLI"
+            "ROS",
+            "Open3D"
         ],
         "link": "segments-ai-api/index.html",
         "isCompany": true
@@ -92,14 +47,14 @@
     {
         "id": "item-invoice-simplifier",
         "title": "Invoice Simplifier",
-        "category": "Automation",
-        "period": "2025.08",
+        "category": "AI Automation",
+        "period": "2025.08 ~ 현재",
         "affiliation": "",
-        "description": "자연어 기반 견적서 생성 도구",
+        "description": "자연어 요청을 견적서로 바꿔 운영자가 직접 발행하는 업무 자동화, 실사용 중",
         "tags": [
             "Python",
-            "Selenium",
-            "Gemini API"
+            "Gemini API",
+            "Telegram Bot"
         ],
         "link": "invoice-simplifier/index.html",
         "isCompany": true
@@ -107,10 +62,10 @@
     {
         "id": "item-novel-transformation",
         "title": "Novel Transformation",
-        "category": "AI & ML",
+        "category": "Education",
         "period": "2023.11 ~ 2023.12",
         "affiliation": "",
-        "description": "소설 텍스트 내 발화자 및 장면 인식 서비스",
+        "description": "소설 속 발화자와 장면을 구분하는 BERT 기반 모델과 서비스, 팀 프로젝트",
         "tags": [
             "Python",
             "NLP",
@@ -122,10 +77,10 @@
     {
         "id": "item-talentbank-analysis",
         "title": "Talentbank Analysis",
-        "category": "Analytics",
+        "category": "Education",
         "period": "2022.05 ~ 2022.06",
         "affiliation": "",
-        "description": "아웃바운드 마케팅 근거 데이터를 위한 잡플랫폼 데이터 수집 및 비교분석 프로젝트",
+        "description": "채용 플랫폼 데이터를 수집·정제해 분야별로 비교 분석한 교육 과제",
         "tags": [
             "Python",
             "Selenium",
@@ -133,5 +88,50 @@
         ],
         "link": "talentbank-analysis/index.html",
         "github": "https://github.com/07LEE/KDT_B"
+    },
+    {
+        "id": "item-real-to-sim",
+        "title": "Real-to-Sim Assets",
+        "category": "Data Processing",
+        "period": "2026.02 ~ 2026.09",
+        "affiliation": "",
+        "description": "3D 재구성 자료를 실측 스케일, 물리, 관절을 갖춘 시뮬레이션 자산으로 가공",
+        "tags": [
+            "Python",
+            "Blender",
+            "USD"
+        ],
+        "link": "real-to-sim/index.html",
+        "isCompany": true
+    },
+    {
+        "id": "item-gs-object-extraction",
+        "title": "GS Object Extraction",
+        "category": "Personal Project",
+        "period": "2026.09 ~ 2026.10",
+        "affiliation": "",
+        "description": "3DGS 장면에서 물체를 몇 방향으로 클릭해 분할하고, 단독 자산으로 내보내는 도구",
+        "tags": [
+            "Python",
+            "PyTorch",
+            "SAM2"
+        ],
+        "link": "https://github.com/07LEE/gs-object-extraction",
+        "github": "https://github.com/07LEE/gs-object-extraction"
+    },
+    {
+        "id": "item-booking-demand",
+        "title": "Booking Demand Tracker",
+        "category": "Data Collection",
+        "period": "2026.06 ~ 2026.07",
+        "affiliation": "",
+        "description": "공개 예약 페이지의 시간대 정보를 매일 수집해 상권 이용량을 추정하고 진입 여부를 판단한 도구",
+        "tags": [
+            "Node.js",
+            "Puppeteer",
+            "JavaScript"
+        ],
+        "link": "nmap-reservation-analyzer/index.html",
+        "github": "https://github.com/07LEE/Nmap-Reservation-Analyzer"
     }
 ]

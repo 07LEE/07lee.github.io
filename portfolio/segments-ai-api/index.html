@@ -1,183 +1,186 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-page="segments">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Segments AI API: 100개 제한 극복을 위한 데이터 위임 및 PCD 업로드 자동화 파이프라인">
-    <title>Segments AI API</title>
+    <meta name="description" content="VFM 3D Sensor Data: 다중 센서 수집 검증, 좌표 정합, 점군 라벨링과 업로드 자동화">
+    <title>VFM 3D Sensor Data</title>
     <meta name="robots" content="noindex, nofollow">
-    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="../components.js" defer></script>
+    <link rel="stylesheet" href="style.css?v=20261109">
+    <link rel="stylesheet" href="../detail-theme.css?v=20261109b">
+    <link rel="stylesheet" href="../deck-extras.css?v=20261109">
+    <script src="../components.js?v=20261109b" defer></script>
 </head>
 
 <body>
 
-    <portfolio-header back-href="../index.html" title="Segments AI API" only-back></portfolio-header>
+    <portfolio-header back-href="../projects.html" title="VFM 3D Sensor Data" only-back></portfolio-header>
 
     <div class="dashboard-container deck-viewport">
-        
-        <!-- Left Fixed Navigation Sidebar -->
+
         <aside class="sidebar">
             <div class="sidebar-brand">
-                <span class="brand-title">Segments API</span>
-                <span class="brand-version">v0.1.0</span>
+                <span class="brand-title">VFM 3D Sensor Data</span>
+                <span class="brand-version">Python · ROS · Open3D</span>
             </div>
             <nav class="sidebar-nav">
                 <button class="sidebar-item active" data-target="slide-1">
                     <span class="nav-num">01</span> Overview
                 </button>
                 <button class="sidebar-item" data-target="slide-2">
-                    <span class="nav-num">02</span> Problem Definition
+                    <span class="nav-num">02</span> Problem
                 </button>
                 <button class="sidebar-item" data-target="slide-3">
-                    <span class="nav-num">03</span> Architecture
+                    <span class="nav-num">03</span> Collection &amp; Alignment
                 </button>
                 <button class="sidebar-item" data-target="slide-4">
-                    <span class="nav-num">04</span> Core Modules
+                    <span class="nav-num">04</span> Labeling &amp; Upload
                 </button>
                 <button class="sidebar-item" data-target="slide-5">
-                    <span class="nav-num">05</span> Performance
+                    <span class="nav-num">05</span> Design Decision
+                </button>
+                <button class="sidebar-item" data-target="slide-6">
+                    <span class="nav-num">06</span> Result
                 </button>
             </nav>
             <div class="sidebar-footer">
-                <span>Ingestion Pipeline Project</span>
+                <span>Data Pipeline · 2025.09 ~ 2026.02</span>
             </div>
         </aside>
 
-        <!-- Right Presentation Screen Area -->
         <main class="content-area deck-container">
 
             <!-- Slide 1: Overview -->
             <section class="slide-section slide active" id="slide-1">
                 <div class="slide-grid">
                     <div class="slide-info-panel">
-                        <span class="badge">Pipeline Overview</span>
-                        <h2>3D PCD 수집 및<br>라벨 시인성 우회 솔루션</h2>
-                        <p class="paragraph">Segments.ai 플랫폼의 100개 데이터셋 API 한계를 극복하고 대용량 포인트클라우드 데이터를 효율적으로 가공 및 적재하기 위해 구축한 동적 위임 자동화 프로그램입니다.</p>
+                        <span class="badge">Overview</span>
+                        <h2>서로 다른 센서 데이터를<br>연구팀이 바로 쓰는 형태로</h2>
+                        <p class="paragraph">VFM 연구에 쓸 3D 공간 데이터를 Matterport, LiDAR, 스테레오 카메라, IMU로 수집하고, 누락 검증과 좌표 정합, 점군 라벨링, 업로드까지 맡아 연구개발 팀에 전달했습니다.</p>
                         <div class="highlight-info-box">
-                            <i class="fa-solid fa-code"></i> Python 패키지 및 CLI 유틸리티 완비
+                            <i class="fa-solid fa-cube"></i> Python · ROS · Open3D · Segments.ai API · pydantic
                         </div>
+                        <p class="note">SLAM과 재구성 연산은 외부 도구가 수행. ICP 알고리즘 자체를 개발한 것은 아닙니다.</p>
                     </div>
                     <div class="slide-visual-panel">
-                        <div class="code-viewport">
-                            <div class="code-header">
-                                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                                <span class="file-name">console.sh</span>
+                        <div class="flow">
+                            <div class="flow-step">
+                                <span class="flow-num">01</span>
+                                <div>
+                                    <h3>수집 검증</h3>
+                                    <p>수집 직후 필수 ROS 토픽의 메시지 수를 확인하고, 기준에 못 미치면 알림</p>
+                                </div>
                             </div>
-                            <pre class="code-body"><code>$ segments-api --upload --src "/path/to/raw_data"
-[INFO] Scanning for PCD files recursively...
-[INFO] Starting Upload Pipeline: 15 files detected.
-[WARN] Detection: 5 datasets will exceed 100 limit.
-[INFO] [DELEGATE] Shared oldest datasets with Worker Key.
-[INFO] Ingestion completed. 3D viewpose stabilized.</code></pre>
+                            <div class="flow-step">
+                                <span class="flow-num">02</span>
+                                <div>
+                                    <h3>좌표 정합</h3>
+                                    <p>기준 스캔과 LiDAR 맵을 정합하고 점군과 카메라 시점을 비교</p>
+                                </div>
+                            </div>
+                            <div class="flow-step">
+                                <span class="flow-num">03</span>
+                                <div>
+                                    <h3>라벨링과 업로드</h3>
+                                    <p>실내 장면 점군을 직접 라벨링하고, 라벨링 플랫폼 업로드와 라벨 변환을 도구화</p>
+                                </div>
+                            </div>
+                            <div class="flow-step">
+                                <span class="flow-num">04</span>
+                                <div>
+                                    <h3>전달</h3>
+                                    <p>정합 점군, 변환 행렬, RGB, 카메라 파라미터를 표준 구조로 정리해 전달</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Slide 2: Problem Definition -->
+            <!-- Slide 2: Problem -->
             <section class="slide-section slide" id="slide-2">
                 <div class="slide-grid">
                     <div class="slide-info-panel">
-                        <span class="badge badge-alert">Problem Definition</span>
-                        <h2>플랫폼 API 한계와<br>비즈니스 리스크</h2>
-                        <p class="paragraph">마스터 API 키가 조회할 수 있는 데이터셋이 100개로 수치 제약됨에 따라, 과거 데이터가 API 리포트에서 소실되는 심각한 인프라 관리 장애가 존재했습니다.</p>
-                        <div class="metrics-grid">
-                            <div class="metric-card">
-                                <span class="metric-title">API Visibility Limit</span>
-                                <span class="metric-value">100</span>
-                            </div>
-                            <div class="metric-card">
-                                <span class="metric-title">수작업 권한 부여 공수</span>
-                                <span class="metric-value">5m / 건</span>
-                            </div>
-                        </div>
+                        <span class="badge badge-alert">Problem</span>
+                        <h2>수집부터 전달까지<br>막히던 곳</h2>
+                        <p class="paragraph">센서가 여러 개이고 데이터가 커서, 문제를 늦게 발견하거나 같은 일을 반복하는 지점이 많았습니다.</p>
                     </div>
                     <div class="slide-visual-panel">
-                        <div class="card-outline outline-alert">
-                            <h3>조회 실종(Invisible) 장애 현상</h3>
-                            <p class="card-p">새로운 3D 데이터가 적재될 때마다 마스터 인덱스 100 바깥으로 밀려난 과거 라벨 데이터에 대한 제어권이 유실되어, 학습 데이터셋 전처리 자동화 파이프라인에서 제외되는 품질 장애 리스크가 발생합니다.</p>
-                        </div>
-                        <div class="card-outline outline-safe" style="margin-top: 15px;">
-                            <h3>해결 방향: 동적 다중 계정 배분</h3>
-                            <p class="card-p">마스터 슬롯 임계치를 동적으로 예측하고, 소실 임박한 꼬리(Tail) 데이터셋에 협업 서브 계정을 매핑시켜 조회가 차단되는 현상을 인프라 비용 없이 완벽히 방어합니다.</p>
+                        <div class="question-list">
+                            <div class="question">수집이 끝난 뒤에야 데이터 누락을 알게 된다</div>
+                            <div class="question">센서마다 좌표와 시점이 달라 그대로는 함께 쓸 수 없다</div>
+                            <div class="question">같은 장면을 실수로 다시 올리면 데이터셋이 중복된다</div>
+                            <div class="question">새 데이터셋마다 클래스 이름과 색상을 다시 설정해야 한다</div>
+                            <div class="question">장면마다 어떤 클래스가 얼마나 들어 있는지 하나씩 열어 봐야 안다</div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Slide 3: Architecture -->
+            <!-- Slide 3: Collection & Alignment -->
             <section class="slide-section slide" id="slide-3">
                 <div class="slide-grid">
                     <div class="slide-info-panel">
-                        <span class="badge">Architecture</span>
-                        <h2>위임 및 업로드<br>파이프라인 아키텍처</h2>
-                        <p class="paragraph">로컬에서 중복 검사를 끝낸 뒤, 마스터 용량 임계치(100개)가 초과될 때 꼬리 데이터셋을 분기하여 서브 계정(Worker) 관리자로 이관하는 지능형 스케줄링 흐름입니다.</p>
+                        <span class="badge">Collection &amp; Alignment</span>
+                        <h2>현장에서 확인하고,<br>좌표를 맞춰 넘긴다</h2>
                         <ul class="step-desc-list">
-                            <li><strong>1. Slot 계산:</strong> 업로드 예정 수량과 잔여 조회 가능량 분석</li>
-                            <li><strong>2. 꼬리 판별:</strong> 생성일자 기준 실종 우선순위 N개 추출</li>
-                            <li><strong>3. 협업 위임:</strong> 서브 계정에 Collaborator 권한 주입</li>
-                            <li><strong>4. 보정 전송:</strong> ego_pose 축 설정 및 default_z 가공 업로드</li>
+                            <li><strong>수집 검증:</strong> 수집 직후 필수 ROS 토픽의 메시지 수를 자동으로 세고, 기준에 못 미치면 알림. 현장을 떠나기 전에 다시 수집할지 판단</li>
+                            <li><strong>좌표 정합:</strong> Matterport 기준 스캔과 LiDAR SLAM 맵을 Point-to-Plane ICP로 정합</li>
+                            <li><strong>정합 확인:</strong> 변환 행렬을 적용한 뒤 점군 렌더링과 카메라 RGB 시점을 비교하고, 기준 대비 오차로 사용 가능 여부를 판단</li>
+                            <li><strong>판단:</strong> SLAM 결과를 그대로 쓰지 않음. 궤적이 발산한 사례를 조사하고 이미지 기반 포즈로 정합 대안을 시도. 정합 품질이 낮은 결과에는 사용 주의를 기록</li>
+                            <li><strong>전달:</strong> 정합 점군, 변환 행렬, RGB, 카메라 파라미터를 표준 구조로 정리해 연구개발 팀이 바로 쓸 수 있게 함</li>
+                        </ul>
+                    </div>
+                    <div class="slide-visual-panel">
+                        <img src="images/pointcloud_rgb_check.png" alt="같은 시점의 점군 렌더링과 카메라 RGB 비교" style="display:block;width:100%;border:1px solid #2a2a30;border-radius:8px;">
+                        <p class="note">점군 렌더링(왼쪽)과 카메라 RGB(오른쪽)를 같은 시점에서 비교해 정합 확인</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 4: Labeling & Upload -->
+            <section class="slide-section slide" id="slide-4">
+                <div class="slide-grid">
+                    <div class="slide-info-panel">
+                        <span class="badge">Labeling &amp; Upload</span>
+                        <h2>직접 라벨링하며<br>반복 작업을 도구로</h2>
+                        <p class="paragraph">실내 장면 점군 라벨링을 직접 하면서, 업로드와 라벨 내려받기를 명령 하나로 묶었습니다.</p>
+                        <ul class="step-desc-list">
+                            <li><strong>ID 매핑과 중복 확인:</strong> 상위 폴더 이름을 장면 ID로 데이터셋 설명에 기록하고, 같은 ID의 데이터셋과 샘플이 있으면 건너뜀</li>
+                            <li><strong>라벨 설정 자동 적용:</strong> 새 데이터셋에 기존에 쓰던 클래스 이름과 색상을 공용 설정 파일에서 그대로 적용</li>
+                            <li><strong>자세 값 입력:</strong> API로 올릴 때 필요한 자세와 높이 값을 API 문서에 맞춰 기본값으로 채움</li>
+                            <li><strong>병렬 처리:</strong> 스레드 풀로 업로드를 동시에 진행</li>
+                            <li><strong>라벨 변환:</strong> 업로드한 점군을 그대로 다시 받아 점 순서와 점별 라벨을 맞추고, 서버의 클래스 색으로 저장해 시각화로 확인</li>
                         </ul>
                     </div>
                     <div class="slide-visual-panel">
                         <div class="code-viewport">
                             <div class="code-header">
                                 <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                                <span class="file-name">delegator.py</span>
+                                <span class="file-name">uploader.py (요약)</span>
                             </div>
-                            <pre class="code-body"><code>def secure_tail_accessibility(upload_count=1):
-    expected_total = current_count + upload_count
-    if expected_total <= VISIBILITY_LIMIT:
-        return
-    
-    # Identify datasets about to fall off the Master's list
-    overlap_n = expected_total - VISIBILITY_LIMIT
-    tail_candidates = master_datasets[-min(overlap_n, current_count):]
-    
-    for ds in tail_candidates:
-        # Assign worker with remaining visibility slots
-        master_client.add_dataset_collaborator(
-            ds.full_name, worker_username, role="manager"
-        )</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                            <pre class="code-body"><code>search_tag = f"[Origin: {unique_id}]"
+target = next((ds for ds in existing_datasets
+               if search_tag in (ds.description or "")), None)
+if target:
+    samples = client.get_samples(target.full_name)
+    if any(s.name == file_path.name for s in samples):
+        return {"name": project_name, "skipped": True}
+else:
+    dataset = client.add_dataset(
+        name=project_name,
+        description=f"{search_tag} ...",
+        task_type="pointcloud-segmentation",
+        task_attributes=get_default_pcd_attributes(),  # shared classes, colors
+    )
 
-            <!-- Slide 4: Core Modules -->
-            <section class="slide-section slide" id="slide-4">
-                <div class="slide-grid">
-                    <div class="slide-info-panel">
-                        <span class="badge">Core Modules</span>
-                        <h2>구현 아키텍처 상세</h2>
-                        <p class="paragraph">멀티스레딩 기반 위임 제어 및 3D 포인트클라우드 데이터 캘리브레이션을 담당하는 핵심 컴포넌트 목록입니다.</p>
-                        <div class="feature-block">
-                            <h4>delegator.py</h4>
-                            <p>서브 계정별 잔여 시인성 용량(Capacity)을 비동기 추적하고 Collaborator manager 권한 연동을 자동화합니다.</p>
-                        </div>
-                        <div class="feature-block">
-                            <h4>uploader.py</h4>
-                            <p>중복 3D 데이터 디렉토리 정보의 전송을 원천 차단하고 3D 웹 뷰어 시점 렌더링 정상화를 위해 pose 메타데이터를 강제 보정합니다.</p>
-                        </div>
-                    </div>
-                    <div class="slide-visual-panel">
-                        <div class="code-viewport">
-                            <div class="code-header">
-                                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                                <span class="file-name">uploader.py</span>
-                            </div>
-                            <pre class="code-body"><code># uploader.py: Stabilization & Ingestion
 attributes = {
     "pcd": {"url": pcd_url, "type": "pcd"},
-    "ego_pose": {
-        "position": {"x": 0, "y": 0, "z": 0},
-        "heading": {"qx": 0, "qy": 0, "qz": 0, "qw": 1}
-    },
-    "default_z": -1
+    "ego_pose": {"position": {"x": 0, "y": 0, "z": 0},
+                 "heading": {"qx": 0, "qy": 0, "qz": 0, "qw": 1}},
+    "default_z": -1,
 }
 client.add_sample(dataset_id, file_path.name, attributes)</code></pre>
                         </div>
@@ -185,46 +188,90 @@ client.add_sample(dataset_id, file_path.name, attributes)</code></pre>
                 </div>
             </section>
 
-            <!-- Slide 5: Performance -->
+            <!-- Slide 5: Design Decision -->
             <section class="slide-section slide" id="slide-5">
                 <div class="slide-grid">
                     <div class="slide-info-panel">
-                        <span class="badge">Performance</span>
-                        <h2>수용 확장성 및<br>인프라 지표 성과</h2>
-                        <p class="paragraph">단일 마스터 한도 내에서 한정되었던 조회 및 적재 임계점을 아키텍처적 우회를 통해 기하급수적으로 상향시켰습니다.</p>
-                        <div class="highlight-info-box border-safe">
-                            <i class="fa-solid fa-chart-line"></i> 수작업 권한 부여 공정률 100% 자동화
+                        <span class="badge">Design Decision</span>
+                        <h2>우회 구조를 만들고,<br>필요 없어지자 걷어냈다</h2>
+                        <p class="paragraph">API가 데이터셋 목록을 100개까지만 돌려주던 시기에는 우회 구조로 조회를 유지했습니다. 이후 전체 페이지를 순서대로 읽을 수 있게 되자 우회 구조를 폐기하고 단순한 페이지 순회로 바꿨습니다.</p>
+                        <div class="card-outline outline-alert" style="margin-top: 20px;">
+                            <h3>2026.04 · 우회</h3>
+                            <p class="card-p">목록 밖으로 밀려날 오래된 데이터셋을 미리 골라 보조 계정에 조회 권한을 붙였습니다. 동작은 했지만 계정과 권한이 계속 늘어나는 구조였습니다.</p>
+                        </div>
+                        <div class="card-outline outline-safe" style="margin-top: 15px;">
+                            <h3>2026.10 · 단순화</h3>
+                            <p class="card-p">권한을 건드리지 않고 모든 페이지를 읽도록 교체했습니다. 같은 페이지가 반복되면 불완전한 목록으로 진행하지 않고 멈춥니다.</p>
                         </div>
                     </div>
                     <div class="slide-visual-panel">
-                        <table class="dashboard-table">
+                        <div class="code-viewport">
+                            <div class="code-header">
+                                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                                <span class="file-name">core.py</span>
+                            </div>
+                            <pre class="code-body"><code>def get_all_datasets(client):
+    datasets, seen, page = [], set(), 1
+    while True:
+        try:
+            batch = client.get_datasets(per_page=100, page=page)
+        except NotFoundError:
+            if page == 1:
+                raise
+            break  # past the last page
+        fresh = [d for d in batch if d.full_name not in seen]
+        if batch and not fresh:
+            raise ConfigError("repeated page: refusing an incomplete list")
+        if not batch:
+            break
+        datasets += fresh
+        seen.update(d.full_name for d in fresh)
+        page += 1
+    return datasets</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 6: Result -->
+            <section class="slide-section slide" id="slide-6">
+                <div class="slide-grid">
+                    <div class="slide-info-panel">
+                        <span class="badge">Result</span>
+                        <h2>연구팀이 바로 쓰는<br>데이터로 전달</h2>
+                        <p class="paragraph">수집 직후 누락 확인과 반복 업로드를 도구로 만들고, 정합한 데이터를 같은 구조로 연구개발 팀에 넘겼습니다.</p>
+                        <div class="highlight-info-box border-safe">
+                            <i class="fa-solid fa-check"></i> 페이지 순회 동작은 단위 테스트로 확인
+                        </div>
+                    </div>
+                    <div class="slide-visual-panel">
+                        <table class="dashboard-table result-table">
                             <thead>
                                 <tr>
-                                    <th>평가 지표</th>
-                                    <th>기존 단일 환경</th>
-                                    <th>위임 자동화 아키텍처</th>
+                                    <th>구분</th>
+                                    <th>내용</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>API 시인성 한계</td>
-                                    <td>100개 고정</td>
-                                    <td>100 × N개 (무제한)</td>
+                                    <td>결과</td>
+                                    <td>정합된 점군, 변환 행렬, RGB를 표준 구조로 정리해 연구개발 팀에 전달</td>
                                 </tr>
                                 <tr>
-                                    <td>데이터 증발률</td>
-                                    <td>초과분 영구 손실</td>
-                                    <td>0% 보존 완료</td>
+                                    <td>결과</td>
+                                    <td>수집 직후 누락 확인과 반복 업로드를 도구화</td>
                                 </tr>
                                 <tr>
-                                    <td>동적 스레딩 분산</td>
-                                    <td>미지원 (직렬 전송)</td>
-                                    <td>ThreadPool 가용 분산</td>
+                                    <td>결과</td>
+                                    <td>중복 업로드 자동 차단, 라벨 설정 자동 적용, 점 순서를 유지한 라벨 변환</td>
                                 </tr>
                                 <tr>
-                                    <td>3D 뷰어 렌더링 보정</td>
-                                    <td>초기 시점 불안정 (z값 누락)</td>
-                                    <td>정상화 완료 (default_z 주입)</td>
+                                    <td>결과</td>
+                                    <td>데이터셋 목록 우회 구조를 폐기하고 전체 페이지 순회로 교체</td>
+                                </tr>
+                                <tr>
+                                    <td>준비</td>
+                                    <td>장면별 클래스 구성 분석 기능을 학습 데이터 선별용 확장 기능으로 마련</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -237,31 +284,25 @@ client.add_sample(dataset_id, file_path.name, attributes)</code></pre>
 
     <portfolio-deck-nav></portfolio-deck-nav>
 
-    <!-- Fixed Footer Bar -->
     <div class="footer-bar">
-        <span>Segments AI API : 3D 포인트클라우드 및 라벨 관리 자동화 유틸리티</span>
+        <span>VFM 3D Sensor Data : 다중 센서 수집 검증, 좌표 정합, 라벨링과 업로드</span>
     </div>
 
-    <script src="../../deck.js"></script>
+    <script src="../../deck.js?v=20261109"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const sidebarItems = document.querySelectorAll('.sidebar-item');
-            if (sidebarItems.length > 0) {
-                // Map click events on sidebar items to trigger slide change
-                sidebarItems.forEach((item, idx) => {
-                    item.addEventListener('click', () => {
-                        document.dispatchEvent(new CustomEvent('changeSlide', { detail: { index: idx } }));
-                    });
+            sidebarItems.forEach((item, idx) => {
+                item.addEventListener('click', () => {
+                    document.dispatchEvent(new CustomEvent('changeSlide', { detail: { index: idx } }));
                 });
-
-                // Sync sidebar active state when slide changes
-                document.addEventListener('slideChanged', (e) => {
-                    sidebarItems.forEach(item => item.classList.remove('active'));
-                    if (sidebarItems[e.detail.index]) {
-                        sidebarItems[e.detail.index].classList.add('active');
-                    }
-                });
-            }
+            });
+            document.addEventListener('slideChanged', (e) => {
+                sidebarItems.forEach(item => item.classList.remove('active'));
+                if (sidebarItems[e.detail.index]) {
+                    sidebarItems[e.detail.index].classList.add('active');
+                }
+            });
         });
     </script>
 </body>

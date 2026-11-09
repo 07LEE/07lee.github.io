@@ -84,6 +84,41 @@ document.addEventListener('DOMContentLoaded', () => {
     let wheelLocked = false;
     document.addEventListener('wheel', (e) => {
         if (!deckContainer) return;
+
+        let el = e.target;
+        let isScrollable = false;
+        let canScroll = false;
+
+        // Traverse up from the event target to find a scrollable parent element
+        while (el && el !== document.body && el !== document.documentElement) {
+            const style = window.getComputedStyle(el);
+            const overflowY = style.getPropertyValue('overflow-y');
+            const isScrollableStyle = overflowY === 'auto' || overflowY === 'scroll';
+            const hasScrollableContent = el.scrollHeight > el.clientHeight;
+
+            if (isScrollableStyle && hasScrollableContent) {
+                isScrollable = true;
+                if (e.deltaY > 0) {
+                    // Check if there is remaining scrollable area downwards
+                    if (el.scrollTop + el.clientHeight < el.scrollHeight - 1) {
+                        canScroll = true;
+                    }
+                } else {
+                    // Check if there is remaining scrollable area upwards
+                    if (el.scrollTop > 1) {
+                        canScroll = true;
+                    }
+                }
+                break;
+            }
+            el = el.parentElement;
+        }
+
+        // If scrolling inside the element is possible, allow default scrolling and block deck navigation
+        if (isScrollable && canScroll) {
+            return;
+        }
+
         e.preventDefault();
         if (wheelLocked) return;
         wheelLocked = true;

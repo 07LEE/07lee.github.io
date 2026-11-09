@@ -14,7 +14,7 @@ class PortfolioHeader extends HTMLElement {
         if (this.querySelector('.topbar') || this.querySelector('.back-link')) return;
 
         const isIframe = window.self !== window.top;
-        const backHref = this.getAttribute('back-href') || '../index.html';
+        const backHref = this.getAttribute('back-href') || '../projects.html';
         const title = this.getAttribute('title') || '';
         const hasSlide = this.hasAttribute('has-slide');
         const onlyBack = this.hasAttribute('only-back');
@@ -26,7 +26,7 @@ class PortfolioHeader extends HTMLElement {
                         <line x1="19" y1="12" x2="5" y2="12"/>
                         <polyline points="12 19 5 12 12 5"/>
                     </svg>
-                    Portfolio
+                    Projects
                 </a>
             `;
         } else {
@@ -58,23 +58,7 @@ class PortfolioDeckNav extends HTMLElement {
 
         const path = window.location.pathname;
 
-        if (path.includes('nmap-reservation-analyzer')) {
-            this.innerHTML = `
-                <nav class="deck-controls">
-                    <button id="prev-btn" class="nav-btn" disabled>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <polyline points="15 18 9 12 15 6"/>
-                        </svg>
-                    </button>
-                    <div class="indicator-dots" id="dots-container"></div>
-                    <button id="next-btn" class="nav-btn">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <polyline points="9 18 15 12 9 6"/>
-                        </svg>
-                    </button>
-                </nav>
-            `;
-        } else if (path.includes('novel-transformation') || path.includes('segments-ai-api')) {
+        if (path.includes('novel-transformation') || path.includes('segments-ai-api') || path.includes('nas-data-platform') || path.includes('real-to-sim') || path.includes('frame-sampling') || path.includes('zed-remote-system') || path.includes('invoice-simplifier') || path.includes('nmap-reservation-analyzer')) {
             this.innerHTML = `
                 <div class="nav-controls">
                     <button id="btn-prev" class="nav-btn" disabled>

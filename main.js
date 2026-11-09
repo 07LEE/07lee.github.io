@@ -88,6 +88,20 @@ function renderProjectList(containerId, dataUrl) {
                     iconsWrapper.appendChild(githubLink);
                 }
 
+                // Dynamically render Hobby marker
+                if (project.affiliation && project.affiliation.toLowerCase() === 'hobby') {
+                    const hobbyMarker = document.createElement('span');
+                    hobbyMarker.className = 'hobby-marker';
+                    hobbyMarker.setAttribute('title', 'Hobby Project');
+                    hobbyMarker.setAttribute('aria-label', 'Hobby Project');
+                    hobbyMarker.innerHTML = `
+                        <svg class="hobby-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 15px; height: 15px;">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                        </svg>
+                    `;
+                    iconsWrapper.appendChild(hobbyMarker);
+                }
+
                 // Dynamically render in-progress marker
                 if (project.inProgress) {
                     const progressMarker = document.createElement('span');
@@ -127,7 +141,7 @@ function renderProjectList(containerId, dataUrl) {
                     metaP.className = 'project-meta';
                     const parts = [];
                     if (project.period) parts.push(project.period);
-                    if (project.affiliation) parts.push(project.affiliation);
+                    if (project.affiliation && project.affiliation.toLowerCase() !== 'hobby') parts.push(project.affiliation);
                     metaP.textContent = parts.join('  ·  ');
                     article.appendChild(metaP);
                 }
@@ -147,44 +161,16 @@ function renderProjectList(containerId, dataUrl) {
                     article.appendChild(tagsDiv);
                 }
 
-                // Bind Master-Detail click event for 2-column layout
+                // Open the project detail as a full page
                 article.addEventListener('click', () => {
-                    // Control active highlight state in list
-                    const siblingCards = listContainer.querySelectorAll('.project-item');
-                    siblingCards.forEach(card => card.classList.remove('active'));
-                    article.classList.add('active');
-
-
-
-                    // Select right container components
-                    const welcomeView = document.getElementById('welcome-view');
-                    const detailFrameView = document.getElementById('detail-frame-view');
-                    const iframe = document.getElementById('project-iframe');
-
-                    if (welcomeView && detailFrameView && iframe) {
-                        welcomeView.style.display = 'none';
-                        detailFrameView.style.display = 'flex';
-                        iframe.src = project.link;
-
-                        const detailTitle = document.getElementById('detail-project-title');
-                        if (detailTitle) {
-                            detailTitle.textContent = project.title;
-                        }
-
-                        adjustIframeScale();
-                    }
-
-                    // Mobile view slide transition control
-                    const mainContent = document.getElementById('portfolio-main-content');
-                    if (mainContent && window.innerWidth <= 768) {
-                        mainContent.classList.add('active');
-                    }
+                    window.location.href = project.link;
                 });
 
                 listContainer.appendChild(article);
             });
             renderDashboard(projects);
             bindCategoryFilters(containerId);
+
         })
         .catch(error => {
             console.error(error);
@@ -443,6 +429,15 @@ function renderDashboard(projects) {
                     </span>
                 `;
             }
+            if (project.affiliation && project.affiliation.toLowerCase() === 'hobby') {
+                iconsHtml += `
+                    <span class="hobby-marker" title="Hobby Project" aria-label="Hobby Project">
+                        <svg class="hobby-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 15px; height: 15px;">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                        </svg>
+                    </span>
+                `;
+            }
 
             card.innerHTML = `
                 <div class="card-header-row">
@@ -451,7 +446,7 @@ function renderDashboard(projects) {
                 </div>
                 <div class="card-meta">
                     <span class="card-period">${project.period}</span>
-                    ${project.affiliation ? `<span class="card-affiliation">${project.affiliation}</span>` : ''}
+                    ${project.affiliation && project.affiliation.toLowerCase() !== 'hobby' ? `<span class="card-affiliation">${project.affiliation}</span>` : ''}
                 </div>
                 <p class="card-desc">${project.description || ''}</p>
                 ${tagsHtml}

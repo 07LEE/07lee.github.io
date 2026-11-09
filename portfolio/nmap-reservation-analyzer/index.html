@@ -1,300 +1,222 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-page="booking">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nmap Reservation Analyzer</title>
-  <meta name="description" content="네이버 예약 데이터 기반 상권 분석 자동화 도구">
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="stylesheet" href="style.css">
-  <script src="../components.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Booking Demand Tracker: 공개 예약 페이지의 시간대 정보를 매일 수집해 상권 이용량을 추정한 도구">
+    <title>Booking Demand Tracker</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=20261109">
+    <link rel="stylesheet" href="../detail-theme.css?v=20261109b">
+    <link rel="stylesheet" href="../deck-extras.css?v=20261109">
+    <script src="../components.js?v=20261109b" defer></script>
 </head>
+
 <body>
 
+    <portfolio-header back-href="../projects.html" title="Booking Demand Tracker" only-back></portfolio-header>
 
-  <div class="deck-viewport">
+    <div class="dashboard-container deck-viewport">
 
-    <portfolio-header back-href="../index.html" title="Nmap Reservation Analyzer" only-back></portfolio-header>
-
-    <div class="deck-container">
-
-      <span class="page-hint">휠 또는 방향키로 전환</span>
-
-      <!-- ─── Slide 1: Cover ─── -->
-      <section class="slide s1 active" id="slide-1">
-
-        <div class="s1-left">
-          <div class="s1-eyebrow">
-            <span class="s1-eyebrow-dot"></span>
-            Automation · Analytics
-          </div>
-          <h1 class="s1-title">
-            Nmap<br>
-            <span class="green">Reservation</span><br>
-            Analyzer
-          </h1>
-          <p class="s1-desc">
-            네이버 예약 데이터 기반의 상권 분석 자동화 및<br>
-            브라우저 전용 다중 날짜 통합 분석 도구
-          </p>
-          <div class="s1-pills">
-            <span class="pill">Node.js</span>
-            <span class="pill">Puppeteer</span>
-            <span class="pill">Vanilla JS</span>
-            <span class="pill">GraphQL</span>
-          </div>
-        </div>
-
-        <div class="s1-right">
-          <div class="stat-block">
-            <div class="stat-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
-              </svg>
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span class="brand-title">Booking Demand Tracker</span>
+                <span class="brand-version">Node.js · Puppeteer · JavaScript</span>
             </div>
-            <div>
-              <div class="stat-label">수집 방식</div>
-              <div class="stat-value">Puppeteer Headless</div>
+            <nav class="sidebar-nav">
+                <button class="sidebar-item active" data-target="slide-1">
+                    <span class="nav-num">01</span> Overview
+                </button>
+                <button class="sidebar-item" data-target="slide-2">
+                    <span class="nav-num">02</span> Problem
+                </button>
+                <button class="sidebar-item" data-target="slide-3">
+                    <span class="nav-num">03</span> Pipeline
+                </button>
+                <button class="sidebar-item" data-target="slide-4">
+                    <span class="nav-num">04</span> Design Decision
+                </button>
+                <button class="sidebar-item" data-target="slide-5">
+                    <span class="nav-num">05</span> Result
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <span>Data Collection · 2026.06 ~ 07</span>
             </div>
-          </div>
-          <div class="stat-block">
-            <div class="stat-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-              </svg>
-            </div>
-            <div>
-              <div class="stat-label">인터셉션</div>
-              <div class="stat-value">GraphQL Network Hook</div>
-            </div>
-          </div>
-          <div class="stat-block">
-            <div class="stat-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
-              </svg>
-            </div>
-            <div>
-              <div class="stat-label">분석 환경</div>
-              <div class="stat-value">브라우저 단독 구동</div>
-            </div>
-          </div>
-        </div>
+        </aside>
 
-      </section>
+        <main class="content-area deck-container">
 
-      <!-- ─── Slide 2: Background ─── -->
-      <section class="slide s2" id="slide-2">
-        <div class="s2-bg-num">3</div>
-
-        <div class="s2-header">
-          <div class="slide-label">01 / Background</div>
-          <h2 class="slide-h2">수작업 분석의 정량적 한계</h2>
-        </div>
-
-        <div class="s2-cards">
-          <div class="prob-card">
-            <div class="prob-card-bar"></div>
-            <div class="prob-num">01</div>
-            <div class="prob-title">수동 조사 비효율</div>
-            <p class="prob-desc">
-              대상 상권 내 여러 업체의 실시간 예약 가능 상태를 파악하기 위해 
-              매시간 개별 페이지를 수동 방문하며 발생하는 리소스 낭비가 큼.
-            </p>
-          </div>
-          <div class="prob-card">
-            <div class="prob-card-bar"></div>
-            <div class="prob-num">02</div>
-            <div class="prob-title">다중 경쟁사 취합 한계</div>
-            <p class="prob-desc">
-              상권 내 다수 경쟁 업체의 예약 현황을 개별 탐색 후
-              엑셀에 수작업으로 취합해야 하여 상권 전체 분석에 비효율이 발생함.
-            </p>
-          </div>
-          <div class="prob-card">
-            <div class="prob-card-bar"></div>
-            <div class="prob-num">03</div>
-            <div class="prob-title">상권 트렌드 분석 불가</div>
-            <p class="prob-desc">
-              단순 시점 열람에 그쳐, 요일별·시간대별 예약 밀집 패턴
-              분석이나 장기적 흐름을 도출하기 어려움.
-            </p>
-          </div>
-        </div>
-
-        <div class="s2-footer">
-          <span>네이버 예약 시스템 상권 분석 실무 관찰 기반</span>
-          <span>2 / 5</span>
-        </div>
-      </section>
-
-      <!-- ─── Slide 3: Pipeline ─── -->
-      <section class="slide s3" id="slide-3">
-
-        <div>
-          <div class="slide-label">02 / Pipeline</div>
-          <h2 class="slide-h2">수집 및 분석 파이프라인</h2>
-        </div>
-
-        <div class="s3-flow">
-          <div class="flow-step">
-            <div class="flow-inner">
-              <div class="flow-badge">01</div>
-              <div class="flow-title">Naver Booking Page</div>
-              <div class="flow-desc">모바일 User-Agent로 예약 페이지 접속, networkidle2 완료까지 대기</div>
-              <div class="flow-code">ua: "Mozilla/5.0 (iPhone...)"<br>waitUntil: 'networkidle2'</div>
-            </div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-inner">
-              <div class="flow-badge">02</div>
-              <div class="flow-title">GraphQL Intercept</div>
-              <div class="flow-desc">네트워크 응답 이벤트를 리스닝하여 hourlySchedule 응답 감지 및 슬롯 추출</div>
-              <div class="flow-code">page.on('response')<br>opName=hourlySchedule</div>
-            </div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-inner">
-              <div class="flow-badge">03</div>
-              <div class="flow-title">CSV Output</div>
-              <div class="flow-desc">StudioName · ResourceID · Date · Time · Status 구조로 날짜 스탬프 파일에 자동 저장</div>
-              <div class="flow-code">reservations_YYYYMMDD.csv<br>UTF-8 BOM (Excel 호환)</div>
-            </div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-inner">
-              <div class="flow-badge">04</div>
-              <div class="flow-title">Dashboard</div>
-              <div class="flow-desc">드래그 앤 드롭으로 다중 CSV 업로드, 랭킹·시간대·추세 차트를 브라우저에서 즉시 렌더링</div>
-              <div class="flow-code">report.html (서버 불필요)<br>Vanilla JS + SVG Chart</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="s2-footer">
-          <span>인증 토큰 없이 GraphQL 응답 인터셉션으로 데이터 획득</span>
-          <span>3 / 5</span>
-        </div>
-
-      </section>
-
-      <section class="slide s45" id="slide-4">
-
-        <div class="s45-header">
-          <div class="slide-label">03 / Stack &amp; Impact</div>
-          <h2 class="slide-h2">기술 스택 및 적용 효과</h2>
-        </div>
-
-        <div class="s45-body">
-
-          <!-- Left: Tech Stack -->
-          <div class="s45-left">
-            <div class="tech-stack-list">
-              <div class="tech-row">
-                <div class="tech-icon-box">N</div>
-                <div>
-                  <div class="tech-row-title">Node.js (ESM) + Puppeteer</div>
-                  <div class="tech-row-desc">Chromium 기반 헤드리스 브라우저로 실제 사용자 탐색 시뮬레이션</div>
+            <!-- Slide 1: Overview -->
+            <section class="slide-section slide active" id="slide-1">
+                <div class="slide-grid">
+                    <div class="slide-info-panel">
+                        <span class="badge">Overview</span>
+                        <h2>직접 볼 수 없는 수요를<br>예약 데이터로 추정한다</h2>
+                        <p class="paragraph">상권을 조사하면서 업체마다 예약이 실제로 얼마나 이뤄지는지 알고 싶었지만, 예약 건수는 공개되지 않았습니다. 대신 공개 예약 페이지의 시간대별 예약 상태를 매일 모아 이용량을 간접적으로 추정했습니다.</p>
+                        <div class="highlight-info-box">
+                            <i class="fa-solid fa-chart-column"></i> Node.js · Puppeteer · JavaScript · SVG
+                        </div>
+                    </div>
+                    <div class="slide-visual-panel">
+                        <div class="flow">
+                            <div class="flow-step">
+                                <span class="flow-num">01</span>
+                                <div>
+                                    <h3>매일 수집</h3>
+                                    <p>스케줄러로 하루 한 번 업체별 예약 페이지의 시간대 상태를 기록</p>
+                                </div>
+                            </div>
+                            <div class="flow-step">
+                                <span class="flow-num">02</span>
+                                <div>
+                                    <h3>날짜별 적재</h3>
+                                    <p>수집한 날짜를 파일 이름에 붙여 CSV로 쌓음</p>
+                                </div>
+                            </div>
+                            <div class="flow-step">
+                                <span class="flow-num">03</span>
+                                <div>
+                                    <h3>기간 병합</h3>
+                                    <p>여러 날짜의 CSV를 한 번에 올려 기간 전체로 합침</p>
+                                </div>
+                            </div>
+                            <div class="flow-step">
+                                <span class="flow-num">04</span>
+                                <div>
+                                    <h3>패턴 확인</h3>
+                                    <p>업체 순위, 시간대별, 요일별 예약 분포를 브라우저에서 바로 시각화</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="tech-row">
-                <div class="tech-icon-box em">G</div>
-                <div>
-                  <div class="tech-row-title">GraphQL 인터셉션</div>
-                  <div class="tech-row-desc">page.on('response')로 인증 없이 hourlySchedule API 응답 캡처</div>
+            </section>
+
+            <!-- Slide 2: Problem -->
+            <section class="slide-section slide" id="slide-2">
+                <div class="slide-grid">
+                    <div class="slide-info-panel">
+                        <span class="badge">Problem</span>
+                        <h2>한 번 들여다봐서는<br>수요를 알 수 없다</h2>
+                        <p class="paragraph">상권에 들어갈지 판단하려면 이용량의 흐름이 필요했지만, 손으로 볼 수 있는 건 한 시점의 화면뿐이었습니다.</p>
+                    </div>
+                    <div class="slide-visual-panel">
+                        <div class="question-list">
+                            <div class="question">업체별 예약 건수는 공개되지 않는다</div>
+                            <div class="question">여러 업체의 예약 현황을 보려면 페이지를 하나씩 열어 엑셀에 옮겨야 한다</div>
+                            <div class="question">한 시점만 봐서는 요일별, 시간대별 흐름과 추세를 알 수 없다</div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="tech-row">
-                <div class="tech-icon-box li">JS</div>
-                <div>
-                  <div class="tech-row-title">Vanilla JS (ES2020)</div>
-                  <div class="tech-row-desc">프레임워크 없이 CSV 파싱, DOM 렌더링, SVG 차트 생성</div>
+            </section>
+
+            <!-- Slide 3: Pipeline -->
+            <section class="slide-section slide" id="slide-3">
+                <div class="slide-grid">
+                    <div class="slide-info-panel">
+                        <span class="badge">Pipeline</span>
+                        <h2>모으고, 쌓고,<br>합쳐서 본다</h2>
+                        <ul class="step-desc-list">
+                            <li><strong>수집:</strong> 헤드리스 브라우저로 모바일 예약 페이지를 열고, 페이지가 불러오는 시간대별 예약 정보를 기록</li>
+                            <li><strong>적재:</strong> 업체, 예약 자원, 날짜, 시간, 상태를 날짜가 붙은 CSV로 저장. 엑셀에서 바로 열리도록 인코딩을 맞춤</li>
+                            <li><strong>자동화:</strong> 스케줄러로 매일 수집해 데이터가 계속 쌓이게 함</li>
+                            <li><strong>분석:</strong> 여러 날짜의 CSV를 끌어다 놓으면 기간 전체를 합쳐 순위, 시간대, 추세 차트를 그림</li>
+                        </ul>
+                    </div>
+                    <div class="slide-visual-panel">
+                        <div class="code-viewport">
+                            <div class="code-header">
+                                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                                <span class="file-name">reservations_YYYYMMDD.csv</span>
+                            </div>
+                            <pre class="code-body"><code># 하루에 파일 하나, 슬롯마다 한 줄
+StudioName, ResourceID, Date, Time, Status
+
+# 날짜별 파일을 여러 개 올리면
+# 브라우저에서 기간 전체로 병합해
+# 업체 순위, 시간대별, 요일별 분포를 계산</code></pre>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="stack-pills" style="margin-top: 14px;">
-              <span class="stack-pill">Node.js ESM</span>
-              <span class="stack-pill">Puppeteer 25</span>
-              <span class="stack-pill">Vanilla JS</span>
-              <span class="stack-pill">GraphQL Hook</span>
-            </div>
-          </div>
+            </section>
 
-          <!-- Divider -->
-          <div class="s45-divider"></div>
+            <!-- Slide 4: Design Decision -->
+            <section class="slide-section slide" id="slide-4">
+                <div class="slide-grid">
+                    <div class="slide-info-panel">
+                        <span class="badge">Design Decision</span>
+                        <h2>없는 값은<br>대리 지표로 채운다</h2>
+                        <p class="paragraph">조사에 필요한 값을 직접 얻을 수 없을 때, 얻을 수 있는 값 중 가장 가까운 것을 골라 꾸준히 쌓는 쪽을 택했습니다.</p>
+                    </div>
+                    <div class="slide-visual-panel">
+                        <div class="decision-list">
+                            <div class="decision">
+                                <span class="label">지표</span>
+                                <h3>예약 건수 대신 예약 상태</h3>
+                                <p>예약 건수는 볼 수 없어서, 시간대마다 예약이 찼는지를 기록해 이용량을 추정했습니다.</p>
+                            </div>
+                            <div class="decision">
+                                <span class="label">수집 주기</span>
+                                <h3>한 번이 아니라 매일</h3>
+                                <p>같은 방식으로 매일 쌓아야 요일별, 시간대별 패턴과 기간 추세를 볼 수 있습니다.</p>
+                            </div>
+                            <div class="decision">
+                                <span class="label">규모</span>
+                                <h3>조사용 도구는 가볍게</h3>
+                                <p>서버, 외부 DB, API 키 없이 로컬 수집과 브라우저 시각화만으로 끝나게 만들어 운영 부담을 남기지 않았습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-          <!-- Right: Impact -->
-          <div class="s45-right">
-            <div class="impact-row">
-              <div class="impact-pip"></div>
-              <div>
-                <div class="impact-row-label">무인 자동화 수집</div>
-                <div class="impact-row-desc">크론탭(Crontab) 스케줄러로 매일 자동 수집을 유도하여 지속적인 데이터 축적 흐름 형성함</div>
-              </div>
-            </div>
-            <div class="impact-row">
-              <div class="impact-pip"></div>
-              <div>
-                <div class="impact-row-label">다중 CSV 날짜 병합 분석</div>
-                <div class="impact-row-desc">여러 날짜의 CSV를 동시 드롭하면 기간별 통합 차트를 즉시 렌더링</div>
-              </div>
-            </div>
-            <div class="impact-row">
-              <div class="impact-pip"></div>
-              <div>
-                <div class="impact-row-label">완전 독립 실행</div>
-                <div class="impact-row-desc">클라우드·외부 DB·API 키 없이 로컬에서 수집과 시각화 완결</div>
-              </div>
-            </div>
-            <div class="s45-summary">
-              네이버 예약 GraphQL 인터셉션 → CSV 자동 적재 → 브라우저 즉시 시각화
-            </div>
-          </div>
-
-        </div>
-
-        <div class="s2-footer">
-          <span>외부 서버 · API 키 · 인증 불필요한 완전 로컬 파이프라인</span>
-          <span>4 / 5</span>
-        </div>
-
-      </section>
-
-      <!-- ─── Slide 5: Result Report ─── -->
-      <section class="slide s5" id="slide-5">
-
-        <div class="s5-header">
-          <div class="slide-label">04 / Result Report</div>
-          <h2 class="slide-h2">분석 대시보드 시각화 결과</h2>
-        </div>
-
-        <div class="s5-content">
-          <div class="report-mockup">
-            <div class="mockup-header">
-              <span class="mockup-dot"></span>
-              <span class="mockup-dot"></span>
-              <span class="mockup-dot"></span>
-              <span class="mockup-address">nmap-reservation-analyzer/report.html</span>
-            </div>
-            <div class="mockup-body">
-              <img src="assets/example.png" alt="대시보드 분석 리포트 화면 예시" class="report-img">
-            </div>
-          </div>
-        </div>
-
-        <div class="s2-footer">
-          <span>통합 대시보드로 요일별, 시간대별 상권 예약 집중 패턴 도출함</span>
-          <span>5 / 5</span>
-        </div>
-
-      </section>
-
-
-      <portfolio-deck-nav></portfolio-deck-nav>
+            <!-- Slide 5: Result -->
+            <section class="slide-section slide" id="slide-5">
+                <div class="slide-grid">
+                    <div class="slide-info-panel">
+                        <span class="badge">Result</span>
+                        <h2>데이터를 보고<br>들어가지 않기로 했다</h2>
+                        <p class="paragraph">쌓인 데이터로 요일별, 시간대별 예약 분포를 확인했고, 예약 이용률이 낮다는 결과를 근거로 해당 사업 검토를 접었습니다.</p>
+                        <div class="highlight-info-box border-safe">
+                            <i class="fa-solid fa-check"></i> 요일·시간대별 예약 분포를 근거로 사업 검토 종료
+                        </div>
+                    </div>
+                    <div class="slide-visual-panel">
+                        <img src="assets/example.png" alt="시간대 및 요일별 예약 분포 대시보드" style="display:block;width:100%;border:1px solid #2a2a30;border-radius:8px;">
+                        <p class="note">분석 대시보드 · 시간대별, 요일별 예약 분포</p>
+                    </div>
+                </div>
+            </section>
+        </main>
 
     </div>
-  </div>
 
-  <script src="../../deck.js"></script>
+    <portfolio-deck-nav></portfolio-deck-nav>
+
+    <div class="footer-bar">
+        <span>Booking Demand Tracker : 공개 예약 정보로 상권 이용량을 추정한 수집·분석 도구</span>
+    </div>
+
+    <script src="../../deck.js?v=20261109"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            sidebarItems.forEach((item, idx) => {
+                item.addEventListener('click', () => {
+                    document.dispatchEvent(new CustomEvent('changeSlide', { detail: { index: idx } }));
+                });
+            });
+            document.addEventListener('slideChanged', (e) => {
+                sidebarItems.forEach(item => item.classList.remove('active'));
+                if (sidebarItems[e.detail.index]) {
+                    sidebarItems[e.detail.index].classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>
