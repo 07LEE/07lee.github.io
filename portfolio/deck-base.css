@@ -1,6 +1,6 @@
-@import "../../style.css";
+@import "../style.css";
 
-/* Premium Dashboard Presentation Style (style.css) */
+/* Shared base style for portfolio detail decks */
 
 :root {
     --bg-main: #f8fafc;
