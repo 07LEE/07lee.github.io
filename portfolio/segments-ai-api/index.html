@@ -196,11 +196,11 @@ client.add_sample(dataset_id, file_path.name, attributes)</code></pre>
                         <h2>우회 구조를 만들고,<br>필요 없어지자 걷어냈다</h2>
                         <p class="paragraph">API가 데이터셋 목록을 100개까지만 돌려주던 시기에는 우회 구조로 조회를 유지했습니다. 이후 전체 페이지를 순서대로 읽을 수 있게 되자 우회 구조를 폐기하고 단순한 페이지 순회로 바꿨습니다.</p>
                         <div class="card-outline outline-alert" style="margin-top: 20px;">
-                            <h3>2026.04 · 우회</h3>
+                            <h3>2026.04 · 우회 (종료 후 유지보수)</h3>
                             <p class="card-p">목록 밖으로 밀려날 오래된 데이터셋을 미리 골라 보조 계정에 조회 권한을 붙였습니다. 동작은 했지만 계정과 권한이 계속 늘어나는 구조였습니다.</p>
                         </div>
                         <div class="card-outline outline-safe" style="margin-top: 15px;">
-                            <h3>2026.10 · 단순화</h3>
+                            <h3>2026.10 · 단순화 (종료 후 유지보수)</h3>
                             <p class="card-p">권한을 건드리지 않고 모든 페이지를 읽도록 교체했습니다. 같은 페이지가 반복되면 불완전한 목록으로 진행하지 않고 멈춥니다.</p>
                         </div>
                     </div>

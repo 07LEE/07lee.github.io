@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let current = 0;
     const totalSlides = slides.length;
 
+    // On narrow screens the CSS lists every slide in one scrolling page (slides are no longer absolute).
+    // Then the deck leaves wheel, keys and scaling to the browser.
+    function isStacked() {
+        return totalSlides > 0 && getComputedStyle(slides[0]).position === 'static';
+    }
+
     // Dynamically generate slide indicators if they do not exist
     if (dotsContainer && dotsContainer.children.length === 0 && totalSlides > 0) {
         slides.forEach((_, i) => {
@@ -78,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.addEventListener('keydown', (e) => {
+        if (isStacked()) return;
         if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'Enter') {
             if (e.key === 'ArrowRight' || e.key === 'ArrowDown') e.preventDefault();
             if (current < totalSlides - 1) goTo(current + 1);
@@ -89,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let wheelLocked = false;
     document.addEventListener('wheel', (e) => {
-        if (!deckContainer) return;
+        if (!deckContainer || isStacked()) return;
 
         let el = e.target;
         let isScrollable = false;
@@ -139,6 +146,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Auto-fit function for 16:9 slide aspect ratio
     function autoFitDeck() {
         if (!deckContainer) return;
+        if (isStacked()) {
+            deckContainer.style.transform = '';
+            return;
+        }
         if (document.querySelector('.dashboard-container') || deckContainer.classList.contains('dashboard-container')) {
             return;
         }
@@ -164,4 +175,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('hashchange', () => goTo(slideFromHash()));
 
     goTo(slideFromHash());
+    if (isStacked() && current > 0) slides[current].scrollIntoView();
+
+    // Pages add their own slideChanged listeners (sidebar highlight) after this script runs,
+    // so announce the starting slide again once they are in place.
+    setTimeout(() => goTo(current), 0);
 });

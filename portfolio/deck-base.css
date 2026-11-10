@@ -507,3 +507,63 @@ body {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
 }
+
+/* Narrow screens: drop the sidebar and stack every slide in one scrolling page.
+   deck.js reads the static slide position to stop paging on wheel and keys. */
+@media (max-width: 900px) {
+    body {
+        overflow: auto;
+        height: auto;
+        width: auto;
+    }
+
+    .dashboard-container {
+        display: block;
+        width: auto;
+        height: auto;
+    }
+
+    .dashboard-container .sidebar,
+    .nav-controls,
+    .footer-bar {
+        display: none;
+    }
+
+    .content-area {
+        height: auto;
+        overflow: visible;
+    }
+
+    .slide-section {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        height: auto;
+        padding: 72px 20px 40px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .slide-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+        height: auto;
+    }
+
+    .slide-info-panel h2 {
+        font-size: 1.7rem;
+    }
+
+    .metrics-grid {
+        flex-wrap: wrap;
+    }
+
+    .dashboard-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .code-viewport {
+        max-height: none;
+    }
+}
