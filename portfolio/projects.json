@@ -3,7 +3,7 @@
         "id": "item-nas-data-platform",
         "title": "NAS Data Platform",
         "category": "Data Pipeline",
-        "period": "2026.09 ~ 2026.10",
+        "period": "2026.09 ~ 2026.11",
         "affiliation": "",
         "description": "현장 수집 데이터와 처리 결과의 출처와 상태를 추적하는 카탈로그와 입고 파이프라인",
         "tags": [
