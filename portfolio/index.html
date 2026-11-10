@@ -6,7 +6,7 @@
     <title>07lee | Data Engineer Portfolio</title>
     <meta name="description" content="데이터 엔지니어 포트폴리오: 데이터 플랫폼, 센서·3D 데이터, Python 개발, AI 업무 자동화">
     <meta name="robots" content="noindex, nofollow">
-    <link rel="stylesheet" href="../style.css?v=4">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <div class="container">
@@ -42,40 +42,7 @@
                     <h2>Featured Projects</h2>
                     <a href="projects.html" class="view-all-link">All projects &rarr;</a>
                 </div>
-                <div class="featured-grid">
-                    <a href="nas-data-platform/index.html" class="featured-card">
-                        <div class="card-category">Data Pipeline</div>
-                        <h3>NAS Data Platform</h3>
-                        <p>현장 수집 데이터와 처리 결과의 출처와 상태를 추적하는 카탈로그와 입고 파이프라인</p>
-                        <div class="card-meta">
-                            <span>2026.09 ~ 2026.11 · Python · FastAPI</span>
-                        </div>
-                    </a>
-                    <a href="real-to-sim/index.html" class="featured-card">
-                        <div class="card-category">Data Processing</div>
-                        <h3>Real-to-Sim Assets</h3>
-                        <p>3D 재구성 자료를 실측 스케일, 물리, 관절을 갖춘 시뮬레이션 자산으로 가공</p>
-                        <div class="card-meta">
-                            <span>2026.02 ~ 2026.09 · Python · Blender · USD</span>
-                        </div>
-                    </a>
-                    <a href="segments-ai-api/index.html" class="featured-card">
-                        <div class="card-category">Data Pipeline</div>
-                        <h3>VFM 3D Sensor Data</h3>
-                        <p>다중 센서 수집 검증, 좌표 정합, 점군 라벨링과 업로드를 거쳐 연구팀에 전달한 3D 데이터</p>
-                        <div class="card-meta">
-                            <span>2025.09 ~ 2026.02 · Python · ROS · Open3D</span>
-                        </div>
-                    </a>
-                    <a href="invoice-simplifier/index.html" class="featured-card">
-                        <div class="card-category">AI Automation</div>
-                        <h3>Invoice Simplifier</h3>
-                        <p>자연어 요청을 견적서로 바꿔 운영자가 직접 발행하는 업무 자동화, 실사용 중</p>
-                        <div class="card-meta">
-                            <span>2025.08 ~ 현재 · Python · LLM</span>
-                        </div>
-                    </a>
-                </div>
+                <div class="featured-grid" id="featured-grid"></div>
             </section>
         </main>
 
@@ -83,5 +50,6 @@
             &copy; 2026 07lee. All rights reserved.
         </footer>
     </div>
+    <script src="projects.js"></script>
 </body>
 </html>

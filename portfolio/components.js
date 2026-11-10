@@ -56,9 +56,8 @@ class PortfolioDeckNav extends HTMLElement {
     connectedCallback() {
         if (this.querySelector('.bottombar') || this.querySelector('.deck-controls') || this.querySelector('.nav-controls')) return;
 
-        const path = window.location.pathname;
-
-        if (path.includes('novel-transformation') || path.includes('segments-ai-api') || path.includes('nas-data-platform') || path.includes('real-to-sim') || path.includes('frame-sampling') || path.includes('zed-remote-system') || path.includes('invoice-simplifier') || path.includes('nmap-reservation-analyzer')) {
+        // Default is the floating nav-controls; variant="bottombar" keeps the older full-width bar.
+        if (this.getAttribute('variant') !== 'bottombar') {
             this.innerHTML = `
                 <div class="nav-controls">
                     <button id="btn-prev" class="nav-btn" disabled>

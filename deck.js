@@ -50,6 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (nextBtn) nextBtn.disabled = index === totalSlides - 1;
         current = index;
 
+        // Keep the slide number in the address (#3) so a refresh or a shared link opens the same slide.
+        const hash = index === 0 ? '' : '#' + (index + 1);
+        if (window.location.hash !== hash) {
+            history.replaceState(null, '', window.location.pathname + window.location.search + hash);
+        }
+
         // Dispatch custom event for slide change
         const event = new CustomEvent('slideChanged', { detail: { index: index } });
         document.dispatchEvent(event);
@@ -150,5 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    goTo(0);
+    function slideFromHash() {
+        const n = parseInt(window.location.hash.slice(1), 10);
+        return Number.isInteger(n) && n >= 1 && n <= totalSlides ? n - 1 : 0;
+    }
+
+    window.addEventListener('hashchange', () => goTo(slideFromHash()));
+
+    goTo(slideFromHash());
 });

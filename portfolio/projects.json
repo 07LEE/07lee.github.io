@@ -1,6 +1,7 @@
 [
     {
         "id": "item-nas-data-platform",
+        "featured": true,
         "title": "NAS Data Platform",
         "category": "Data Pipeline",
         "period": "2026.09 ~ 2026.11",
@@ -31,6 +32,7 @@
     },
     {
         "id": "item-segments-ai-api",
+        "featured": true,
         "title": "VFM 3D Sensor Data",
         "category": "Data Pipeline",
         "period": "2025.09 ~ 2026.02",
@@ -46,6 +48,7 @@
     },
     {
         "id": "item-invoice-simplifier",
+        "featured": true,
         "title": "Invoice Simplifier",
         "category": "AI Automation",
         "period": "2025.08 ~ 현재",
@@ -91,6 +94,7 @@
     },
     {
         "id": "item-real-to-sim",
+        "featured": true,
         "title": "Real-to-Sim Assets",
         "category": "Data Processing",
         "period": "2026.02 ~ 2026.09",
