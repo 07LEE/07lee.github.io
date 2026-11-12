@@ -275,6 +275,59 @@ main {
     color: var(--text-muted);
 }
 
+/* Problem Solving Section */
+.ps-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.ps-tier {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.ps-tier-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.ps-meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.ps-stats {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 2rem;
+    margin: 0;
+}
+
+.ps-stat dt {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+}
+
+.ps-stat dd {
+    margin: 0.15rem 0 0 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-accent);
+}
+
 /* Footer */
 footer {
     margin-top: 4rem;
@@ -301,5 +354,15 @@ footer {
     .header-nav-links {
         width: 100%;
         justify-content: space-between;
+    }
+    .ps-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .ps-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        width: 100%;
     }
 }
