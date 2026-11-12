@@ -19,7 +19,7 @@
         "id": "item-zed-remote-system",
         "title": "ZED Remote System",
         "category": "Data Collection",
-        "period": "2026.03 ~ 2026.04",
+        "period": "2026.03 ~ 2026.05",
         "affiliation": "",
         "description": "Jetson 카메라의 원격 배포, 실행, 상태 확인을 갖춘 현장 수집 도구",
         "tags": [
@@ -97,7 +97,7 @@
         "featured": true,
         "title": "Real-to-Sim Assets",
         "category": "Data Processing",
-        "period": "2026.02 ~ 2026.09",
+        "period": "2026.03 ~ 2026.09",
         "affiliation": "",
         "description": "3D 재구성 자료를 실측 스케일, 물리, 관절을 갖춘 시뮬레이션 자산으로 가공",
         "tags": [
