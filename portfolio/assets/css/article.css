@@ -32,7 +32,7 @@ html[data-page] body.article-page .back-link {
 /* ---------- Head ---------- */
 .article-head {
     margin-bottom: 32px;
-    padding-bottom: 24px;
+    padding-bottom: 28px;
     border-bottom: 1px solid var(--line);
 }
 
@@ -58,6 +58,36 @@ html[data-page] body.article-page .back-link {
 
 .article .article-meta a {
     color: var(--text);
+}
+
+/* Role, period and result: what a reader skimming the page should take away. */
+.article .facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    margin: 20px 0 0;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--line);
+}
+
+.article .facts > div {
+    padding: 12px 14px;
+    background: #141417;
+}
+
+.article .facts dt {
+    margin-bottom: 4px;
+    color: var(--muted);
+    font-size: 0.8rem;
+}
+
+.article .facts dd {
+    margin: 0;
+    color: var(--text-strong);
+    font-size: 0.9rem;
+    line-height: 1.5;
 }
 
 /* ---------- Table of contents ---------- */
@@ -111,25 +141,36 @@ html[data-page] body.article-page .back-link {
 
 /* ---------- Sections ---------- */
 .article section {
-    margin-bottom: 40px;
+    padding: 36px 0;
+    border-top: 1px solid var(--line);
     scroll-margin-top: 72px;
 }
 
+.article section:first-of-type {
+    border-top: 0;
+    padding-top: 8px;
+}
+
 .article h2 {
-    margin: 0 0 10px;
+    margin: 0 0 14px;
     color: var(--text-strong);
-    font-size: 1.15rem;
+    font-size: 1.3rem;
     line-height: 1.4;
 }
 
 .article h3 {
-    margin: 20px 0 6px;
+    margin: 28px 0 10px;
     color: var(--text-strong);
     font-size: 1rem;
 }
 
 .article p {
     margin: 0 0 10px;
+}
+
+/* The first line of a section says what it is about. */
+.article section > p {
+    color: var(--text-strong);
 }
 
 .article ul,
@@ -147,9 +188,28 @@ html[data-page] body.article-page .back-link {
     margin: 2px 0 0;
 }
 
+/* Labeled items: the label on the left, what it means on the right. */
+.article .deflist {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    gap: 10px 16px;
+    margin: 4px 0 8px;
+}
+
+.article .deflist dt {
+    color: var(--muted);
+}
+
+.article .deflist dd {
+    margin: 0;
+}
+
 /* ---------- Figures ---------- */
 .article .fig {
-    margin: 12px 0 16px;
+    margin: 28px 0;
+    padding: 20px;
+    border-radius: 6px;
+    background: #1a1a1e;
     overflow-x: auto;
 }
 
@@ -165,18 +225,39 @@ html[data-page] body.article-page .back-link {
     display: block;
     width: 100%;
     height: auto;
+    margin: 0 auto;
     border: 1px solid var(--line);
     border-radius: 4px;
 }
 
+/* Phone screenshots and tall images: not wider than a phone screen. */
+.article .fig-narrow img {
+    width: auto;
+    max-width: min(100%, 480px);
+}
+
 .article .fig figcaption {
-    margin-top: 6px;
+    margin-top: 12px;
     color: var(--muted);
     font-size: 0.85rem;
+    text-align: center;
 }
 
 .article .fig figcaption a {
     color: var(--text);
+}
+
+/* Several screens compared in one frame, one under the other. */
+.article .fig-stack figure {
+    margin: 0;
+}
+
+.article .fig-stack figure + figure {
+    margin-top: 28px;
+}
+
+.article .fig-stack figcaption {
+    margin-top: 10px;
 }
 
 .fig-box {
@@ -215,15 +296,6 @@ html[data-page] body.article-page .back-link {
 .fig-box-dash,
 .fig-dashline {
     stroke-dasharray: 4 3;
-}
-
-.article pre.screen {
-    margin: 0;
-    padding: 12px 14px;
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    font-size: 12px;
-    line-height: 1.5;
 }
 
 /* ---------- Tables and code ---------- */
@@ -272,17 +344,17 @@ html[data-page] body.article-page .back-link {
     line-height: 1.6;
 }
 
+/* A terminal screen inside a figure. */
+.article pre.screen {
+    margin: 0;
+    padding: 12px 14px;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
 .article code {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.88em;
 }
 
-@media (max-width: 600px) {
-    .article {
-        padding: 72px 16px 96px;
-    }
-
-    .article-head h1 {
-        font-size: 1.5rem;
-    }
-}

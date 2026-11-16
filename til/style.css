@@ -315,21 +315,6 @@ body {
     scrollbar-color: var(--card-border) transparent;
 }
 
-@media (max-width: 900px) {
-    body {
-        flex-direction: column;
-    }
-    .sidebar {
-        width: 100%;
-        height: auto;
-        border-bottom: 1px solid var(--card-border);
-    }
-    .main-content {
-        height: auto;
-        overflow-y: visible;
-        padding: 2rem;
-    }
-}
 
 .content-view {
     width: 100%;

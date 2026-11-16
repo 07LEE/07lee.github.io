@@ -1,0 +1,75 @@
+/* Phone rules for the whole site, in one place and at one width (640px).
+   Every page loads this file last, after its own stylesheets. */
+
+@media (max-width: 640px) {
+    /* ---------- Home and project list (style.css) ---------- */
+    .container {
+        padding: 1.5rem 1rem;
+    }
+
+    .hero-title {
+        font-size: 1.75rem;
+    }
+
+    .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .header-nav-links {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .ps-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .ps-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        width: 100%;
+    }
+
+    /* ---------- Long-form project pages (portfolio/assets/css/article.css) ---------- */
+    .article {
+        padding: 72px 16px 96px;
+    }
+
+    .article-head h1 {
+        font-size: 1.5rem;
+    }
+
+    .article .facts {
+        grid-template-columns: 1fr;
+    }
+
+    .article .deflist {
+        grid-template-columns: 1fr;
+        gap: 2px;
+    }
+
+    .article .deflist dd {
+        margin-bottom: 8px;
+    }
+
+    /* ---------- TIL (til/style.css) ---------- */
+    .til-page {
+        flex-direction: column;
+    }
+
+    .til-page .sidebar {
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid var(--card-border);
+    }
+
+    .til-page .main-content {
+        height: auto;
+        overflow-y: visible;
+        padding: 2rem;
+    }
+}

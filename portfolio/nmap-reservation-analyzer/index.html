@@ -9,6 +9,7 @@
     <meta name="robots" content="noindex, nofollow">
     <link rel="stylesheet" href="../assets/css/detail-theme.css">
     <link rel="stylesheet" href="../assets/css/article.css">
+    <link rel="stylesheet" href="../../mobile.css">
     <script src="../assets/js/components.js" defer></script>
     <script src="../assets/js/article.js" defer></script>
 </head>
@@ -22,7 +23,12 @@
         <header class="article-head">
             <h1>Booking Demand Tracker</h1>
             <p class="lede">공개 예약 페이지의 시간대별 예약 상태를 매일 모아 상권 이용량을 추정한 수집·분석 도구</p>
-            <p class="article-meta">개인 프로젝트 · 2026.06 ~ 2026.07 · Node.js, Puppeteer, JavaScript · <a href="https://github.com/HiTomorrow-kr/Nmap-reservation-analyzer">GitHub</a> · <a href="https://hitomorrow-kr.github.io/Nmap-reservation-analyzer/dashboard/report.html">예시 대시보드</a></p>
+            <p class="article-meta">Node.js, Puppeteer, JavaScript · <a href="https://github.com/HiTomorrow-kr/Nmap-reservation-analyzer">GitHub</a> · <a href="https://hitomorrow-kr.github.io/Nmap-reservation-analyzer/dashboard/report.html">예시 대시보드</a></p>
+            <dl class="facts">
+                <div><dt>역할</dt><dd>개인 프로젝트, 수집부터 분석까지 혼자</dd></div>
+                <div><dt>기간</dt><dd>2026.06 ~ 2026.07</dd></div>
+                <div><dt>결과</dt><dd>요일·시간대별 예약 분포를 근거로 사업 진입을 접음</dd></div>
+            </dl>
         </header>
 
         <nav class="article-toc" aria-label="목차">
@@ -36,11 +42,13 @@
 
         <section id="overview">
             <h2>개요</h2>
-            <ul>
-                <li>계기: 상권 조사 중 업체마다 예약이 실제로 얼마나 이뤄지는지 알고 싶었지만 예약 건수는 비공개</li>
-                <li>방법: 공개 예약 페이지의 시간대별 예약 상태를 매일 모아 이용량을 간접 추정</li>
-                <li>결과물: 매일 도는 수집기와, 내려받은 CSV를 끌어다 놓으면 바로 그려지는 브라우저 대시보드</li>
-            </ul>
+            <p>상권 조사 중 업체마다 예약이 실제로 얼마나 이뤄지는지 알고 싶었지만 예약 건수는 비공개</p>
+            <dl class="deflist">
+                <dt>방법</dt>
+                <dd>공개 예약 페이지의 시간대별 예약 상태를 매일 모아 이용량을 간접 추정</dd>
+                <dt>결과물</dt>
+                <dd>매일 도는 수집기와, 내려받은 CSV를 끌어다 놓으면 바로 그려지는 브라우저 대시보드</dd>
+            </dl>
             <h3>수집부터 분석까지</h3>
             <figure class="fig">
                 <svg viewBox="0 0 632 52" role="img" aria-label="매일 수집, 날짜별 적재, 기간 병합, 패턴 확인 순서의 흐름"><defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" class="fig-head"/></marker></defs><rect class="fig-box" x="0" y="0" width="140" height="52" rx="3"/><text class="fig-text" x="70.0" y="22" text-anchor="middle">매일 수집</text><text class="fig-sub" x="70.0" y="40" text-anchor="middle">시간대별 예약 상태</text><path class="fig-line" marker-end="url(#arrow)" d="M140 26 H162"/><rect class="fig-box" x="164" y="0" width="140" height="52" rx="3"/><text class="fig-text" x="234.0" y="22" text-anchor="middle">날짜별 적재</text><text class="fig-sub" x="234.0" y="40" text-anchor="middle">날짜가 붙은 CSV</text><path class="fig-line" marker-end="url(#arrow)" d="M304 26 H326"/><rect class="fig-box" x="328" y="0" width="140" height="52" rx="3"/><text class="fig-text" x="398.0" y="22" text-anchor="middle">기간 병합</text><text class="fig-sub" x="398.0" y="40" text-anchor="middle">여러 날 CSV 합치기</text><path class="fig-line" marker-end="url(#arrow)" d="M468 26 H490"/><rect class="fig-box" x="492" y="0" width="140" height="52" rx="3"/><text class="fig-text" x="562.0" y="22" text-anchor="middle">패턴 확인</text><text class="fig-sub" x="562.0" y="40" text-anchor="middle">순위·시간대·요일</text></svg>
@@ -49,8 +57,8 @@
 
         <section id="problem">
             <h2>수요 파악의 문제</h2>
+            <p>상권에 들어갈지 판단하려면 이용량의 흐름이 필요했지만, 손으로 볼 수 있는 건 한 시점의 화면뿐</p>
             <ul>
-                <li>상권에 들어갈지 판단하려면 이용량의 흐름이 필요했지만, 손으로 볼 수 있는 건 한 시점의 화면뿐</li>
                 <li>업체별 예약 건수는 공개되지 않음</li>
                 <li>여러 업체의 예약 현황을 보려면 페이지를 하나씩 열어 엑셀로 옮겨야 함</li>
                 <li>한 시점만 봐서는 요일별, 시간대별 흐름과 추세를 알 수 없음</li>
@@ -59,49 +67,53 @@
 
         <section id="collect">
             <h2>수집 방식</h2>
-            <ul>
-                <li>헤드리스 브라우저(Puppeteer)로 업체별 모바일 예약 페이지를 엶</li>
-                <li>화면의 글자를 긁지 않고, 페이지가 스스로 불러오는 시간대별 예약 데이터 응답을 가로채 기록
-                    <ul>
-                        <li>화면 구조가 바뀌어도 덜 깨지고, 값이 이미 구조화되어 있음</li>
-                        <li>인증 토큰이나 따로 알아낸 API 키 없이, 페이지를 여는 것과 같은 요청만 사용</li>
-                    </ul>
-                </li>
-                <li>대상 업체는 설정 파일로 관리, 장소 주소 하나로 업체를 등록하는 명령 제공</li>
-                <li>예약 자원 ID를 모르면 페이지의 상태 데이터에서 자동으로 찾음</li>
-                <li>스케줄러(cron)로 하루 한 번 수집해 데이터가 계속 쌓이게 함</li>
-            </ul>
+            <p>헤드리스 브라우저(Puppeteer)로 업체별 모바일 예약 페이지를 열고, 화면의 글자 대신 페이지가 스스로 불러오는 예약 데이터 응답을 가로채 기록</p>
+            <dl class="deflist">
+                <dt>이유</dt>
+                <dd>화면 구조가 바뀌어도 덜 깨지고, 값이 이미 구조화되어 있음</dd>
+                <dt>요청</dt>
+                <dd>인증 토큰이나 따로 알아낸 API 키 없이, 페이지를 여는 것과 같은 요청만 사용</dd>
+                <dt>대상 관리</dt>
+                <dd>설정 파일로 관리, 장소 주소 하나로 업체를 등록하는 명령 제공. 예약 자원 ID를 모르면 페이지의 상태 데이터에서 자동으로 찾음</dd>
+                <dt>주기</dt>
+                <dd>스케줄러(cron)로 하루 한 번 수집해 데이터가 계속 쌓이게 함</dd>
+            </dl>
         </section>
 
         <section id="analysis">
             <h2>적재와 분석</h2>
-            <ul>
-                <li>업체, 예약 자원, 날짜, 시간, 상태를 하루 한 파일, 슬롯마다 한 줄로 저장</li>
-                <li>엑셀에서 바로 열리도록 인코딩을 맞춤</li>
-                <li>대시보드는 서버 없는 HTML 한 파일. 여러 날짜의 CSV를 끌어다 놓으면 기간 전체로 합쳐 업체 순위, 시간대별, 요일별 분포와 추세를 그림</li>
-                <li>데이터는 브라우저 밖으로 나가지 않음</li>
-            </ul>
+            <dl class="deflist">
+                <dt>저장</dt>
+                <dd>업체, 예약 자원, 날짜, 시간, 상태를 하루 한 파일, 슬롯마다 한 줄로 저장. 엑셀에서 바로 열리도록 인코딩을 맞춤</dd>
+                <dt>대시보드</dt>
+                <dd>서버 없는 HTML 한 파일. 여러 날짜의 CSV를 끌어다 놓으면 기간 전체로 합쳐 업체 순위, 시간대별, 요일별 분포와 추세를 그림</dd>
+                <dt>데이터</dt>
+                <dd>브라우저 밖으로 나가지 않음</dd>
+            </dl>
 <pre><code># reservations_YYYYMMDD.csv: one file a day, one row per slot
 StudioName, ResourceID, Date, Time, Status</code></pre>
         </section>
 
         <section id="decision">
             <h2>대리 지표 설계</h2>
-            <ul>
-                <li>필요한 값을 직접 얻을 수 없을 때, 얻을 수 있는 값 중 가장 가까운 것을 골라 꾸준히 쌓는 쪽을 선택</li>
-                <li>지표: 예약 건수 대신 시간대마다 예약이 찼는지를 기록해 이용량 추정</li>
-                <li>수집 주기: 한 번이 아니라 매일. 같은 방식으로 쌓아야 요일별, 시간대별 패턴과 기간 추세가 보임</li>
-                <li>규모: 조사용이라 서버, 외부 DB, API 키 없이 로컬 수집과 브라우저 시각화만으로 끝나게 해 운영 부담을 남기지 않음</li>
-            </ul>
+            <p>필요한 값을 직접 얻을 수 없을 때, 얻을 수 있는 값 중 가장 가까운 것을 골라 꾸준히 쌓는 쪽을 선택</p>
+            <dl class="deflist">
+                <dt>지표</dt>
+                <dd>예약 건수 대신 시간대마다 예약이 찼는지를 기록해 이용량 추정</dd>
+                <dt>수집 주기</dt>
+                <dd>한 번이 아니라 매일. 같은 방식으로 쌓아야 요일별, 시간대별 패턴과 기간 추세가 보임</dd>
+                <dt>규모</dt>
+                <dd>조사용이라 서버, 외부 DB, API 키 없이 로컬 수집과 브라우저 시각화만으로 끝나게 해 운영 부담을 남기지 않음</dd>
+            </dl>
         </section>
 
         <section id="result">
             <h2>결과: 진입하지 않기로 결정</h2>
-            <ul>
-                <li>쌓인 데이터로 요일별, 시간대별 예약 분포를 확인</li>
-                <li>예약 이용률이 낮다는 결과를 근거로 해당 사업 검토를 접음</li>
-                <li>한계: 예약이 찬 슬롯은 보이지만 실제 방문이나 취소는 알 수 없어, 이용량의 절대값이 아니라 흐름을 보는 용도</li>
-            </ul>
+            <p>쌓인 데이터로 요일별, 시간대별 예약 분포를 확인하고, 예약 이용률이 낮다는 결과를 근거로 해당 사업 검토를 접음</p>
+            <dl class="deflist">
+                <dt>한계</dt>
+                <dd>예약이 찬 슬롯은 보이지만 실제 방문이나 취소는 알 수 없어, 이용량의 절대값이 아니라 흐름을 보는 용도</dd>
+            </dl>
             <figure class="fig">
                 <img src="images/example.png" alt="시간대 및 요일별 예약 분포 대시보드">
                 <figcaption>분석 대시보드, 시간대별·요일별 예약 분포. <a href="https://hitomorrow-kr.github.io/Nmap-reservation-analyzer/dashboard/report.html">예시 대시보드</a>에서 꾸민 데이터로 직접 볼 수 있음</figcaption>

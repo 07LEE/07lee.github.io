@@ -9,6 +9,7 @@
     <meta name="robots" content="noindex, nofollow">
     <link rel="stylesheet" href="../assets/css/detail-theme.css">
     <link rel="stylesheet" href="../assets/css/article.css">
+    <link rel="stylesheet" href="../../mobile.css">
     <script src="../assets/js/components.js" defer></script>
     <script src="../assets/js/article.js" defer></script>
 </head>
@@ -22,7 +23,12 @@
         <header class="article-head">
             <h1>NAS Data Platform</h1>
             <p class="lede">현장 수집 데이터와 처리 결과의 출처와 상태를 추적하는 카탈로그와 입고 파이프라인</p>
-            <p class="article-meta">회사 업무 · 2026.09 ~ 2026.11 · Python, FastAPI, SQLite</p>
+            <p class="article-meta">Python, FastAPI, SQLite</p>
+            <dl class="facts">
+                <div><dt>역할</dt><dd>회사 업무, 설계부터 구현, 운영까지 혼자</dd></div>
+                <div><dt>기간</dt><dd>2026.09 ~ 2026.11</dd></div>
+                <div><dt>결과</dt><dd>데이터셋 178건, 약 1.85TB를 검증 후 등록</dd></div>
+            </dl>
         </header>
 
         <nav class="article-toc" aria-label="목차">
@@ -36,19 +42,18 @@
 
         <section id="why">
             <h2>시작한 이유</h2>
+            <p>폴더에 쌓인 기존 데이터를 새 계층 구조로 옮기는 마이그레이션을 맡았는데, 열어 보니 데이터 사이의 연결이 끊겨 있음</p>
             <ul>
-                <li>폴더에 쌓인 기존 데이터를 새 계층 구조로 옮기는 마이그레이션을 맡음</li>
-                <li>열어 보니 데이터 사이의 연결이 끊겨 있음
-                    <ul>
-                        <li>어떤 원본으로 만들었는지 기록이 없는 재구성 결과</li>
-                        <li>다른 폴더에 흩어져 어느 촬영의 것인지 알 수 없는 전처리 버전</li>
-                        <li>원본이 빠지고 결과만 남은 경우</li>
-                    </ul>
-                </li>
-                <li>그대로 옮기면 자리는 정리되지만, 무엇이 무엇에서 나왔는지는 여전히 알 수 없음</li>
-                <li>목표: 파일만이 아니라 데이터 사이의 연결까지 옮기기</li>
-                <li>설계부터 구현, 운영까지 혼자 담당</li>
+                <li>어떤 원본으로 만들었는지 기록이 없는 재구성 결과</li>
+                <li>다른 폴더에 흩어져 어느 촬영의 것인지 알 수 없는 전처리 버전</li>
+                <li>원본이 빠지고 결과만 남은 경우</li>
             </ul>
+            <dl class="deflist">
+                <dt>그대로 옮기면</dt>
+                <dd>자리는 정리되지만, 무엇이 무엇에서 나왔는지는 여전히 알 수 없음</dd>
+                <dt>목표</dt>
+                <dd>파일만이 아니라 데이터 사이의 연결까지 옮기기</dd>
+            </dl>
         </section>
 
         <section id="system">
@@ -56,76 +61,78 @@
             <figure class="fig">
                 <svg viewBox="0 0 632 148" role="img" aria-label="파일은 업로드에서 완료까지 NAS로 흐르고, 카탈로그는 메타데이터와 상태만 주고받는 구성"><defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" class="fig-head"/></marker></defs><rect class="fig-box" x="0" y="0" width="112" height="52" rx="3"/><text class="fig-text" x="56.0" y="23.0" text-anchor="middle">현장 업로드</text><text class="fig-sub" x="56.0" y="40.0" text-anchor="middle">전송 모듈</text><path class="fig-line" marker-end="url(#arrow)" d="M112 26 H128"/><rect class="fig-box" x="130" y="0" width="112" height="52" rx="3"/><text class="fig-text" x="186.0" y="23.0" text-anchor="middle">입고 대기</text><text class="fig-sub" x="186.0" y="40.0" text-anchor="middle">등록 전 자료</text><path class="fig-line" marker-end="url(#arrow)" d="M242 26 H258"/><line class="fig-dash" x1="186.0" y1="52" x2="186.0" y2="96"/><rect class="fig-box" x="260" y="0" width="112" height="52" rx="3"/><text class="fig-text" x="316.0" y="23.0" text-anchor="middle">계층에 등록</text><text class="fig-sub" x="316.0" y="40.0" text-anchor="middle">검증 통과분만</text><path class="fig-line" marker-end="url(#arrow)" d="M372 26 H388"/><line class="fig-dash" x1="316.0" y1="52" x2="316.0" y2="96"/><rect class="fig-box" x="390" y="0" width="112" height="52" rx="3"/><text class="fig-text" x="446.0" y="23.0" text-anchor="middle">재구성 워커</text><text class="fig-sub" x="446.0" y="40.0" text-anchor="middle">사용한 입력 기록</text><path class="fig-line" marker-end="url(#arrow)" d="M502 26 H518"/><line class="fig-dash" x1="446.0" y1="52" x2="446.0" y2="96"/><rect class="fig-box" x="520" y="0" width="112" height="52" rx="3"/><text class="fig-text" x="576.0" y="23.0" text-anchor="middle">완료</text><text class="fig-sub" x="576.0" y="40.0" text-anchor="middle">등록 확인 후</text><line class="fig-dash" x1="576.0" y1="52" x2="576.0" y2="96"/><rect class="fig-box" x="0" y="96" width="632" height="52" rx="3"/><text class="fig-text" x="316.0" y="119.0" text-anchor="middle">카탈로그: API · 주기 스캔 워커 · DB · 운영 도구</text><text class="fig-sub" x="316.0" y="136.0" text-anchor="middle">메타데이터와 작업 상태만 관리, 데이터 파일은 거치지 않고 NAS로 직접</text><text class="fig-sub" x="0" y="74">NAS</text></svg>
             </figure>
-            <ul>
-                <li>카탈로그를 중심으로 전송 모듈, 재구성 처리 워커, 운영 도구까지 함께 구성</li>
-                <li>파일이 올라오면 카탈로그가 주기적으로 확인하고, 체크섬까지 맞은 것만 계층에 등록</li>
-                <li>처리 워커는 새 입력을 받아 3D로 만들고, 어떤 입력을 썼는지 기록해 결과를 다시 올림</li>
-                <li>카탈로그가 결과 등록을 확인해야 완료로 처리</li>
-                <li>연결 원칙
-                    <ul>
-                        <li>데이터 파일은 API 서버를 거치지 않고 NAS로 직접 올리고 내려받음</li>
-                        <li>API로는 메타데이터와 작업 상태만 주고받음</li>
-                        <li>완료 기록과 체크섬 목록을 파일로 남겨, 한쪽이 멈춰도 다른 쪽이 보고 재시도</li>
-                    </ul>
-                </li>
-            </ul>
+            <dl class="deflist">
+                <dt>등록</dt>
+                <dd>파일이 올라오면 카탈로그가 주기적으로 확인하고, 체크섬까지 맞은 것만 계층에 등록</dd>
+                <dt>처리</dt>
+                <dd>처리 워커는 새 입력을 받아 3D로 만들고, 어떤 입력을 썼는지 기록해 결과를 다시 올림</dd>
+                <dt>완료</dt>
+                <dd>카탈로그가 결과 등록을 확인해야 완료로 처리</dd>
+                <dt>파일 경로</dt>
+                <dd>데이터 파일은 API 서버를 거치지 않고 NAS로 직접 올리고 내려받음. API로는 메타데이터와 작업 상태만 주고받음</dd>
+                <dt>재시도</dt>
+                <dd>완료 기록과 체크섬 목록을 파일로 남겨, 한쪽이 멈춰도 다른 쪽이 보고 재시도</dd>
+            </dl>
         </section>
 
         <section id="lineage">
             <h2>계층과 계보</h2>
-            <ul>
-                <li>계층은 회사의 메달리온 구조(Bronze ~ Diamond)를 따르고, 그 안의 단위와 계보 설계를 담당</li>
-                <li>같은 촬영의 원본과 전처리 버전은 한 단위로 보관, 쓰는 사람이 원본이나 특정 버전을 선택</li>
-                <li>결과마다 실제로 쓴 입력을 계보로 기록</li>
-            </ul>
+            <p>결과마다 실제로 쓴 입력을 계보로 기록</p>
+            <dl class="deflist">
+                <dt>계층</dt>
+                <dd>회사의 메달리온 구조(Bronze ~ Diamond)를 따르고, 그 안의 단위와 계보 설계를 담당</dd>
+                <dt>단위</dt>
+                <dd>같은 촬영의 원본과 전처리 버전은 한 단위로 보관, 쓰는 사람이 원본이나 특정 버전을 선택</dd>
+            </dl>
             <figure class="fig">
                 <svg viewBox="0 0 632 148" role="img" aria-label="계층별 결과와 입력 연결: 단계를 차례로 거친 경우, 원본을 바로 쓴 경우, 확인되지 않은 후보"><defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" class="fig-head"/></marker></defs><text class="fig-sub" x="56.0" y="12" text-anchor="middle">Bronze</text><text class="fig-sub" x="186.0" y="12" text-anchor="middle">Silver</text><text class="fig-sub" x="316.0" y="12" text-anchor="middle">Gold</text><text class="fig-sub" x="446.0" y="12" text-anchor="middle">Platinum</text><text class="fig-sub" x="576.0" y="12" text-anchor="middle">Diamond</text><rect class="fig-box" x="0" y="24" width="112" height="30" rx="3"/><text class="fig-text" x="56.0" y="44.0" text-anchor="middle">촬영 A 전처리 v1</text><path class="fig-line" marker-end="url(#arrow)" d="M112 39 H128"/><rect class="fig-box" x="130" y="24" width="112" height="30" rx="3"/><text class="fig-text" x="186.0" y="44.0" text-anchor="middle">위치 추정 A</text><path class="fig-line" marker-end="url(#arrow)" d="M242 39 H258"/><rect class="fig-box" x="260" y="24" width="112" height="30" rx="3"/><text class="fig-text" x="316.0" y="44.0" text-anchor="middle">재구성 A</text><path class="fig-line" marker-end="url(#arrow)" d="M372 39 H388"/><rect class="fig-box" x="390" y="24" width="112" height="30" rx="3"/><text class="fig-text" x="446.0" y="44.0" text-anchor="middle">모델 A</text><path class="fig-line" marker-end="url(#arrow)" d="M502 39 H518"/><rect class="fig-box" x="520" y="24" width="112" height="30" rx="3"/><text class="fig-text" x="576.0" y="44.0" text-anchor="middle">패키지 A</text><rect class="fig-box" x="0" y="70" width="112" height="30" rx="3"/><text class="fig-text" x="56.0" y="90.0" text-anchor="middle">촬영 B 원본</text><rect class="fig-box" x="260" y="70" width="112" height="30" rx="3"/><text class="fig-text" x="316.0" y="90.0" text-anchor="middle">재구성 B</text><path class="fig-line" marker-end="url(#arrow)" d="M112 85 H258"/><text class="fig-sub" x="384" y="89">원본을 바로 사용, 거치지 않은 단계는 만들지 않음</text><rect class="fig-box" x="0" y="116" width="112" height="30" rx="3"/><text class="fig-text" x="56.0" y="136.0" text-anchor="middle">촬영 C 원본</text><rect class="fig-box fig-box-dash" x="260" y="116" width="112" height="30" rx="3"/><text class="fig-text" x="316.0" y="136.0" text-anchor="middle">재구성 C</text><path class="fig-line fig-dashline" marker-end="url(#arrow)" d="M112 131 H258"/><text class="fig-sub" x="384" y="135">확인되지 않은 관계, 후보로만 표시</text></svg>
             </figure>
-            <ul>
-                <li>원본을 바로 쓴 결과에 중간 단계를 거친 것처럼 계보를 만들지 않음</li>
-                <li>확인되지 않은 관계는 확정하지 않고 후보로만 남겨, 확인된 계보와 섞이지 않게 함</li>
-                <li>데이터셋은 등록하되, 계보는 입력이 하나로 확인될 때만 확정</li>
-            </ul>
+            <dl class="deflist">
+                <dt>지어내지 않음</dt>
+                <dd>원본을 바로 쓴 결과에 중간 단계를 거친 것처럼 계보를 만들지 않음</dd>
+                <dt>후보</dt>
+                <dd>확인되지 않은 관계는 확정하지 않고 후보로만 남겨, 확인된 계보와 섞이지 않게 함</dd>
+                <dt>확정 기준</dt>
+                <dd>데이터셋은 등록하되, 계보는 입력이 하나로 확인될 때만 확정</dd>
+            </dl>
         </section>
 
         <section id="source">
             <h2>원천과 색인</h2>
-            <ul>
-                <li>데이터 옆에 요약 파일(JSON)을 두고 메타데이터의 원천으로 사용
-                    <ul>
-                        <li>이름, 유형, 현장, 파일 수, 용량, 계층별 정보, 실제로 사용한 입력</li>
-                        <li>DB 없이 저장소만 봐도 데이터가 무엇인지 알 수 있음</li>
-                    </ul>
-                </li>
-                <li>카탈로그 DB는 빠르게 찾기 위한 색인, 작업 상태는 별도 작업 DB가 관리</li>
-                <li>두 곳을 맞추는 규칙
-                    <ul>
-                        <li>수집: 새 항목만 추가, 기존 값은 덮어쓰지 않고 차이를 보고</li>
-                        <li>검증: 실제 파일, 요약, DB 기록을 비교해 차이를 보고만 하고 자동으로 고치지 않음</li>
-                        <li>검토 후 갱신: 사람이 확인한 변경만 요약 파일과 DB에 함께 반영, 이전 값 보존</li>
-                    </ul>
-                </li>
-                <li>DB를 잃어도 요약 파일로 색인을 다시 만들 수 있고, 어긋남은 덮어쓰기 전에 드러남. 잘못된 값은 DB 제약이 한 번 더 막음</li>
-            </ul>
+            <p>데이터 옆 요약 파일(JSON)이 메타데이터의 원천이고, 카탈로그 DB는 빠르게 찾기 위한 색인</p>
+            <dl class="deflist">
+                <dt>요약 파일</dt>
+                <dd>이름, 유형, 현장, 파일 수, 용량, 계층별 정보, 실제로 사용한 입력. DB 없이 저장소만 봐도 데이터가 무엇인지 알 수 있음</dd>
+                <dt>작업 상태</dt>
+                <dd>별도 작업 DB가 관리</dd>
+                <dt>수집</dt>
+                <dd>새 항목만 추가, 기존 값은 덮어쓰지 않고 차이를 보고</dd>
+                <dt>검증</dt>
+                <dd>실제 파일, 요약, DB 기록을 비교해 차이를 보고만 하고 자동으로 고치지 않음</dd>
+                <dt>검토 후 갱신</dt>
+                <dd>사람이 확인한 변경만 요약 파일과 DB에 함께 반영, 이전 값 보존</dd>
+                <dt>효과</dt>
+                <dd>DB를 잃어도 요약 파일로 색인을 다시 만들 수 있고, 어긋남은 덮어쓰기 전에 드러남. 잘못된 값은 DB 제약이 한 번 더 막음</dd>
+            </dl>
         </section>
 
         <section id="recovery">
             <h2>중단 복구</h2>
-            <ul>
-                <li>계층 등록은 NAS에서 파일을 옮기고 DB에 기록하는 두 단계인데, 둘을 한 번에 확정할 트랜잭션이 없음</li>
-                <li>중간에 끊기면 파일은 옮겨졌는데 DB 기록이 없는 상태가 생길 수 있음</li>
-                <li>무엇을 어디로 옮길지 계획을 내용 해시로 고정하고, 실행 전에 할 일을 저널에 먼저 기록</li>
-                <li>끊긴 뒤 같은 계획을 다시 적용하면
-                    <ul>
-                        <li>저널과 대상이 맞으면 끝난 단계는 건너뛰고 남은 단계만 실행</li>
-                        <li>응답이 끊긴 이동은 대상을 다시 검사해 판단</li>
-                        <li>파일이 바뀌었거나 대상에 이미 자료가 있으면 덮어쓰지 않고 보존한 채 멈춤</li>
-                        <li>등록은 끝났는데 정리만 남은 경우에는 정리 단계만 재시도</li>
-                    </ul>
-                </li>
-                <li>저널 자체도 임시 파일에 쓰고 디스크에 내린 뒤 한 번에 교체해, 쓰다 만 저널이 남지 않음</li>
-                <li>실행은 작업 큐가 관리해, 워커가 죽어도 작업을 회수해 다시 실행</li>
-            </ul>
+            <p>계층 등록은 NAS에서 파일을 옮기고 DB에 기록하는 두 단계인데, 둘을 한 번에 확정할 트랜잭션이 없어 중간에 끊기면 파일만 옮겨진 상태가 생길 수 있음</p>
+            <dl class="deflist">
+                <dt>계획 고정</dt>
+                <dd>무엇을 어디로 옮길지 계획을 내용 해시로 고정하고, 실행 전에 할 일을 저널에 먼저 기록</dd>
+                <dt>이어서 실행</dt>
+                <dd>저널과 대상이 맞으면 끝난 단계는 건너뛰고 남은 단계만 실행. 응답이 끊긴 이동은 대상을 다시 검사해 판단</dd>
+                <dt>멈춤</dt>
+                <dd>파일이 바뀌었거나 대상에 이미 자료가 있으면 덮어쓰지 않고 보존한 채 멈춤</dd>
+                <dt>정리만 재시도</dt>
+                <dd>등록은 끝났는데 정리만 남은 경우에는 정리 단계만 재시도</dd>
+                <dt>저널</dt>
+                <dd>임시 파일에 쓰고 디스크에 내린 뒤 한 번에 교체해, 쓰다 만 저널이 남지 않음</dd>
+                <dt>작업 큐</dt>
+                <dd>워커가 죽어도 작업을 회수해 다시 실행</dd>
+            </dl>
 <pre><code>def atomic_json(path, value):
     """Write through a temporary file, fsync it,
     then replace the journal in one step."""
@@ -169,10 +176,12 @@
                     </tbody>
                 </table>
             </div>
-            <ul>
-                <li>운영과 인계: API와 워커 상태, 실패와 보류 원인 확인 절차와 업로드·운영 문서, 실행 예제를 정리해 인계</li>
-                <li>범위 밖: 재구성 연산 자체는 외부 도구가 수행. 직접 구현한 부분은 데이터 관리, 실행 자동화, 검증, 운영 연계</li>
-            </ul>
+            <dl class="deflist">
+                <dt>운영과 인계</dt>
+                <dd>API와 워커 상태, 실패와 보류 원인 확인 절차와 업로드·운영 문서, 실행 예제를 정리해 인계</dd>
+                <dt>범위 밖</dt>
+                <dd>재구성 연산 자체는 외부 도구가 수행. 직접 구현한 부분은 데이터 관리, 실행 자동화, 검증, 운영 연계</dd>
+            </dl>
         </section>
 
     </article>
