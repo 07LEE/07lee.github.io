@@ -7,165 +7,126 @@
     <meta name="description" content="NAS Data Platform: 현장 수집 데이터와 처리 결과의 출처와 상태를 추적하는 카탈로그와 입고 파이프라인">
     <title>NAS Data Platform</title>
     <meta name="robots" content="noindex, nofollow">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/deck-base.css">
     <link rel="stylesheet" href="../assets/css/detail-theme.css">
+    <link rel="stylesheet" href="../assets/css/article.css">
     <script src="../assets/js/components.js" defer></script>
-    <link rel="stylesheet" href="../assets/css/deck-extras.css">
+    <script src="../assets/js/article.js" defer></script>
 </head>
 
-<body>
+<body class="article-page">
 
     <portfolio-header back-href="../projects.html" title="NAS Data Platform" only-back></portfolio-header>
 
-    <div class="dashboard-container deck-viewport">
+    <article class="article">
 
-        <aside class="sidebar">
-            <div class="sidebar-brand">
-                <span class="brand-title">NAS Data Platform</span>
-                <span class="brand-version">Python · FastAPI · SQLite</span>
-            </div>
-            <nav class="sidebar-nav">
-                <button class="sidebar-item active" data-target="slide-1">
-                    <span class="nav-num">01</span> Overview
-                </button>
-                <button class="sidebar-item" data-target="slide-2">
-                    <span class="nav-num">02</span> Problem
-                </button>
-                <button class="sidebar-item" data-target="slide-3">
-                    <span class="nav-num">03</span> Design Decision
-                </button>
-                <button class="sidebar-item" data-target="slide-4">
-                    <span class="nav-num">04</span> Failure &amp; Recovery
-                </button>
-                <button class="sidebar-item" data-target="slide-5">
-                    <span class="nav-num">05</span> Operation &amp; Handoff
-                </button>
-                <button class="sidebar-item" data-target="slide-6">
-                    <span class="nav-num">06</span> Result &amp; Limits
-                </button>
-            </nav>
-            <div class="sidebar-footer">
-                <span>Data Platform · 2026.09 ~ 11</span>
-            </div>
-        </aside>
+        <header class="article-head">
+            <h1>NAS Data Platform</h1>
+            <p class="lede">현장 수집 데이터와 처리 결과의 출처와 상태를 추적하는 카탈로그와 입고 파이프라인</p>
+            <p class="article-meta">회사 업무 · 2026.09 ~ 2026.11 · Python, FastAPI, SQLite</p>
+        </header>
 
-        <main class="content-area deck-container">
+        <nav class="article-toc" aria-label="목차">
+            <a href="#why">시작한 이유</a>
+            <a href="#system">전체 구성</a>
+            <a href="#lineage">계층과 계보</a>
+            <a href="#source">원천과 색인</a>
+            <a href="#recovery">중단 복구</a>
+            <a href="#result">결과</a>
+        </nav>
 
-            <!-- Slide 1: Overview -->
-            <section class="slide-section slide active" id="slide-1">
-                <div class="slide-grid">
-                    <div class="slide-info-panel">
-                        <span class="badge">Overview</span>
-                        <h2>수집 데이터 카탈로그와 입고 파이프라인</h2>
-                        <p class="paragraph">폴더 단위로 쌓이던 현장 수집 데이터와 3D 재구성 결과를, 출처와 처리 상태를 조회할 수 있는 카탈로그와 입고 파이프라인으로 옮겼습니다. 설계부터 구현, 통합, 운영까지 혼자 맡았습니다.</p>
-                        <div class="highlight-info-box">
-                            <i class="fa-solid fa-layer-group"></i> Python · FastAPI · SQLite · Linux / Windows
-                        </div>
-                    </div>
-                    <div class="slide-visual-panel">
-                        <div class="flow">
-                            <div class="flow-step">
-                                <span class="flow-num">01</span>
-                                <div>
-                                    <h3>원본 등록</h3>
-                                    <p>들어온 자료의 유형을 판별하고 검증한 뒤 계층별로 이관해 등록. 새 센서 형식도 검증해 자동 분류</p>
-                                </div>
-                            </div>
-                            <div class="flow-step">
-                                <span class="flow-num">02</span>
-                                <div>
-                                    <h3>입력 선택</h3>
-                                    <p>같은 촬영의 원본과 전처리 버전을 구분해 처리할 입력을 고름</p>
-                                </div>
-                            </div>
-                            <div class="flow-step">
-                                <span class="flow-num">03</span>
-                                <div>
-                                    <h3>처리와 검증</h3>
-                                    <p>작업 상태를 남기며 실행하고, 출력 파일을 검증</p>
-                                </div>
-                            </div>
-                            <div class="flow-step">
-                                <span class="flow-num">04</span>
-                                <div>
-                                    <h3>결과 인계</h3>
-                                    <p>결과를 등록하고 실제로 사용한 입력과 연결해 다음 사람이 조회</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <section id="why">
+            <h2>시작한 이유</h2>
+            <ul>
+                <li>폴더에 쌓인 기존 데이터를 새 계층 구조로 옮기는 마이그레이션을 맡음</li>
+                <li>열어 보니 데이터 사이의 연결이 끊겨 있음
+                    <ul>
+                        <li>어떤 원본으로 만들었는지 기록이 없는 재구성 결과</li>
+                        <li>다른 폴더에 흩어져 어느 촬영의 것인지 알 수 없는 전처리 버전</li>
+                        <li>원본이 빠지고 결과만 남은 경우</li>
+                    </ul>
+                </li>
+                <li>그대로 옮기면 자리는 정리되지만, 무엇이 무엇에서 나왔는지는 여전히 알 수 없음</li>
+                <li>목표: 파일만이 아니라 데이터 사이의 연결까지 옮기기</li>
+                <li>설계부터 구현, 운영까지 혼자 담당</li>
+            </ul>
+        </section>
 
-            <!-- Slide 2: Problem -->
-            <section class="slide-section slide" id="slide-2">
-                <div class="slide-grid">
-                    <div class="slide-info-panel">
-                        <span class="badge">Problem</span>
-                        <h2>폴더 관리의 문제</h2>
-                        <p class="paragraph">데이터가 폴더 단위로만 관리되어, 다음 담당자는 어떤 데이터를 믿고 써야 하는지 알 수 없었습니다. 이 세 가지 질문에 답할 수 있는 구조를 목표로 잡았습니다.</p>
-                    </div>
-                    <div class="slide-visual-panel">
-                        <div class="question-list">
-                            <div class="question">원본과 전처리 버전 중 무엇을 써야 하는가?</div>
-                            <div class="question">이 결과는 어떤 입력으로 만들어졌는가?</div>
-                            <div class="question">지금 작업은 어디까지 끝났는가?</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <section id="system">
+            <h2>전체 구성</h2>
+            <figure class="fig">
+                <svg viewBox="0 0 632 148" role="img" aria-label="파일은 업로드에서 완료까지 NAS로 흐르고, 카탈로그는 메타데이터와 상태만 주고받는 구성"><defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" class="fig-head"/></marker></defs><rect class="fig-box" x="0" y="0" width="112" height="52" rx="3"/><text class="fig-text" x="56.0" y="23.0" text-anchor="middle">현장 업로드</text><text class="fig-sub" x="56.0" y="40.0" text-anchor="middle">전송 모듈</text><path class="fig-line" marker-end="url(#arrow)" d="M112 26 H128"/><rect class="fig-box" x="130" y="0" width="112" height="52" rx="3"/><text class="fig-text" x="186.0" y="23.0" text-anchor="middle">입고 대기</text><text class="fig-sub" x="186.0" y="40.0" text-anchor="middle">등록 전 자료</text><path class="fig-line" marker-end="url(#arrow)" d="M242 26 H258"/><line class="fig-dash" x1="186.0" y1="52" x2="186.0" y2="96"/><rect class="fig-box" x="260" y="0" width="112" height="52" rx="3"/><text class="fig-text" x="316.0" y="23.0" text-anchor="middle">계층에 등록</text><text class="fig-sub" x="316.0" y="40.0" text-anchor="middle">검증 통과분만</text><path class="fig-line" marker-end="url(#arrow)" d="M372 26 H388"/><line class="fig-dash" x1="316.0" y1="52" x2="316.0" y2="96"/><rect class="fig-box" x="390" y="0" width="112" height="52" rx="3"/><text class="fig-text" x="446.0" y="23.0" text-anchor="middle">재구성 워커</text><text class="fig-sub" x="446.0" y="40.0" text-anchor="middle">사용한 입력 기록</text><path class="fig-line" marker-end="url(#arrow)" d="M502 26 H518"/><line class="fig-dash" x1="446.0" y1="52" x2="446.0" y2="96"/><rect class="fig-box" x="520" y="0" width="112" height="52" rx="3"/><text class="fig-text" x="576.0" y="23.0" text-anchor="middle">완료</text><text class="fig-sub" x="576.0" y="40.0" text-anchor="middle">등록 확인 후</text><line class="fig-dash" x1="576.0" y1="52" x2="576.0" y2="96"/><rect class="fig-box" x="0" y="96" width="632" height="52" rx="3"/><text class="fig-text" x="316.0" y="119.0" text-anchor="middle">카탈로그: API · 주기 스캔 워커 · DB · 운영 도구</text><text class="fig-sub" x="316.0" y="136.0" text-anchor="middle">메타데이터와 작업 상태만 관리, 데이터 파일은 거치지 않고 NAS로 직접</text><text class="fig-sub" x="0" y="74">NAS</text></svg>
+            </figure>
+            <ul>
+                <li>카탈로그를 중심으로 전송 모듈, 재구성 처리 워커, 운영 도구까지 함께 구성</li>
+                <li>파일이 올라오면 카탈로그가 주기적으로 확인하고, 체크섬까지 맞은 것만 계층에 등록</li>
+                <li>처리 워커는 새 입력을 받아 3D로 만들고, 어떤 입력을 썼는지 기록해 결과를 다시 올림</li>
+                <li>카탈로그가 결과 등록을 확인해야 완료로 처리</li>
+                <li>연결 원칙
+                    <ul>
+                        <li>데이터 파일은 API 서버를 거치지 않고 NAS로 직접 올리고 내려받음</li>
+                        <li>API로는 메타데이터와 작업 상태만 주고받음</li>
+                        <li>완료 기록과 체크섬 목록을 파일로 남겨, 한쪽이 멈춰도 다른 쪽이 보고 재시도</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
 
-            <!-- Slide 3: Design Decision -->
-            <section class="slide-section slide" id="slide-3">
-                <div class="slide-grid">
-                    <div class="slide-info-panel">
-                        <span class="badge">Design Decision</span>
-                        <h2>등록과 출처 연결 기준</h2>
-                        <p class="paragraph">카탈로그가 틀린 정보를 보여주면 폴더보다 못합니다. 그래서 확인된 사실만 기록하고, 확인되지 않은 것은 그렇다고 표시하는 쪽을 택했습니다.</p>
-                    </div>
-                    <div class="slide-visual-panel">
-                        <div class="decision-list">
-                            <div class="decision">
-                                <span class="label">등록</span>
-                                <h3>파일 도착과 등록 완료는 별개</h3>
-                                <p>완료 기록, 파일 목록, 체크섬을 검증한 뒤에만 등록합니다. 누락, 변조, 경로 충돌이 있으면 자료를 그대로 보존하고 멈춥니다.</p>
-                            </div>
-                            <div class="decision">
-                                <span class="label">관리 단위</span>
-                                <h3>같은 촬영의 원본과 전처리를 구분</h3>
-                                <p>원본과 전처리 버전을 한 단위 안에서 따로 관리하고, 원본, 특정 버전, 전체 중 쓸 범위를 고를 수 있게 했습니다.</p>
-                            </div>
-                            <div class="decision">
-                                <span class="label">출처 추적</span>
-                                <h3>확인되지 않은 관계는 확정하지 않음</h3>
-                                <p>결과에는 실제로 사용한 입력 경로와 처리 근거를 남깁니다. 확인된 입력과 후보 관계를 구분하고, 출처를 모르는 결과에 계보를 지어내지 않습니다. 결과를 쓰는 담당자는 어떤 원본과 버전으로 만든 결과인지 바로 조회할 수 있습니다.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <section id="lineage">
+            <h2>계층과 계보</h2>
+            <ul>
+                <li>계층은 회사의 메달리온 구조(Bronze ~ Diamond)를 따르고, 그 안의 단위와 계보 설계를 담당</li>
+                <li>같은 촬영의 원본과 전처리 버전은 한 단위로 보관, 쓰는 사람이 원본이나 특정 버전을 선택</li>
+                <li>결과마다 실제로 쓴 입력을 계보로 기록</li>
+            </ul>
+            <figure class="fig">
+                <svg viewBox="0 0 632 148" role="img" aria-label="계층별 결과와 입력 연결: 단계를 차례로 거친 경우, 원본을 바로 쓴 경우, 확인되지 않은 후보"><defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" class="fig-head"/></marker></defs><text class="fig-sub" x="56.0" y="12" text-anchor="middle">Bronze</text><text class="fig-sub" x="186.0" y="12" text-anchor="middle">Silver</text><text class="fig-sub" x="316.0" y="12" text-anchor="middle">Gold</text><text class="fig-sub" x="446.0" y="12" text-anchor="middle">Platinum</text><text class="fig-sub" x="576.0" y="12" text-anchor="middle">Diamond</text><rect class="fig-box" x="0" y="24" width="112" height="30" rx="3"/><text class="fig-text" x="56.0" y="44.0" text-anchor="middle">촬영 A 전처리 v1</text><path class="fig-line" marker-end="url(#arrow)" d="M112 39 H128"/><rect class="fig-box" x="130" y="24" width="112" height="30" rx="3"/><text class="fig-text" x="186.0" y="44.0" text-anchor="middle">위치 추정 A</text><path class="fig-line" marker-end="url(#arrow)" d="M242 39 H258"/><rect class="fig-box" x="260" y="24" width="112" height="30" rx="3"/><text class="fig-text" x="316.0" y="44.0" text-anchor="middle">재구성 A</text><path class="fig-line" marker-end="url(#arrow)" d="M372 39 H388"/><rect class="fig-box" x="390" y="24" width="112" height="30" rx="3"/><text class="fig-text" x="446.0" y="44.0" text-anchor="middle">모델 A</text><path class="fig-line" marker-end="url(#arrow)" d="M502 39 H518"/><rect class="fig-box" x="520" y="24" width="112" height="30" rx="3"/><text class="fig-text" x="576.0" y="44.0" text-anchor="middle">패키지 A</text><rect class="fig-box" x="0" y="70" width="112" height="30" rx="3"/><text class="fig-text" x="56.0" y="90.0" text-anchor="middle">촬영 B 원본</text><rect class="fig-box" x="260" y="70" width="112" height="30" rx="3"/><text class="fig-text" x="316.0" y="90.0" text-anchor="middle">재구성 B</text><path class="fig-line" marker-end="url(#arrow)" d="M112 85 H258"/><text class="fig-sub" x="384" y="89">원본을 바로 사용, 거치지 않은 단계는 만들지 않음</text><rect class="fig-box" x="0" y="116" width="112" height="30" rx="3"/><text class="fig-text" x="56.0" y="136.0" text-anchor="middle">촬영 C 원본</text><rect class="fig-box fig-box-dash" x="260" y="116" width="112" height="30" rx="3"/><text class="fig-text" x="316.0" y="136.0" text-anchor="middle">재구성 C</text><path class="fig-line fig-dashline" marker-end="url(#arrow)" d="M112 131 H258"/><text class="fig-sub" x="384" y="135">확인되지 않은 관계, 후보로만 표시</text></svg>
+            </figure>
+            <ul>
+                <li>원본을 바로 쓴 결과에 중간 단계를 거친 것처럼 계보를 만들지 않음</li>
+                <li>확인되지 않은 관계는 확정하지 않고 후보로만 남겨, 확인된 계보와 섞이지 않게 함</li>
+                <li>데이터셋은 등록하되, 계보는 입력이 하나로 확인될 때만 확정</li>
+            </ul>
+        </section>
 
-            <!-- Slide 4: Failure & Recovery -->
-            <section class="slide-section slide" id="slide-4">
-                <div class="slide-grid">
-                    <div class="slide-info-panel">
-                        <span class="badge">Failure &amp; Recovery</span>
-                        <h2>실패 후 이어서 처리하기</h2>
-                        <p class="paragraph">원본 수신, 재구성, 결과 등록, 로컬 정리로 이어지는 처리는 어느 단계에서든 끊길 수 있습니다. 단계마다 상태를 남겨, 이미 끝난 일은 다시 하지 않고 남은 일만 재시도합니다.</p>
-                        <ul class="step-desc-list">
-                            <li><strong>입력:</strong> 체크섬 목록으로 다운로드를 검증한 원본으로만 시작</li>
-                            <li><strong>실행:</strong> worker 프로세스가 살아 있는지와 실행 준비가 됐는지를 구분. 자원 부족은 대기, 일시적인 연결 오류는 횟수를 제한해 재시도</li>
-                            <li><strong>복구:</strong> 같은 작업 ID, 계획 해시, 저널로 이어서 진행. 이미 등록된 결과는 새로 만들지 않고 정리 단계만 재시도</li>
-                        </ul>
-                    </div>
-                    <div class="slide-visual-panel">
-                        <div class="code-viewport">
-                            <div class="code-header">
-                                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                                <span class="file-name">journal.py (요약)</span>
-                            </div>
-                            <pre class="code-body"><code>def atomic_json(path, value):
+        <section id="source">
+            <h2>원천과 색인</h2>
+            <ul>
+                <li>데이터 옆에 요약 파일(JSON)을 두고 메타데이터의 원천으로 사용
+                    <ul>
+                        <li>이름, 유형, 현장, 파일 수, 용량, 계층별 정보, 실제로 사용한 입력</li>
+                        <li>DB 없이 저장소만 봐도 데이터가 무엇인지 알 수 있음</li>
+                    </ul>
+                </li>
+                <li>카탈로그 DB는 빠르게 찾기 위한 색인, 작업 상태는 별도 작업 DB가 관리</li>
+                <li>두 곳을 맞추는 규칙
+                    <ul>
+                        <li>수집: 새 항목만 추가, 기존 값은 덮어쓰지 않고 차이를 보고</li>
+                        <li>검증: 실제 파일, 요약, DB 기록을 비교해 차이를 보고만 하고 자동으로 고치지 않음</li>
+                        <li>검토 후 갱신: 사람이 확인한 변경만 요약 파일과 DB에 함께 반영, 이전 값 보존</li>
+                    </ul>
+                </li>
+                <li>DB를 잃어도 요약 파일로 색인을 다시 만들 수 있고, 어긋남은 덮어쓰기 전에 드러남. 잘못된 값은 DB 제약이 한 번 더 막음</li>
+            </ul>
+        </section>
+
+        <section id="recovery">
+            <h2>중단 복구</h2>
+            <ul>
+                <li>계층 등록은 NAS에서 파일을 옮기고 DB에 기록하는 두 단계인데, 둘을 한 번에 확정할 트랜잭션이 없음</li>
+                <li>중간에 끊기면 파일은 옮겨졌는데 DB 기록이 없는 상태가 생길 수 있음</li>
+                <li>무엇을 어디로 옮길지 계획을 내용 해시로 고정하고, 실행 전에 할 일을 저널에 먼저 기록</li>
+                <li>끊긴 뒤 같은 계획을 다시 적용하면
+                    <ul>
+                        <li>저널과 대상이 맞으면 끝난 단계는 건너뛰고 남은 단계만 실행</li>
+                        <li>응답이 끊긴 이동은 대상을 다시 검사해 판단</li>
+                        <li>파일이 바뀌었거나 대상에 이미 자료가 있으면 덮어쓰지 않고 보존한 채 멈춤</li>
+                        <li>등록은 끝났는데 정리만 남은 경우에는 정리 단계만 재시도</li>
+                    </ul>
+                </li>
+                <li>저널 자체도 임시 파일에 쓰고 디스크에 내린 뒤 한 번에 교체해, 쓰다 만 저널이 남지 않음</li>
+                <li>실행은 작업 큐가 관리해, 워커가 죽어도 작업을 회수해 다시 실행</li>
+            </ul>
+<pre><code>def atomic_json(path, value):
     """Write through a temporary file, fsync it,
     then replace the journal in one step."""
     path = Path(path)
@@ -180,117 +141,42 @@
     finally:
         if os.path.exists(temporary):
             os.unlink(temporary)</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        </section>
 
-            <!-- Slide 5: Operation & Handoff -->
-            <section class="slide-section slide" id="slide-5">
-                <div class="slide-grid">
-                    <div class="slide-info-panel">
-                        <span class="badge">Operation &amp; Handoff</span>
-                        <h2>운영과 인계</h2>
-                        <p class="paragraph">플랫폼은 쓰는 사람이 계속 믿을 수 있어야 의미가 있습니다. 운영하면서 상태를 확인하고, 새 데이터 형식을 받아들이고, 다음 담당자가 이어받을 수 있게 정리했습니다.</p>
-                    </div>
-                    <div class="slide-visual-panel">
-                        <div class="decision-list">
-                            <div class="decision">
-                                <span class="label">운영</span>
-                                <h3>상태와 정합성을 계속 확인</h3>
-                                <p>API와 worker 상태, 실패와 보류 원인을 확인합니다. 실제 파일, 요약 JSON, 카탈로그 기록이 서로 맞는지 관리하고, 대용량 NAS 검사와 운영 모니터링을 개선했습니다.</p>
-                            </div>
-                            <div class="decision">
-                                <span class="label">확장</span>
-                                <h3>새 센서 데이터 형식 지원</h3>
-                                <p>새로 들어온 센서 데이터 형식도 검증한 뒤 자동으로 분류되도록 지원 범위를 넓혔습니다.</p>
-                            </div>
-                            <div class="decision">
-                                <span class="label">인계</span>
-                                <h3>다음 사람이 이어받을 수 있게</h3>
-                                <p>업로드와 운영 문서, 실행 예제를 제공하고, 오퍼레이터의 입력, 산출물, 완료 기준을 정리했습니다. 경로 전환 확인과 이전 자료 정리 절차를 인계했습니다.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <section id="result">
+            <h2>결과</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>구분</th>
+                            <th>2026년 10월 말 운영 DB 기준</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>데이터 신뢰성</td>
+                            <td>재구성 결과 17건 중 14건은 실제로 쓴 입력 확인, 3건은 확정 전으로 구분</td>
+                        </tr>
+                        <tr>
+                            <td>데이터 정합성</td>
+                            <td>검증을 거친 데이터셋 178건, 파일 23.7만 개, 약 1.85TB 등록</td>
+                        </tr>
+                        <tr>
+                            <td>운영 안정성</td>
+                            <td>실제 환경에서 한 건을 끝까지 처리, 등록 대기와 정리 대기 0건. 운영 상태를 복원한 뒤 작업 재개 확인</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ul>
+                <li>운영과 인계: API와 워커 상태, 실패와 보류 원인 확인 절차와 업로드·운영 문서, 실행 예제를 정리해 인계</li>
+                <li>범위 밖: 재구성 연산 자체는 외부 도구가 수행. 직접 구현한 부분은 데이터 관리, 실행 자동화, 검증, 운영 연계</li>
+            </ul>
+        </section>
 
-            <!-- Slide 6: Result & Limits -->
-            <section class="slide-section slide" id="slide-6">
-                <div class="slide-grid">
-                    <div class="slide-info-panel">
-                        <span class="badge">Result &amp; Limits</span>
-                        <h2>결과와 한계</h2>
-                        <p class="paragraph">신규 촬영 업로드부터 결과 인계까지의 전체 흐름과, 운영 상태를 복원한 뒤 서비스를 다시 띄워 작업을 이어 가는 것까지 실제 운영 환경에서 확인했습니다.</p>
-                        <div class="highlight-info-box border-safe">
-                            <i class="fa-solid fa-check"></i> 실제 NAS·Windows 환경에서 전체 흐름과 복구 검증
-                        </div>
-                    </div>
-                    <div class="slide-visual-panel">
-                        <table class="dashboard-table result-table">
-                            <thead>
-                                <tr>
-                                    <th>구분</th>
-                                    <th>내용</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>확인</td>
-                                    <td>계층별 NAS 데이터 마이그레이션 완료</td>
-                                </tr>
-                                <tr>
-                                    <td>확인</td>
-                                    <td>신규 촬영 업로드부터 재구성, 결과 등록, 입력 관계 확인, 로컬 정리까지 전체 흐름을 실제 환경에서 검증</td>
-                                </tr>
-                                <tr>
-                                    <td>확인</td>
-                                    <td>운영 상태를 별도 경로로 복원하고 DB 무결성과 체크섬 확인</td>
-                                </tr>
-                                <tr>
-                                    <td>확인</td>
-                                    <td>복원 후 서비스 재가동과 작업 재개 검증</td>
-                                </tr>
-                                <tr>
-                                    <td>확인</td>
-                                    <td>프로젝트 간 합성 검증 기록 보관</td>
-                                </tr>
-                                <tr>
-                                    <td>범위 밖</td>
-                                    <td>재구성 연산 자체는 외부 도구가 수행. 직접 구현한 부분은 데이터 관리, 실행 자동화, 검증, 운영 연계</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-        </main>
+    </article>
 
-    </div>
-
-    <portfolio-deck-nav></portfolio-deck-nav>
-
-    <div class="footer-bar">
-        <span>NAS Data Platform : 현장 수집 데이터와 처리 결과의 출처·상태 추적</span>
-    </div>
-
-    <script src="../assets/js/deck.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const sidebarItems = document.querySelectorAll('.sidebar-item');
-            sidebarItems.forEach((item, idx) => {
-                item.addEventListener('click', () => {
-                    document.dispatchEvent(new CustomEvent('changeSlide', { detail: { index: idx } }));
-                });
-            });
-            document.addEventListener('slideChanged', (e) => {
-                sidebarItems.forEach(item => item.classList.remove('active'));
-                if (sidebarItems[e.detail.index]) {
-                    sidebarItems[e.detail.index].classList.add('active');
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>
