@@ -57,7 +57,7 @@
                 <div class="slide-grid">
                     <div class="slide-info-panel">
                         <span class="badge">Overview</span>
-                        <h2>서로 다른 센서 데이터를<br>연구팀이 바로 쓰는 형태로</h2>
+                        <h2>다중 센서 3D 데이터 준비</h2>
                         <p class="paragraph">VFM 연구에 쓸 3D 공간 데이터를 Matterport, LiDAR, 스테레오 카메라, IMU로 수집하고, 누락 검증과 좌표 정합, 점군 라벨링, 업로드까지 맡아 연구개발 팀에 전달했습니다.</p>
                         <div class="highlight-info-box">
                             <i class="fa-solid fa-cube"></i> Python · ROS · Open3D · Segments.ai API · pydantic
@@ -104,7 +104,7 @@
                 <div class="slide-grid">
                     <div class="slide-info-panel">
                         <span class="badge badge-alert">Problem</span>
-                        <h2>수집부터 전달까지<br>막히던 곳</h2>
+                        <h2>수집부터 전달까지의 문제</h2>
                         <p class="paragraph">센서가 여러 개이고 데이터가 커서, 문제를 늦게 발견하거나 같은 일을 반복하는 지점이 많았습니다.</p>
                     </div>
                     <div class="slide-visual-panel">
@@ -124,7 +124,7 @@
                 <div class="slide-grid">
                     <div class="slide-info-panel">
                         <span class="badge">Collection &amp; Alignment</span>
-                        <h2>현장에서 확인하고,<br>좌표를 맞춰 넘긴다</h2>
+                        <h2>현장 검증과 좌표 정합</h2>
                         <ul class="step-desc-list">
                             <li><strong>수집 검증:</strong> 수집 직후 필수 ROS 토픽의 메시지 수를 자동으로 세고, 기준에 못 미치면 알림. 현장을 떠나기 전에 다시 수집할지 판단</li>
                             <li><strong>좌표 정합:</strong> Matterport 기준 스캔과 LiDAR SLAM 맵을 Point-to-Plane ICP로 정합</li>
@@ -145,7 +145,7 @@
                 <div class="slide-grid">
                     <div class="slide-info-panel">
                         <span class="badge">Labeling &amp; Upload</span>
-                        <h2>직접 라벨링하며<br>반복 작업을 도구로</h2>
+                        <h2>라벨링 반복 작업 자동화</h2>
                         <p class="paragraph">실내 장면 점군 라벨링을 직접 하면서, 업로드와 라벨 내려받기를 명령 하나로 묶었습니다.</p>
                         <ul class="step-desc-list">
                             <li><strong>ID 매핑과 중복 확인:</strong> 상위 폴더 이름을 장면 ID로 데이터셋 설명에 기록하고, 같은 ID의 데이터셋과 샘플이 있으면 건너뜀</li>
@@ -193,7 +193,7 @@ client.add_sample(dataset_id, file_path.name, attributes)</code></pre>
                 <div class="slide-grid">
                     <div class="slide-info-panel">
                         <span class="badge">Design Decision</span>
-                        <h2>우회 구조를 만들고,<br>필요 없어지자 걷어냈다</h2>
+                        <h2>임시 우회 구조와 제거</h2>
                         <p class="paragraph">API가 데이터셋 목록을 100개까지만 돌려주던 시기에는 우회 구조로 조회를 유지했습니다. 이후 전체 페이지를 순서대로 읽을 수 있게 되자 우회 구조를 폐기하고 단순한 페이지 순회로 바꿨습니다.</p>
                         <div class="card-outline outline-alert" style="margin-top: 20px;">
                             <h3>2026.04 · 우회 (종료 후 유지보수)</h3>
@@ -238,7 +238,7 @@ client.add_sample(dataset_id, file_path.name, attributes)</code></pre>
                 <div class="slide-grid">
                     <div class="slide-info-panel">
                         <span class="badge">Result</span>
-                        <h2>연구팀이 바로 쓰는<br>데이터로 전달</h2>
+                        <h2>결과</h2>
                         <p class="paragraph">수집 직후 누락 확인과 반복 업로드를 도구로 만들고, 정합한 데이터를 같은 구조로 연구개발 팀에 넘겼습니다.</p>
                         <div class="highlight-info-box border-safe">
                             <i class="fa-solid fa-check"></i> 페이지 순회 동작은 단위 테스트로 확인

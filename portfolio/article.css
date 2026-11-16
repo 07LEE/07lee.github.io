@@ -1,0 +1,263 @@
+/* Long-form project pages: one plain column that reads top to bottom.
+   Pages opt in with <html data-page="..."> (detail-theme.css) and <body class="article-page">. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+.article-page {
+    --text: #d4d4d8;
+    --text-strong: #fafafa;
+    --muted: #8b8b93;
+    --line: #2e2e35;
+    margin: 0;
+    color: var(--text);
+    font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+}
+
+.article {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 80px 24px 112px;
+}
+
+/* ---------- Head ---------- */
+.article-head {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line);
+}
+
+.article-head h1 {
+    margin: 0 0 8px;
+    color: var(--text-strong);
+    font-size: 1.75rem;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+}
+
+.article-head .lede {
+    margin: 0 0 6px;
+    color: var(--text);
+    font-size: 1rem;
+}
+
+.article .article-meta {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.article .article-meta a {
+    color: var(--text);
+}
+
+/* ---------- Table of contents ---------- */
+.article-toc {
+    margin: 0 0 40px;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.article-toc a {
+    display: inline-block;
+    margin: 0 14px 4px 0;
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.article-toc a:hover {
+    color: var(--text-strong);
+    text-decoration: underline;
+}
+
+/* Wide screens: the contents float on the right and follow the page,
+   marking the section being read (article.js). */
+@media (min-width: 1180px) {
+    .article-toc {
+        position: fixed;
+        top: 120px;
+        left: calc(50% + 340px + 40px);
+        width: 180px;
+        margin: 0;
+        padding-left: 12px;
+        border-left: 1px solid var(--line);
+    }
+
+    .article-toc a {
+        display: block;
+        margin: 0;
+        padding: 3px 0;
+        font-size: 0.8rem;
+        line-height: 1.5;
+    }
+
+    .article-toc a.active {
+        color: var(--text-strong);
+    }
+
+    .article-toc a:hover {
+        text-decoration: none;
+    }
+}
+
+/* ---------- Sections ---------- */
+.article section {
+    margin-bottom: 40px;
+    scroll-margin-top: 72px;
+}
+
+.article h2 {
+    margin: 0 0 10px;
+    color: var(--text-strong);
+    font-size: 1.15rem;
+    line-height: 1.4;
+}
+
+.article h3 {
+    margin: 20px 0 6px;
+    color: var(--text-strong);
+    font-size: 1rem;
+}
+
+.article p {
+    margin: 0 0 10px;
+}
+
+.article ul,
+.article ol {
+    margin: 0 0 10px;
+    padding-left: 20px;
+}
+
+.article li {
+    margin-bottom: 2px;
+}
+
+.article li > ul,
+.article li > ol {
+    margin: 2px 0 0;
+}
+
+/* ---------- Figures ---------- */
+.article .fig {
+    margin: 12px 0 16px;
+    overflow-x: auto;
+}
+
+.article .fig svg {
+    display: block;
+    width: 100%;
+    min-width: 560px;
+    height: auto;
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+}
+
+.article .fig figcaption {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.fig-box {
+    fill: none;
+    stroke: #4a4a52;
+}
+
+.fig-bar {
+    fill: #2c2c33;
+}
+
+.fig-text {
+    fill: var(--text);
+    font-size: 13px;
+}
+
+.fig-sub {
+    fill: var(--muted);
+    font-size: 12px;
+}
+
+.fig-line {
+    fill: none;
+    stroke: #6b6b73;
+}
+
+.fig-head {
+    fill: #6b6b73;
+}
+
+.fig-dash {
+    stroke: #8b8b93;
+    stroke-dasharray: 3 3;
+}
+
+.article pre.screen {
+    margin: 0;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* ---------- Tables and code ---------- */
+.article .table-wrap {
+    margin: 6px 0 12px;
+    overflow-x: auto;
+}
+
+.article table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+.article th,
+.article td {
+    padding: 6px 12px 6px 0;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+}
+
+.article th {
+    color: var(--muted);
+    font-weight: 500;
+    border-bottom-color: #44444c;
+}
+
+.article td.num,
+.article th.num {
+    padding-right: 0;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.article pre {
+    margin: 8px 0 20px;
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.84rem;
+    line-height: 1.6;
+}
+
+.article code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88em;
+}
+
+@media (max-width: 600px) {
+    .article {
+        padding: 72px 16px 96px;
+    }
+
+    .article-head h1 {
+        font-size: 1.5rem;
+    }
+}
