@@ -242,6 +242,117 @@ main {
     font-weight: 400;
 }
 
+/* Projects page: title, card grid, card details and field buttons */
+.page-title {
+    margin: 0 0 0.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-accent);
+}
+
+.page-subtitle {
+    margin: 0 0 2rem;
+    color: var(--text-sub);
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+}
+
+.project-grid .featured-card {
+    position: relative;
+    justify-content: flex-start;
+}
+
+/* The period and the GitHub link share one line, so the tags below always get the full width. */
+.project-grid .featured-card .card-meta {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+}
+
+.card-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.card-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+}
+
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: auto;
+}
+
+.card-tag {
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 0.1rem 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-sub);
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.card-github {
+    position: relative;
+    z-index: 1;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.card-github:hover {
+    color: var(--accent);
+}
+
+/* Field buttons: same shape as the card tags; the chosen ones filled. */
+.project-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+}
+
+.project-filters button {
+    padding: 0.25rem 0.7rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: none;
+    color: var(--text-sub);
+    font: 0.8rem 'Inter', 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+}
+
+.project-filters button:hover {
+    border-color: var(--text-muted);
+    color: var(--primary-hover);
+}
+
+.project-filters button.active {
+    border-color: var(--primary-color);
+    background: var(--primary-color);
+    color: var(--bg-color);
+}
+
 /* Notes Section */
 .notes-list {
     display: flex;

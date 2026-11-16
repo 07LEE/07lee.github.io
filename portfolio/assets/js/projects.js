@@ -80,38 +80,49 @@ function fill(grid, projects, build) {
 // Where the work was done. The category says what kind of work it was.
 const KIND_LABELS = { company: '회사', personal: '개인', education: '교육' };
 
-// projects.html: two rows of filters, by kind and by category, read from and kept in the address.
-function setupFilters(container, projects) {
-    const params = new URLSearchParams(location.search);
-    const state = { kind: params.get('kind') || '', category: params.get('category') || '' };
-    const kinds = Object.keys(KIND_LABELS).filter(k => projects.some(p => p.kind === k));
-    const categories = [...new Set(projects.map(p => p.category))].sort();
+// projects.html: company work first, then personal, then education; newest first within each.
+const KIND_ORDER = ['company', 'personal', 'education'];
+function byKindThenRecent(a, b) {
+    return KIND_ORDER.indexOf(a.kind) - KIND_ORDER.indexOf(b.kind) || byRecent(a, b);
+}
 
-    const row = (key, label, values, text) => {
-        const buttons = ['', ...values].map(v =>
-            `<button type="button" data-key="${key}" data-value="${escapeHtml(v)}">${escapeHtml(v ? text(v) : '전체')}</button>`
-        ).join('');
-        return `<div class="filter-row"><span class="filter-label">${label}</span>${buttons}</div>`;
-    };
-    container.innerHTML = row('kind', '구분', kinds, k => KIND_LABELS[k]) + row('category', '분야', categories, c => c);
+// The fields closest to data engineering come first; any other field follows alphabetically.
+const CATEGORY_ORDER = ['Data Pipeline', 'Data Collection', 'Data Processing', 'AI Automation', 'NLP', 'Data Analysis'];
+function categoryRank(c) {
+    const i = CATEGORY_ORDER.indexOf(c);
+    return i === -1 ? CATEGORY_ORDER.length : i;
+}
+
+// One row of field buttons. Several can be on at once; none on shows every project.
+// The chosen fields are kept in the address, e.g. ?category=Data Pipeline,NLP
+function setupFilters(container, projects) {
+    const fromAddress = new URLSearchParams(location.search).get('category');
+    const chosen = new Set(fromAddress ? fromAddress.split(',') : []);
+    const categories = [...new Set(projects.map(p => p.category))]
+        .sort((a, b) => categoryRank(a) - categoryRank(b) || a.localeCompare(b));
+
+    container.innerHTML = categories
+        .map(c => `<button type="button" data-category="${escapeHtml(c)}">${escapeHtml(c)}</button>`)
+        .join('');
 
     const apply = () => {
         container.querySelectorAll('button').forEach(b => {
-            b.classList.toggle('active', state[b.dataset.key] === b.dataset.value);
+            const on = chosen.has(b.dataset.category);
+            b.classList.toggle('active', on);
+            b.setAttribute('aria-pressed', on);
         });
-        const shown = projects.filter(p =>
-            (!state.kind || p.kind === state.kind) && (!state.category || p.category === state.category)
-        );
-        fill(projectGrid, shown, buildCard);
-        if (!shown.length) projectGrid.innerHTML = '<p class="error-msg">이 조건의 프로젝트가 없습니다.</p>';
-        const query = new URLSearchParams(Object.entries(state).filter(([, v]) => v)).toString();
-        history.replaceState(null, '', query ? `?${query}` : location.pathname);
+        const shown = projects.filter(p => !chosen.size || chosen.has(p.category)).sort(byKindThenRecent);
+        projectGrid.innerHTML = '';
+        shown.forEach(p => projectGrid.appendChild(buildCard(p)));
+        const query = chosen.size ? `?category=${encodeURIComponent([...chosen].join(','))}` : '';
+        history.replaceState(null, '', query || location.pathname);
     };
 
     container.addEventListener('click', e => {
         const button = e.target.closest('button');
         if (!button) return;
-        state[button.dataset.key] = button.dataset.value;
+        const c = button.dataset.category;
+        if (chosen.has(c)) chosen.delete(c); else chosen.add(c);
         apply();
     });
     apply();
