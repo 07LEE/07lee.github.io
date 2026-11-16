@@ -34,7 +34,7 @@
         return cell;
     }
 
-    fetch('solvedac.json')
+    fetch('assets/data/solvedac.json')
         .then(res => {
             if (!res.ok) throw new Error('Failed to load solvedac.json');
             return res.json();

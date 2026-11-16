@@ -81,7 +81,7 @@ function fill(grid, projects, build) {
 const projectGrid = document.getElementById('project-grid');
 const featuredGrid = document.getElementById('featured-grid');
 
-fetch('projects.json')
+fetch('assets/data/projects.json')
     .then(res => {
         if (!res.ok) throw new Error('Failed to load projects.json');
         return res.json();

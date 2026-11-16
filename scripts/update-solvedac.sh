@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Saves the solved.ac numbers shown on the portfolio page into portfolio/solvedac.json.
+# Saves the solved.ac numbers shown on the portfolio page into portfolio/assets/data/solvedac.json.
 # Run it from a home PC, then commit the changed file:
 #   ./scripts/update-solvedac.sh
 # The page cannot call the solved.ac API itself (the API blocks browser calls from other sites),
@@ -9,7 +9,7 @@
 set -euo pipefail
 
 HANDLE=07lee
-OUTPUT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/portfolio/solvedac.json"
+OUTPUT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/portfolio/assets/data/solvedac.json"
 
 response="$(mktemp)"
 trap 'rm -f "$response"' EXIT
