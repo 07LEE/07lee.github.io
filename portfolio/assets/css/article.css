@@ -323,6 +323,10 @@ html[data-page] body.article-page .back-link {
     overflow-x: auto;
 }
 
+.article .deflist + .table-wrap {
+    margin-top: 20px;
+}
+
 .article table {
     width: 100%;
     border-collapse: collapse;
