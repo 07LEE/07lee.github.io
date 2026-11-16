@@ -17,6 +17,7 @@
     },
     {
         "id": "item-company-signal",
+        "featured": true,
         "title": "Company Signal",
         "category": "Data Pipeline",
         "kind": "personal",
@@ -112,7 +113,6 @@
     },
     {
         "id": "item-real-to-sim",
-        "featured": true,
         "title": "Real-to-Sim Assets",
         "category": "Data Processing",
         "kind": "company",

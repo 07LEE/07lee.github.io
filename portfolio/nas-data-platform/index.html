@@ -133,21 +133,6 @@
                 <dt>작업 큐</dt>
                 <dd>워커가 죽어도 작업을 회수해 다시 실행</dd>
             </dl>
-<pre><code>def atomic_json(path, value):
-    """Write through a temporary file, fsync it,
-    then replace the journal in one step."""
-    path = Path(path)
-    fd, temporary = tempfile.mkstemp(dir=path.parent)
-    try:
-        with os.fdopen(fd, 'w', encoding='utf-8') as stream:
-            json.dump(value, stream, ensure_ascii=False, indent=2)
-            stream.write('\n')
-            stream.flush()
-            os.fsync(stream.fileno())
-        replace_file(temporary, path)  # atomic replace, durable rename
-    finally:
-        if os.path.exists(temporary):
-            os.unlink(temporary)</code></pre>
         </section>
 
         <section id="result">

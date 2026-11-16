@@ -35,56 +35,6 @@ html[data-page] .back-link:hover {
     color: #ffffff;
 }
 
-/* ---------- Segments AI API (PCD Data Pipeline) ---------- */
-html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) {
-    --bg-main: #121214;
-    --bg-sidebar: #18181b;
-    --bg-content: #121214;
-    --text-primary: #f4f4f5;
-    --text-secondary: #a1a1aa;
-    --accent-blue: #e4e4e7;
-    --accent-blue-light: rgba(255, 255, 255, 0.08);
-    --border-color: #2a2a30;
-    --code-bg: #18181b;
-    --code-text: #e4e4e7;
-}
-
-html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .back-link {
-    left: auto;
-    right: 24px;
-    top: 24px;
-}
-
-html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .sidebar-item:hover,
-html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .highlight-info-box,
-html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .card-outline,
-html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .metric-card,
-html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .dashboard-table thead tr {
-    background-color: #1f1f23;
-}
-
-html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .badge-alert {
-    background-color: rgba(239, 68, 68, 0.12);
-}
-
-html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .code-viewport {
-    border: 1px solid #2a2a30;
-    box-shadow: none;
-    max-height: 560px;
-}
-
-html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .code-header {
-    background-color: #111113;
-}
-
-html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .indicator {
-    background: #3f3f46;
-}
-
-html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .nav-btn:hover:not(:disabled) {
-    border-color: #3f3f46;
-}
-
 /* ---------- Novel Transformation ---------- */
 html[data-page="novel"] {
     --bg-main: #121214;
@@ -203,29 +153,7 @@ html[data-page="talentbank"] .bottombar {
     background: rgba(24, 24, 27, 0.92);
 }
 
-/* ---------- Status colors: keep one muted green, turn red/orange/yellow neutral ---------- */
-html[data-page] {
-    --muted-green: #6ebe96;
-    --muted-green-line: rgba(110, 190, 150, 0.55);
-    --muted-green-soft: rgba(110, 190, 150, 0.06);
-}
-
-/* Segments */
-html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .badge-alert {
-    color: #d4d4d8;
-    background-color: rgba(255, 255, 255, 0.08);
-}
-
-html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .outline-alert {
-    border-left-color: #3f3f46;
-}
-
-html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .outline-safe,
-html:is([data-page="segments"], [data-page="nas"], [data-page="realsim"], [data-page="sampling"], [data-page="zed"], [data-page="invoice"], [data-page="booking"]) .border-safe {
-    border-left-color: var(--muted-green-line);
-}
-
-/* Novel */
+/* ---------- Novel: neutral accent ---------- */
 html[data-page="novel"] {
     --accent-orange: #d4d4d8;
 }

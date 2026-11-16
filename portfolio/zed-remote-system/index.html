@@ -4,239 +4,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ZED Remote System: 디스플레이 없는 Jetson 장비에서 프레임을 잃지 않고 수집하는 원격 수집 도구">
+    <meta name="description" content="ZED Remote System: Jetson 카메라의 원격 배포, 실행, 상태 확인을 갖춘 현장 수집 도구">
     <title>ZED Remote System</title>
     <meta name="robots" content="noindex, nofollow">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/deck-base.css">
     <link rel="stylesheet" href="../assets/css/detail-theme.css">
-    <link rel="stylesheet" href="../assets/css/deck-extras.css">
+    <link rel="stylesheet" href="../assets/css/article.css">
+    <link rel="stylesheet" href="../../mobile.css">
     <script src="../assets/js/components.js" defer></script>
-    <style>
-        .screenshot {
-            display: block;
-            width: 100%;
-            border: 1px solid #2a2a30;
-            border-radius: 8px;
-        }
-    </style>
+    <script src="../assets/js/article.js" defer></script>
 </head>
 
-<body>
+<body class="article-page">
 
     <portfolio-header back-href="../projects.html" title="ZED Remote System" only-back></portfolio-header>
 
-    <div class="dashboard-container deck-viewport">
+    <article class="article">
 
-        <aside class="sidebar">
-            <div class="sidebar-brand">
-                <span class="brand-title">ZED Remote System</span>
-                <span class="brand-version">Python · PySide6 · OpenCV</span>
-            </div>
-            <nav class="sidebar-nav">
-                <button class="sidebar-item active" data-target="slide-1">
-                    <span class="nav-num">01</span> Overview
-                </button>
-                <button class="sidebar-item" data-target="slide-2">
-                    <span class="nav-num">02</span> Problem
-                </button>
-                <button class="sidebar-item" data-target="slide-3">
-                    <span class="nav-num">03</span> Design Decision
-                </button>
-                <button class="sidebar-item" data-target="slide-4">
-                    <span class="nav-num">04</span> Remote Operation
-                </button>
-                <button class="sidebar-item" data-target="slide-5">
-                    <span class="nav-num">05</span> Result
-                </button>
-            </nav>
-            <div class="sidebar-footer">
-                <span>Data Collection · 2026.03 ~ 05</span>
-            </div>
-        </aside>
+        <header class="article-head">
+            <h1>ZED Remote System</h1>
+            <p class="lede">화면 없는 장비에 연결한 스테레오 카메라로 현장 데이터를 모으기 위한 원격 수집 도구</p>
+            <p class="article-meta">Python, PySide6, OpenCV, ZED SDK, SSH, rsync</p>
+            <dl class="facts">
+                <div><dt>역할</dt><dd>회사 업무, 수집 엔진과 대시보드 설계·구현</dd></div>
+                <div><dt>기간</dt><dd>2026.03 ~ 2026.05</dd></div>
+                <div><dt>결과</dt><dd>현장에서 터미널 없이 배포, 실행, 상태 확인을 대시보드 하나로</dd></div>
+            </dl>
+        </header>
 
-        <main class="content-area deck-container">
+        <nav class="article-toc" aria-label="목차">
+            <a href="#overview">개요</a>
+            <a href="#problem">현장 장비 관리의 문제</a>
+            <a href="#frames">프레임 누락 방지</a>
+            <a href="#remote">배포와 실행 관리</a>
+            <a href="#result">결과</a>
+        </nav>
 
-            <!-- Slide 1: Overview -->
-            <section class="slide-section slide active" id="slide-1">
-                <div class="slide-grid">
-                    <div class="slide-info-panel">
-                        <span class="badge">Overview</span>
-                        <h2>원격 카메라 수집 도구</h2>
-                        <p class="paragraph">디스플레이가 없는 Jetson에 연결한 스테레오 카메라로 현장 데이터를 모으기 위해, 노트북의 대시보드에서 장비의 수집 엔진을 배포하고 실행하고 상태를 확인하는 도구를 만들었습니다.</p>
-                        <div class="highlight-info-box">
-                            <i class="fa-solid fa-camera"></i> Python · PySide6 · OpenCV · ZED SDK · SSH · rsync
-                        </div>
-                    </div>
-                    <div class="slide-visual-panel">
-                        <img class="screenshot" src="images/dashboard.jpg" alt="노트북에서 장비의 수집 엔진을 제어하는 대시보드 화면">
-                        <p class="note">노트북 대시보드 · 실시간 화면, 엔진 상태, 온도와 저장 공간, 세션과 카메라 설정</p>
-                    </div>
-                </div>
-            </section>
+        <section id="overview">
+            <h2>개요</h2>
+            <p>디스플레이가 없는 Jetson에 연결한 스테레오 카메라로 현장 데이터를 모으기 위해, 노트북 대시보드에서 장비의 수집 엔진을 배포하고 실행하고 상태를 확인하는 도구를 만듦</p>
+            <figure class="fig">
+                <img src="images/dashboard.jpg" alt="노트북에서 장비의 수집 엔진을 제어하는 대시보드 화면">
+                <figcaption>노트북 대시보드: 실시간 화면, 엔진 상태, 온도와 저장 공간, 세션과 카메라 설정</figcaption>
+            </figure>
+        </section>
 
-            <!-- Slide 2: Problem -->
-            <section class="slide-section slide" id="slide-2">
-                <div class="slide-grid">
-                    <div class="slide-info-panel">
-                        <span class="badge">Problem</span>
-                        <h2>현장 장비 관리의 문제</h2>
-                        <p class="paragraph">장비에 화면이 없어서 수집이 제대로 되고 있는지 현장에서 바로 알 수 없었습니다. 문제를 발견하는 시점이 사무실로 돌아온 뒤라면, 그 촬영은 다시 해야 합니다.</p>
-                    </div>
-                    <div class="slide-visual-panel">
-                        <div class="question-list">
-                            <div class="question">직접 연 SSH 세션은 네트워크가 끊기면 진행 중인 캡처도 함께 멈춘다</div>
-                            <div class="question">수집 중 발열, 남은 저장 공간, 프레임이 실제로 저장되는지를 확인할 수 없다</div>
-                            <div class="question">장비마다 코드와 의존성을 맞추는 일이 매번 반복된다</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <section id="problem">
+            <h2>현장 장비 관리의 문제</h2>
+            <p>장비에 화면이 없어 수집이 제대로 되는지 현장에서 알 수 없음. 사무실로 돌아온 뒤 문제를 발견하면 그 촬영은 다시 해야 함</p>
+            <ul>
+                <li>직접 연 SSH 세션은 네트워크가 끊기면 진행 중인 캡처도 함께 멈춤</li>
+                <li>수집 중 발열, 남은 저장 공간, 프레임이 실제로 저장되는지를 확인할 수 없음</li>
+                <li>장비마다 코드와 의존성을 맞추는 일이 매번 반복됨</li>
+            </ul>
+        </section>
 
-            <!-- Slide 3: Design Decision -->
-            <section class="slide-section slide" id="slide-3">
-                <div class="slide-grid">
-                    <div class="slide-info-panel">
-                        <span class="badge">Design Decision</span>
-                        <h2>프레임 누락 방지</h2>
-                        <p class="paragraph">저장이 밀릴 때 프레임을 버리면 겉으로는 FPS가 유지되지만, 데이터에는 빈 구간이 생깁니다. 그래서 프레임을 버리지 않고 캡처가 기다리도록 했습니다.</p>
-                        <ul class="step-desc-list">
-                            <li><strong>저장 대기:</strong> 저장 큐에 상한을 두고, 가득 차면 캡처 루프가 기다림. 저장이 느려지면 FPS가 떨어지는 대신 프레임이 빠지지 않음</li>
-                            <li><strong>메모리 보호:</strong> 큐 상한으로 고해상도 이미지가 메모리에 끝없이 쌓이지 않게 함</li>
-                            <li><strong>자원 집중:</strong> 점군, 위치 추적처럼 무거운 기능은 빼고 이미지 수집에 장비 자원을 집중</li>
-                            <li><strong>메타데이터:</strong> 세션을 닫을 때 프레임 수와 카메라 설정을 fsync로 디스크에 확정</li>
-                        </ul>
-                    </div>
-                    <div class="slide-visual-panel">
-                        <div class="code-viewport">
-                            <div class="code-header">
-                                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                                <span class="file-name">saver.py (요약)</span>
-                            </div>
-                            <pre class="code-body"><code># Bounded queue: about 100 stereo frames at most in RAM
-self.save_queue = queue.Queue(maxsize=100)
+        <section id="frames">
+            <h2>프레임 누락 방지</h2>
+            <p>저장이 밀릴 때 프레임을 버리면 겉으로는 FPS가 유지되지만 데이터에는 빈 구간이 생김. 그래서 프레임을 버리지 않고 캡처가 기다리게 함</p>
+            <dl class="deflist">
+                <dt>저장 대기</dt>
+                <dd>저장 큐에 상한을 두고, 가득 차면 캡처 루프가 기다림. 저장이 느려지면 FPS가 떨어지는 대신 프레임이 빠지지 않음</dd>
+                <dt>메모리 보호</dt>
+                <dd>큐 상한으로 고해상도 이미지가 메모리에 끝없이 쌓이지 않게 함</dd>
+                <dt>자원 집중</dt>
+                <dd>점군, 위치 추적처럼 무거운 기능은 빼고 이미지 수집에 장비 자원을 집중</dd>
+                <dt>확정 저장</dt>
+                <dd>세션을 닫을 때 프레임 수와 카메라 설정을 fsync로 디스크에 확정. 이미지는 쓰기 속도를 위해 일반 저장으로 처리</dd>
+            </dl>
+        </section>
 
-def save_frame(self, left_raw, right_raw):
-    ...
-    # Block instead of dropping frames when the queue is full
-    self.save_queue.put(("img", l_path, left_raw.copy()), block=True)
-    self.save_queue.put(("img", r_path, right_raw.copy()), block=True)
+        <section id="remote">
+            <h2>배포와 실행 관리</h2>
+            <p>현장에서 터미널을 열지 않아도 되도록, 반복되던 손작업을 버튼 하나로 묶음</p>
+            <figure class="fig">
+                <svg viewBox="0 0 632 52" role="img" aria-label="배포와 설치, 분리된 실행, 상태 확인, 안전 정지 순서의 흐름"><defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" class="fig-head"/></marker></defs><rect class="fig-box" x="0" y="0" width="140" height="52" rx="3"/><text class="fig-text" x="70.0" y="22" text-anchor="middle">배포와 설치</text><text class="fig-sub" x="70.0" y="40" text-anchor="middle">rsync, 원격 설치</text><path class="fig-line" marker-end="url(#arrow)" d="M140 26 H162"/><rect class="fig-box" x="164" y="0" width="140" height="52" rx="3"/><text class="fig-text" x="234.0" y="22" text-anchor="middle">분리된 실행</text><text class="fig-sub" x="234.0" y="40" text-anchor="middle">연결이 끊겨도 유지</text><path class="fig-line" marker-end="url(#arrow)" d="M304 26 H326"/><rect class="fig-box" x="328" y="0" width="140" height="52" rx="3"/><text class="fig-text" x="398.0" y="22" text-anchor="middle">상태 확인</text><text class="fig-sub" x="398.0" y="40" text-anchor="middle">3단계 연결, 온도·공간</text><path class="fig-line" marker-end="url(#arrow)" d="M468 26 H490"/><rect class="fig-box" x="492" y="0" width="140" height="52" rx="3"/><text class="fig-text" x="562.0" y="22" text-anchor="middle">안전 정지</text><text class="fig-sub" x="562.0" y="40" text-anchor="middle">1GB 아래면 정리</text></svg>
+            </figure>
+            <dl class="deflist">
+                <dt>배포와 설치</dt>
+                <dd>rsync로 최신 코드를 장비에 동기화하고, 처음 한 번은 필요한 라이브러리를 원격으로 설치</dd>
+                <dt>분리된 실행</dt>
+                <dd>수집 엔진을 백그라운드로 분리해 실행. 노트북 연결이 끊겨도 캡처 세션은 유지</dd>
+                <dt>상태 확인</dt>
+                <dd>오프라인, 네트워크 연결, 서비스 실행의 3단계로 연결 상태를 구분하고, 온도와 저장 공간을 실시간 표시</dd>
+                <dt>안전 정지</dt>
+                <dd>저장 공간이 1GB 아래로 떨어지면 진행 중인 세션을 정리하고 엔진을 멈춤</dd>
+            </dl>
+        </section>
 
-def _saver_worker(self):
-    while True:
-        task_type, path, data = self.save_queue.get()
-        if task_type == "img":
-            cv2.imwrite(path, data)  # releases the GIL
-        self.save_queue.task_done()</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <section id="result">
+            <h2>결과</h2>
+            <dl class="deflist">
+                <dt>구현</dt>
+                <dd>장비 배포, 원격 실행, 3단계 연결 상태, 온도와 저장 공간 감시, 세션과 카메라 설정 관리</dd>
+                <dt>수집</dt>
+                <dd>저장이 밀리면 캡처가 기다리는 수집 파이프라인과 세션 메타데이터 확정 저장</dd>
+            </dl>
+        </section>
 
-            <!-- Slide 4: Remote Operation -->
-            <section class="slide-section slide" id="slide-4">
-                <div class="slide-grid">
-                    <div class="slide-info-panel">
-                        <span class="badge">Remote Operation</span>
-                        <h2>배포와 실행 관리</h2>
-                        <p class="paragraph">현장에서 터미널을 열지 않아도 되도록, 반복되던 손작업을 버튼 하나로 묶었습니다.</p>
-                    </div>
-                    <div class="slide-visual-panel">
-                        <div class="flow">
-                            <div class="flow-step">
-                                <span class="flow-num">01</span>
-                                <div>
-                                    <h3>배포와 설치</h3>
-                                    <p>rsync로 최신 코드를 장비에 동기화하고, 처음 한 번은 필요한 라이브러리를 원격으로 설치</p>
-                                </div>
-                            </div>
-                            <div class="flow-step">
-                                <span class="flow-num">02</span>
-                                <div>
-                                    <h3>분리된 실행</h3>
-                                    <p>수집 엔진을 백그라운드로 분리해 실행. 노트북 연결이 끊겨도 캡처 세션은 유지</p>
-                                </div>
-                            </div>
-                            <div class="flow-step">
-                                <span class="flow-num">03</span>
-                                <div>
-                                    <h3>상태 확인</h3>
-                                    <p>오프라인, 네트워크 연결, 서비스 실행의 3단계로 연결 상태를 구분하고, 온도와 저장 공간을 실시간 표시</p>
-                                </div>
-                            </div>
-                            <div class="flow-step">
-                                <span class="flow-num">04</span>
-                                <div>
-                                    <h3>안전 정지</h3>
-                                    <p>저장 공간이 1GB 아래로 떨어지면 진행 중인 세션을 정리하고 엔진을 멈춤</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    </article>
 
-            <!-- Slide 5: Result & Limits -->
-            <section class="slide-section slide" id="slide-5">
-                <div class="slide-grid">
-                    <div class="slide-info-panel">
-                        <span class="badge">Result</span>
-                        <h2>결과</h2>
-                        <p class="paragraph">현장에서 터미널을 열지 않고도 원격 배포, 실행, 상태 확인을 할 수 있게 하나의 대시보드로 묶었습니다.</p>
-                    </div>
-                    <div class="slide-visual-panel">
-                        <table class="dashboard-table result-table">
-                            <thead>
-                                <tr>
-                                    <th>구분</th>
-                                    <th>내용</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>구현</td>
-                                    <td>장비 배포, 원격 실행, 3단계 연결 상태, 온도와 저장 공간 감시, 세션과 카메라 설정 관리</td>
-                                </tr>
-                                <tr>
-                                    <td>구현</td>
-                                    <td>저장이 밀리면 캡처가 기다리는 수집 파이프라인과 세션 메타데이터 확정 저장</td>
-                                </tr>
-                                <tr>
-                                    <td>판단</td>
-                                    <td>세션 메타데이터와 설정 파일은 fsync로 디스크에 확정하고, 이미지는 쓰기 속도를 위해 일반 저장으로 처리</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-    </div>
-
-    <portfolio-deck-nav></portfolio-deck-nav>
-
-    <div class="footer-bar">
-        <span>ZED Remote System : 디스플레이 없는 장비의 원격 데이터 수집</span>
-    </div>
-
-    <script src="../assets/js/deck.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const sidebarItems = document.querySelectorAll('.sidebar-item');
-            sidebarItems.forEach((item, idx) => {
-                item.addEventListener('click', () => {
-                    document.dispatchEvent(new CustomEvent('changeSlide', { detail: { index: idx } }));
-                });
-            });
-            document.addEventListener('slideChanged', (e) => {
-                sidebarItems.forEach(item => item.classList.remove('active'));
-                if (sidebarItems[e.detail.index]) {
-                    sidebarItems[e.detail.index].classList.add('active');
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>

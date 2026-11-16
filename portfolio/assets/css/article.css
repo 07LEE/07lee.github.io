@@ -260,6 +260,25 @@ html[data-page] body.article-page .back-link {
     margin-top: 10px;
 }
 
+/* Before and after, side by side in one frame. */
+.article .fig-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Images of different heights still get their captions on one line. */
+.article .fig-pair figure {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.article .fig-pair figcaption {
+    margin-top: auto;
+    padding-top: 12px;
+}
+
 .fig-box {
     fill: none;
     stroke: #4a4a52;
