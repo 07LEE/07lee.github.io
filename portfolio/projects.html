@@ -36,8 +36,13 @@
             justify-content: flex-start;
         }
 
+        /* The period and the GitHub link share one line, so the tags below always get the full width. */
         .project-grid .featured-card .card-meta {
             margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 0.75rem;
         }
 
         .card-link {

@@ -45,10 +45,9 @@ function buildCard(project) {
         <div class="card-category">${escapeHtml(project.category)}</div>
         <h3><a class="card-link" href="${escapeHtml(project.link)}"${externalAttrs(project.link)}>${escapeHtml(project.title)}</a></h3>
         <p>${escapeHtml(project.description)}</p>
-        <div class="card-meta">${escapeHtml(project.period)}</div>
+        <div class="card-meta"><span>${escapeHtml(project.period)}</span>${github}</div>
         <div class="card-footer">
             <div class="card-tags">${tags}</div>
-            ${github}
         </div>
     `;
     return card;
