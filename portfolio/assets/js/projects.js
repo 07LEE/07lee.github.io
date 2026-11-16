@@ -42,7 +42,7 @@ function buildCard(project) {
         : '';
 
     card.innerHTML = `
-        <div class="card-category">${escapeHtml(project.category)}</div>
+        <div class="card-category">${escapeHtml(project.category)} · ${escapeHtml(KIND_LABELS[project.kind] || '')}</div>
         <h3><a class="card-link" href="${escapeHtml(project.link)}"${externalAttrs(project.link)}>${escapeHtml(project.title)}</a></h3>
         <p>${escapeHtml(project.description)}</p>
         <div class="card-meta"><span>${escapeHtml(project.period)}</span>${github}</div>
@@ -77,7 +77,48 @@ function fill(grid, projects, build) {
     projects.slice().sort(byRecent).forEach(p => grid.appendChild(build(p)));
 }
 
+// Where the work was done. The category says what kind of work it was.
+const KIND_LABELS = { company: '회사', personal: '개인', education: '교육' };
+
+// projects.html: two rows of filters, by kind and by category, read from and kept in the address.
+function setupFilters(container, projects) {
+    const params = new URLSearchParams(location.search);
+    const state = { kind: params.get('kind') || '', category: params.get('category') || '' };
+    const kinds = Object.keys(KIND_LABELS).filter(k => projects.some(p => p.kind === k));
+    const categories = [...new Set(projects.map(p => p.category))].sort();
+
+    const row = (key, label, values, text) => {
+        const buttons = ['', ...values].map(v =>
+            `<button type="button" data-key="${key}" data-value="${escapeHtml(v)}">${escapeHtml(v ? text(v) : '전체')}</button>`
+        ).join('');
+        return `<div class="filter-row"><span class="filter-label">${label}</span>${buttons}</div>`;
+    };
+    container.innerHTML = row('kind', '구분', kinds, k => KIND_LABELS[k]) + row('category', '분야', categories, c => c);
+
+    const apply = () => {
+        container.querySelectorAll('button').forEach(b => {
+            b.classList.toggle('active', state[b.dataset.key] === b.dataset.value);
+        });
+        const shown = projects.filter(p =>
+            (!state.kind || p.kind === state.kind) && (!state.category || p.category === state.category)
+        );
+        fill(projectGrid, shown, buildCard);
+        if (!shown.length) projectGrid.innerHTML = '<p class="error-msg">이 조건의 프로젝트가 없습니다.</p>';
+        const query = new URLSearchParams(Object.entries(state).filter(([, v]) => v)).toString();
+        history.replaceState(null, '', query ? `?${query}` : location.pathname);
+    };
+
+    container.addEventListener('click', e => {
+        const button = e.target.closest('button');
+        if (!button) return;
+        state[button.dataset.key] = button.dataset.value;
+        apply();
+    });
+    apply();
+}
+
 const projectGrid = document.getElementById('project-grid');
+const projectFilters = document.getElementById('project-filters');
 const featuredGrid = document.getElementById('featured-grid');
 
 fetch('assets/data/projects.json')
@@ -86,7 +127,8 @@ fetch('assets/data/projects.json')
         return res.json();
     })
     .then(projects => {
-        if (projectGrid) fill(projectGrid, projects, buildCard);
+        if (projectGrid && projectFilters) setupFilters(projectFilters, projects);
+        else if (projectGrid) fill(projectGrid, projects, buildCard);
         if (featuredGrid) fill(featuredGrid, projects.filter(p => p.featured), buildFeaturedCard);
     })
     .catch(err => {

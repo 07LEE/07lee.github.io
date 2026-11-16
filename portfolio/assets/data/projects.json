@@ -4,6 +4,7 @@
         "featured": true,
         "title": "NAS Data Platform",
         "category": "Data Pipeline",
+        "kind": "company",
         "period": "2026.09 ~ 2026.11",
         "affiliation": "",
         "description": "현장 수집 데이터와 처리 결과의 출처와 상태를 추적하는 카탈로그와 입고 파이프라인",
@@ -12,13 +13,13 @@
             "FastAPI",
             "SQLite"
         ],
-        "link": "nas-data-platform/index.html",
-        "isCompany": true
+        "link": "nas-data-platform/index.html"
     },
     {
         "id": "item-company-signal",
         "title": "Company Signal",
         "category": "Data Pipeline",
+        "kind": "personal",
         "period": "2026.11",
         "affiliation": "",
         "description": "국민연금 사업장 자료 11년치로 사업장의 월별 인원, 입사, 퇴사를 보여 주는 데이터 파이프라인",
@@ -34,6 +35,7 @@
         "id": "item-zed-remote-system",
         "title": "ZED Remote System",
         "category": "Data Collection",
+        "kind": "company",
         "period": "2026.03 ~ 2026.05",
         "affiliation": "",
         "description": "Jetson 카메라의 원격 배포, 실행, 상태 확인을 갖춘 현장 수집 도구",
@@ -42,14 +44,14 @@
             "PySide6",
             "ZED SDK"
         ],
-        "link": "zed-remote-system/index.html",
-        "isCompany": true
+        "link": "zed-remote-system/index.html"
     },
     {
         "id": "item-segments-ai-api",
         "featured": true,
         "title": "VFM 3D Sensor Data",
         "category": "Data Pipeline",
+        "kind": "company",
         "period": "2025.09 ~ 2026.02",
         "affiliation": "",
         "description": "다중 센서 수집 검증, 좌표 정합, 점군 라벨링과 업로드를 거쳐 연구팀에 전달한 3D 데이터",
@@ -58,14 +60,14 @@
             "ROS",
             "Open3D"
         ],
-        "link": "segments-ai-api/index.html",
-        "isCompany": true
+        "link": "segments-ai-api/index.html"
     },
     {
         "id": "item-invoice-simplifier",
         "featured": true,
         "title": "Invoice Simplifier",
         "category": "AI Automation",
+        "kind": "company",
         "period": "2025.08 ~ 현재",
         "affiliation": "",
         "description": "자연어 요청을 견적서로 바꿔 운영자가 직접 발행하는 업무 자동화, 실사용 중",
@@ -74,13 +76,13 @@
             "Gemini API",
             "Telegram Bot"
         ],
-        "link": "invoice-simplifier/index.html",
-        "isCompany": true
+        "link": "invoice-simplifier/index.html"
     },
     {
         "id": "item-novel-transformation",
         "title": "Novel Transformation",
-        "category": "Education",
+        "category": "NLP",
+        "kind": "education",
         "period": "2023.11 ~ 2023.12",
         "affiliation": "",
         "description": "소설 속 발화자와 장면을 구분하는 BERT 기반 모델과 서비스, 팀 프로젝트",
@@ -95,7 +97,8 @@
     {
         "id": "item-talentbank-analysis",
         "title": "Talentbank Analysis",
-        "category": "Education",
+        "category": "Data Analysis",
+        "kind": "education",
         "period": "2022.05 ~ 2022.06",
         "affiliation": "",
         "description": "채용 플랫폼 데이터를 수집·정제해 분야별로 비교 분석한 교육 과제",
@@ -112,6 +115,7 @@
         "featured": true,
         "title": "Real-to-Sim Assets",
         "category": "Data Processing",
+        "kind": "company",
         "period": "2026.03 ~ 2026.09",
         "affiliation": "",
         "description": "3D 재구성 자료를 실측 스케일, 물리, 관절을 갖춘 시뮬레이션 자산으로 가공",
@@ -120,13 +124,13 @@
             "Blender",
             "USD"
         ],
-        "link": "real-to-sim/index.html",
-        "isCompany": true
+        "link": "real-to-sim/index.html"
     },
     {
         "id": "item-gs-object-extraction",
         "title": "GS Object Extraction",
-        "category": "Personal Project",
+        "category": "Data Processing",
+        "kind": "personal",
         "period": "2026.09 ~ 2026.10",
         "affiliation": "",
         "description": "3DGS 장면에서 물체를 몇 방향으로 클릭해 분할하고, 단독 자산으로 내보내는 도구",
@@ -142,6 +146,7 @@
         "id": "item-booking-demand",
         "title": "Booking Demand Tracker",
         "category": "Data Collection",
+        "kind": "personal",
         "period": "2026.06 ~ 2026.07",
         "affiliation": "",
         "description": "공개 예약 페이지의 시간대 정보를 매일 수집해 상권 이용량을 추정하고 진입 여부를 판단한 도구",

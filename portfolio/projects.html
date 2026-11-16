@@ -93,6 +93,46 @@
         .card-github:hover {
             color: var(--accent);
         }
+
+        /* Filters: plain text buttons, the chosen one brighter. */
+        .project-filters {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.25rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        .filter-label {
+            width: 2.5rem;
+            color: var(--text-muted);
+        }
+
+        .filter-row button {
+            padding: 0;
+            border: 0;
+            background: none;
+            color: var(--text-muted);
+            font: inherit;
+            cursor: pointer;
+        }
+
+        .filter-row button:hover {
+            color: var(--text-sub);
+        }
+
+        .filter-row button.active {
+            color: var(--primary-hover);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
     </style>
 </head>
 
@@ -116,6 +156,7 @@
             <section>
                 <h1 class="page-title">Projects</h1>
                 <p class="page-subtitle">데이터 파이프라인과 가공, 수집부터 업무 자동화, 개인·교육 프로젝트까지</p>
+                <div class="project-filters" id="project-filters"></div>
                 <div class="project-grid" id="project-grid">
                     <p class="error-msg">Loading projects...</p>
                 </div>
