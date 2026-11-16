@@ -161,10 +161,22 @@ html[data-page] body.article-page .back-link {
     font-family: 'Inter', 'Noto Sans KR', sans-serif;
 }
 
+.article .fig img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+}
+
 .article .fig figcaption {
     margin-top: 6px;
     color: var(--muted);
     font-size: 0.85rem;
+}
+
+.article .fig figcaption a {
+    color: var(--text);
 }
 
 .fig-box {
