@@ -177,7 +177,7 @@ body {
 /* Grid & Layout inside slides */
 .slide-grid {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
     gap: 50px;
     height: 100%;
     align-items: center;
@@ -510,7 +510,7 @@ body {
 
 /* Narrow screens: drop the sidebar and stack every slide in one scrolling page.
    deck.js reads the static slide position to stop paging on wheel and keys. */
-@media (max-width: 900px) {
+@media (max-width: 1300px) {
     body {
         overflow: auto;
         height: auto;

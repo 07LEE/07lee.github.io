@@ -16,6 +16,21 @@
         "isCompany": true
     },
     {
+        "id": "item-company-signal",
+        "title": "Company Signal",
+        "category": "Data Pipeline",
+        "period": "2026.11",
+        "affiliation": "",
+        "description": "국민연금 사업장 자료 11년치로 사업장의 월별 인원, 입사, 퇴사를 보여 주는 데이터 파이프라인",
+        "tags": [
+            "Python",
+            "DuckDB",
+            "dbt"
+        ],
+        "link": "company-signal/index.html",
+        "github": "https://github.com/07LEE/company-signal"
+    },
+    {
         "id": "item-zed-remote-system",
         "title": "ZED Remote System",
         "category": "Data Collection",

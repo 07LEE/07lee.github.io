@@ -241,7 +241,7 @@ html[data-page="novel"] .academic-table tr.highlight-row {
 }
 
 /* Novel: slides are images, so narrow screens simply list them top to bottom. */
-@media (max-width: 900px) {
+@media (max-width: 1300px) {
     html[data-page="novel"] body {
         display: block;
         overflow: auto;

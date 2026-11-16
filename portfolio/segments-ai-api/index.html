@@ -210,18 +210,20 @@ client.add_sample(dataset_id, file_path.name, attributes)</code></pre>
                                 <span class="dot"></span><span class="dot"></span><span class="dot"></span>
                                 <span class="file-name">core.py</span>
                             </div>
-                            <pre class="code-body"><code>def get_all_datasets(client):
+                            <pre class="code-body"><code style="font-size: 0.78rem;">def get_all_datasets(client):
     datasets, seen, page = [], set(), 1
     while True:
         try:
-            batch = client.get_datasets(per_page=100, page=page)
+            batch = client.get_datasets(
+                per_page=100, page=page)
         except NotFoundError:
             if page == 1:
                 raise
             break  # past the last page
-        fresh = [d for d in batch if d.full_name not in seen]
+        fresh = [d for d in batch
+                 if d.full_name not in seen]
         if batch and not fresh:
-            raise ConfigError("repeated page: refusing an incomplete list")
+            raise ConfigError("repeated page")
         if not batch:
             break
         datasets += fresh
